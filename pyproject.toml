@@ -1,0 +1,14 @@
+[project]
+name = "fpl"
+version = "0.1.0"
+description = "Fantasy Premier League data downloader"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.31.0",
+    "urllib3>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "numpy>=1.24.0",
+    "xgboost>=2.0.0",
+    "lightgbm>=4.0.0",
+]
+

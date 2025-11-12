@@ -34,6 +34,19 @@ except (ImportError, Exception):
 
 DATA_DIR = Path("data")
 
+METRIC_WEIGHTS = {
+    "xgi_per_90": 3.0,
+    "fdr_score": 0.5,
+    "form": 0.3,
+    "value_score": 2.0,
+    "rotation_score": 0.5,
+    "recent_xgi_per_game": 0.5,
+    "ict_index": 0.1,
+    "bonus_potential": 0.02,
+    "conversion_efficiency": 0.4,
+    "predicted_points": 0.15,
+}
+
 
 def load_bootstrap_data() -> Dict:
     """Load bootstrap-static data."""
@@ -749,14 +762,19 @@ def train_and_evaluate_model(
     y_pred_train = model.predict(X_train)
     y_pred_test = model.predict(X_test)
 
+    train_corr = np.corrcoef(y_train, y_pred_train)[0, 1] if len(y_train) > 1 else 0.0
+    test_corr = np.corrcoef(y_test, y_pred_test)[0, 1] if len(y_test) > 1 else 0.0
+
     metrics = {
         "name": model_name,
         "train_mae": mean_absolute_error(y_train, y_pred_train),
         "train_rmse": np.sqrt(mean_squared_error(y_train, y_pred_train)),
         "train_r2": r2_score(y_train, y_pred_train),
+        "train_corr": train_corr if not np.isnan(train_corr) else 0.0,
         "test_mae": mean_absolute_error(y_test, y_pred_test),
         "test_rmse": np.sqrt(mean_squared_error(y_test, y_pred_test)),
         "test_r2": r2_score(y_test, y_pred_test),
+        "test_corr": test_corr if not np.isnan(test_corr) else 0.0,
         "model": model,
     }
 
@@ -917,7 +935,10 @@ def train_prediction_model(
     if verbose:
         print("Model Performance:")
         for r in results:
-            print(f"  {r['name']}: Test MAE={r['test_mae']:.2f}, R²={r['test_r2']:.3f}")
+            print(
+                f"  {r['name']}: Test MAE={r['test_mae']:.2f}, R²={r['test_r2']:.3f}, "
+                f"Correlation={r['test_corr']:.3f}"
+            )
 
     best_model_metrics = min(results, key=lambda x: x["test_mae"])
 
@@ -1093,12 +1114,18 @@ def analyze_midfielders(
             upcoming_fixtures, team_id, bootstrap_data, team_points
         )
 
-        xg = player.get("expected_goals", 0.0)
-        xa = player.get("expected_assists", 0.0)
-        xgi = player.get("expected_goal_involvements", 0.0)
-        xg_per_90 = player.get("expected_goals_per_90", 0.0)
-        xa_per_90 = player.get("expected_assists_per_90", 0.0)
-        xgi_per_90 = player.get("expected_goal_involvements_per_90", 0.0)
+        xg = float(player.get("expected_goals", 0.0) or 0.0)
+        xa = float(player.get("expected_assists", 0.0) or 0.0)
+        xgi = float(player.get("expected_goal_involvements", 0.0) or 0.0)
+        xg_per_90 = float(player.get("expected_goals_per_90", 0.0) or 0.0)
+        xa_per_90 = float(player.get("expected_assists_per_90", 0.0) or 0.0)
+        xgi_per_90 = float(player.get("expected_goal_involvements_per_90", 0.0) or 0.0)
+
+        goals_scored = int(player.get("goals_scored", 0) or 0)
+        assists = int(player.get("assists", 0) or 0)
+        gi = goals_scored + assists
+
+        conversion_efficiency = gi / xgi if xgi > 0 else 1.0
 
         cost = player.get("now_cost", 0) / 10.0
         form = float(player.get("form", 0.0))
@@ -1145,19 +1172,26 @@ def analyze_midfielders(
                 recent_form,
             )
 
+        fdr_score = 6.0 - avg_fdr
+        rotation_score = 1.0 - rotation_risk_score
+        recent_xgi_per_game = recent_form["recent_xgi"] / max(
+            recent_form["games_played"], 1
+        )
+
         composite_score = (
-            xgi_per_90 * 3.0
-            + (6.0 - avg_fdr) * 0.5
-            + form * 0.3
-            + value_score * 2.0
-            + (1.0 - rotation_risk_score) * 0.5
-            + recent_form["recent_xgi"] / max(recent_form["games_played"], 1) * 0.5
-            + ict_index * 0.1
-            + bonus_potential * 0.02
+            xgi_per_90 * METRIC_WEIGHTS["xgi_per_90"]
+            + fdr_score * METRIC_WEIGHTS["fdr_score"]
+            + form * METRIC_WEIGHTS["form"]
+            + value_score * METRIC_WEIGHTS["value_score"]
+            + rotation_score * METRIC_WEIGHTS["rotation_score"]
+            + recent_xgi_per_game * METRIC_WEIGHTS["recent_xgi_per_game"]
+            + ict_index * METRIC_WEIGHTS["ict_index"]
+            + bonus_potential * METRIC_WEIGHTS["bonus_potential"]
+            + conversion_efficiency * METRIC_WEIGHTS["conversion_efficiency"]
         )
 
         if predicted_points is not None:
-            composite_score += predicted_points * 0.15
+            composite_score += predicted_points * METRIC_WEIGHTS["predicted_points"]
 
         result = {
             "id": player_id,
@@ -1171,6 +1205,10 @@ def analyze_midfielders(
             "total_xgi": xgi,
             "total_xg": xg,
             "total_xa": xa,
+            "goals": goals_scored,
+            "assists": assists,
+            "gi": gi,
+            "conversion_efficiency": conversion_efficiency,
             "form": form,
             "points_per_game": points_per_game,
             "total_points": total_points,
@@ -1277,6 +1315,9 @@ def print_recommendations(
         print(f"   Expected Goal Involvement per 90: {player['xgi_per_90']:.2f}")
         print(
             f"   - xG per 90: {player['xg_per_90']:.2f} | xA per 90: {player['xa_per_90']:.2f}"
+        )
+        print(
+            f"   Conversion Efficiency (GI/xGI): {player['conversion_efficiency']:.2f} (GI: {player['gi']}, xGI: {player['total_xgi']:.2f})"
         )
         print(
             f"   Form: {player['form']:.1f} | PPG: {player['points_per_game']:.1f} | Total Points: {player['total_points']}"

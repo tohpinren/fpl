@@ -5,9 +5,9 @@ This script fetches data from the official FPL API endpoints and saves them loca
 """
 
 import json
-import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -16,6 +16,8 @@ from urllib3.util.retry import Retry
 
 BASE_URL = "https://fantasy.premierleague.com/api"
 DATA_DIR = Path("data")
+MAX_WORKERS = 20
+POOL_MAXSIZE = 32
 RETRY_STRATEGY = Retry(
     total=3,
     backoff_factor=1,
@@ -24,9 +26,9 @@ RETRY_STRATEGY = Retry(
 
 
 def create_session() -> requests.Session:
-    """Create a requests session with retry strategy."""
+    """Create a requests session with retry strategy and connection pool for parallel requests."""
     session = requests.Session()
-    adapter = HTTPAdapter(max_retries=RETRY_STRATEGY)
+    adapter = HTTPAdapter(max_retries=RETRY_STRATEGY, pool_maxsize=POOL_MAXSIZE)
     session.mount("http://", adapter)
     session.mount("https://", adapter)
     session.headers.update({
@@ -55,6 +57,17 @@ def fetch_endpoint(session: requests.Session, endpoint: str) -> Optional[Dict[st
         return None
 
 
+def _fetch_and_save(
+    session: requests.Session, endpoint: str, filepath: Path
+) -> Tuple[bool, str]:
+    """Fetch endpoint and save to filepath. Returns (success, endpoint) for use in executor."""
+    data = fetch_endpoint(session, endpoint)
+    if data:
+        save_json(data, filepath)
+        return True, endpoint
+    return False, endpoint
+
+
 def download_bootstrap_static(session: requests.Session) -> Optional[Dict[str, Any]]:
     """Download bootstrap-static data containing players, teams, gameweeks, etc."""
     print("Downloading bootstrap-static data...")
@@ -73,37 +86,53 @@ def download_fixtures(session: requests.Session) -> None:
 
 
 def download_player_summaries(session: requests.Session, player_ids: List[int]) -> None:
-    """Download element-summary for each player."""
+    """Download element-summary for each player in parallel."""
     print(f"Downloading player summaries for {len(player_ids)} players...")
     players_dir = DATA_DIR / "players"
     players_dir.mkdir(parents=True, exist_ok=True)
+    workers = min(MAX_WORKERS, len(player_ids))
 
-    for i, player_id in enumerate(player_ids, 1):
-        data = fetch_endpoint(session, f"/element-summary/{player_id}/")
-        if data:
-            save_json(data, players_dir / f"{player_id}.json")
-
-        if i % 10 == 0:
-            print(f"Progress: {i}/{len(player_ids)} players downloaded")
-            time.sleep(0.5)
-        else:
-            time.sleep(0.1)
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {
+            executor.submit(
+                _fetch_and_save,
+                session,
+                f"/element-summary/{player_id}/",
+                players_dir / f"{player_id}.json",
+            ): player_id
+            for player_id in player_ids
+        }
+        done = 0
+        for future in as_completed(futures):
+            success, _ = future.result()
+            if success:
+                done += 1
+            if done % 50 == 0 and done > 0:
+                print(f"Progress: {done}/{len(player_ids)} players downloaded")
+    print(f"Player summaries: {done}/{len(player_ids)} downloaded")
 
 
 def download_gameweek_data(session: requests.Session, gameweek: int) -> None:
     """Download data for a specific gameweek."""
-    print(f"Downloading gameweek {gameweek} data...")
     data = fetch_endpoint(session, f"/event/{gameweek}/live/")
     if data:
         save_json(data, DATA_DIR / "gameweeks" / f"{gameweek}.json")
 
 
 def download_all_gameweeks(session: requests.Session, num_gameweeks: int) -> None:
-    """Download data for all gameweeks."""
+    """Download data for all gameweeks in parallel."""
     print(f"Downloading data for {num_gameweeks} gameweeks...")
-    for gw in range(1, num_gameweeks + 1):
-        download_gameweek_data(session, gw)
-        time.sleep(0.2)
+    (DATA_DIR / "gameweeks").mkdir(parents=True, exist_ok=True)
+    workers = min(MAX_WORKERS, num_gameweeks)
+
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = [
+            executor.submit(download_gameweek_data, session, gw)
+            for gw in range(1, num_gameweeks + 1)
+        ]
+        for f in as_completed(futures):
+            f.result()
+    print(f"Gameweeks: {num_gameweeks} downloaded")
 
 
 def download_league_data(session: requests.Session, league_id: int) -> None:
@@ -143,18 +172,22 @@ def main() -> None:
         print("Failed to download bootstrap-static data. Exiting.")
         return
 
-    download_fixtures(session)
+    player_ids: List[int] = (
+        [int(p["id"]) for p in bootstrap_data["elements"]]
+        if "elements" in bootstrap_data
+        else []
+    )
+    events = bootstrap_data.get("events") or []
+    max_gameweek = max((e.get("id", 0) for e in events), default=0)
 
-    if "elements" in bootstrap_data:
-        player_ids = [player["id"] for player in bootstrap_data["elements"]]
-        download_player_summaries(session, player_ids)
-
-    if "events" in bootstrap_data:
-        events = bootstrap_data["events"]
-        if events:
-            max_gameweek = max(e.get("id", 0) for e in events)
-            if max_gameweek > 0:
-                download_all_gameweeks(session, max_gameweek)
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        futures = [executor.submit(download_fixtures, session)]
+        if player_ids:
+            futures.append(executor.submit(download_player_summaries, session, player_ids))
+        if max_gameweek > 0:
+            futures.append(executor.submit(download_all_gameweeks, session, max_gameweek))
+        for f in as_completed(futures):
+            f.result()
 
     print("\n" + "=" * 60)
     print("Download complete!")

@@ -268,6 +268,7 @@ def calculate_metric_weights() -> Dict[str, float]:
         "ict_index": [],
         "bonus_potential": [],
         "conversion_efficiency": [],
+        "defcon_points_pct": [],
         "points": [],
     }
 
@@ -304,10 +305,10 @@ def calculate_metric_weights() -> Dict[str, float]:
             (bonus_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
         )
 
-        goals_scored = player.get("goals_scored", 0)
-        assists = player.get("assists", 0)
+        goals_scored = int(player.get("goals_scored", 0) or 0)
+        assists = int(player.get("assists", 0) or 0)
         gi = goals_scored + assists
-        xgi = player.get("expected_goal_involvements", 0.0)
+        xgi = float(player.get("expected_goal_involvements", 0.0) or 0.0)
         conversion_efficiency = gi / xgi if xgi > 0 else 1.0
 
         games_60plus = recent_form["games_60plus_minutes"]
@@ -323,6 +324,25 @@ def calculate_metric_weights() -> Dict[str, float]:
             recent_form["games_played"], 1
         )
 
+        defcon = player.get("defensive_contribution", 0)
+        defcon_per_90 = float(player.get("defensive_contribution_per_90", 0.0) or 0.0)
+        games_played_season = player.get("games_played", 0) or player.get(
+            "starts", 0
+        ) + player.get("sub_appearances", 0)
+        defcon_per_game = (
+            defcon / max(games_played_season, 1) if games_played_season > 0 else 0.0
+        )
+
+        total_defcon = 0
+        if player_history and player_history.get("history"):
+            history = player_history["history"]
+            for h in history:
+                total_defcon += safe_float(h.get("defensive_contribution", 0), 0)
+        defcon_points = (total_defcon / 10.0) * 2.0
+        defcon_points_pct = (
+            (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+        )
+
         metric_data["xgi_per_90"].append(xgi_per_90)
         metric_data["fdr_score"].append(6.0 - avg_fdr)
         metric_data["form"].append(form)
@@ -332,6 +352,7 @@ def calculate_metric_weights() -> Dict[str, float]:
         metric_data["ict_index"].append(ict_index)
         metric_data["bonus_potential"].append(bonus_potential)
         metric_data["conversion_efficiency"].append(conversion_efficiency)
+        metric_data["defcon_points_pct"].append(defcon_points_pct)
         metric_data["points"].append(float(total_points))
 
         processed += 1
@@ -350,6 +371,7 @@ def calculate_metric_weights() -> Dict[str, float]:
             "ict_index": 0.1,
             "bonus_potential": 0.02,
             "conversion_efficiency": 0.4,
+            "defcon_points_pct": 0.0,
         }
 
     points_array = np.array(metric_data["points"])
@@ -369,14 +391,23 @@ def calculate_metric_weights() -> Dict[str, float]:
         "ict_index",
         "bonus_potential",
         "conversion_efficiency",
+        "defcon_points_pct",
     ]:
         metric_array = np.array(metric_data[metric_name])
         if len(metric_array) > 0 and np.std(metric_array) > 0:
             correlation = np.corrcoef(metric_array, points_array)[0, 1]
             if not np.isnan(correlation):
                 correlations[metric_name] = correlation
-                weights[metric_name] = abs(correlation)
-                print(f"{metric_name:25s}: {correlation:7.4f}")
+
+                if metric_name == "defcon_points_pct":
+                    weights[metric_name] = abs(correlation) * 0.5
+                    print(
+                        f"{metric_name:25s}: {correlation:7.4f} (weighted +0.5x, defcon is valuable but defensive players score less)"
+                    )
+                else:
+                    weights[metric_name] = correlation
+                    sign = "+" if correlation >= 0 else "-"
+                    print(f"{metric_name:25s}: {correlation:7.4f} ({sign})")
             else:
                 correlations[metric_name] = 0.0
                 weights[metric_name] = 0.0
@@ -386,9 +417,9 @@ def calculate_metric_weights() -> Dict[str, float]:
             weights[metric_name] = 0.0
             print(f"{metric_name:25s}: {'N/A':>7s}")
 
-    total_weight = sum(weights.values())
-    if total_weight > 0:
-        scale_factor = 10.0 / total_weight
+    total_abs_weight = sum(abs(v) for v in weights.values())
+    if total_abs_weight > 0:
+        scale_factor = 10.0 / total_abs_weight
         weights = {k: v * scale_factor for k, v in weights.items()}
     else:
         print("\nWarning: All correlations are zero, using default weights")
@@ -402,6 +433,7 @@ def calculate_metric_weights() -> Dict[str, float]:
             "ict_index": 0.1,
             "bonus_potential": 0.02,
             "conversion_efficiency": 0.4,
+            "defcon_points_pct": 0.0,
         }
 
     print("\nCalculated Weights:")

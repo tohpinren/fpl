@@ -1,0 +1,882 @@
+"""
+Script to find potential defenders with good underlying stats for FPL transfers.
+
+FPL defender scoring: 4 pts clean sheet (60+ min), 2 pts per 10 defensive contributions;
+6 pts per goal, 3 per assist; 1 pt for 1-60 min, 2 pts for 60+; -1 per 2 goals conceded;
+bonus up to 3 (BPS). Metrics and weights align to these: clean sheets, defcon, CS rate,
+attacking xGI for goal/assist potential, rotation (60+), bonus. Also uses team defensive
+strength: season-long clean sheets, goals conceded, and rates (CS rate, GA per game).
+Uses machine learning model to predict points in next 5 games.
+"""
+
+import argparse
+import json
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
+
+try:
+    from xgboost import XGBRegressor
+
+    XGBOOST_AVAILABLE = True
+except (ImportError, Exception):
+    XGBOOST_AVAILABLE = False
+    XGBRegressor = None
+
+try:
+    from lightgbm import LGBMRegressor
+
+    LIGHTGBM_AVAILABLE = True
+except (ImportError, Exception):
+    LIGHTGBM_AVAILABLE = False
+    LGBMRegressor = None
+
+from find_midfielders import (
+    calculate_fixture_difficulty_score,
+    calculate_recent_form,
+    calculate_team_points_from_fixtures,
+    calculate_team_points_from_fixtures_for_gw,
+    calculate_team_strength_score,
+    format_fixture,
+    get_actual_points_next_5_games,
+    get_player_features_for_prediction,
+    get_upcoming_fixtures,
+    load_bootstrap_data,
+    load_fixtures,
+    load_player_history,
+    safe_float,
+    train_and_evaluate_model,
+)
+
+DATA_DIR = Path("data")
+
+DEFENDER_ELEMENT_TYPE = 2
+
+# Weights aligned to FPL defender scoring: clean sheet 4 pts, defcon 2 pts per 10,
+# goal 6 pts, assist 3 pts; appearance 1/2 pts; bonus up to 3.
+# team_clean_sheet_rate / team_goals_conceded_per_game = season-long team defensive strength.
+METRIC_WEIGHTS = {
+    "defcon_per_90": 2.2,
+    "clean_sheets_per_game": 2.8,
+    "fdr_score": 0.34,
+    "form": 1.2,
+    "value_score": 0.5,
+    "rotation_score": 1.6,
+    "recent_xgi_per_game": 0.55,
+    "ict_index": 1.0,
+    "bonus_potential": 1.3,
+    "defcon_points_pct": 0.45,
+    "team_clean_sheet_rate": 1.4,
+    "team_goals_conceded_per_game": -0.35,
+    "predicted_points": 0.15,
+}
+
+
+def get_current_gameweek(bootstrap_data: Dict) -> int:
+    """Get the current gameweek number."""
+    events = bootstrap_data.get("events", [])
+    for event in events:
+        if event.get("is_current"):
+            return event.get("id", 1)
+    return 1
+
+
+def get_next_gameweek(bootstrap_data: Dict) -> int:
+    """Get the next gameweek number for transfer planning."""
+    events = bootstrap_data.get("events", [])
+    for event in events:
+        if event.get("is_next"):
+            return event.get("id", 1)
+    current_gw = get_current_gameweek(bootstrap_data)
+    return current_gw + 1
+
+
+def get_team_defensive_stats(
+    fixtures: List[Dict], team_id: int, up_to_gw: Optional[int] = None
+) -> Dict[str, float]:
+    """
+    Team defensive stats from finished fixtures: clean sheets, goals conceded,
+    and rates over the season up to the given gameweek.
+
+    Returns clean_sheets, goals_conceded, matches_played, clean_sheet_rate (0-1),
+    goals_conceded_per_game. Rates are 0 if no matches played.
+    """
+    clean_sheets = 0
+    goals_conceded = 0
+    matches_played = 0
+
+    for fixture in fixtures:
+        if not fixture.get("finished"):
+            continue
+        event = fixture.get("event")
+        if up_to_gw is not None and event is not None and event > up_to_gw:
+            continue
+
+        team_h = fixture.get("team_h")
+        team_a = fixture.get("team_a")
+        score_h = fixture.get("team_h_score")
+        score_a = fixture.get("team_a_score")
+        if team_h is None or team_a is None or score_h is None or score_a is None:
+            continue
+
+        if team_id == team_h:
+            ga = score_a
+            matches_played += 1
+            if ga == 0:
+                clean_sheets += 1
+            goals_conceded += ga
+        elif team_id == team_a:
+            ga = score_h
+            matches_played += 1
+            if ga == 0:
+                clean_sheets += 1
+            goals_conceded += ga
+
+    if matches_played == 0:
+        return {
+            "clean_sheets": 0,
+            "goals_conceded": 0,
+            "matches_played": 0,
+            "clean_sheet_rate": 0.0,
+            "goals_conceded_per_game": 0.0,
+        }
+
+    return {
+        "clean_sheets": clean_sheets,
+        "goals_conceded": goals_conceded,
+        "matches_played": matches_played,
+        "clean_sheet_rate": clean_sheets / matches_played,
+        "goals_conceded_per_game": goals_conceded / matches_played,
+    }
+
+
+def _defender_feature_vector(features: Dict) -> List[float]:
+    """Build feature vector for defender model (same as midfielders plus defcon/CS)."""
+    return [
+        features["xgi_per_90"],
+        features["xg_per_90"],
+        features["xa_per_90"],
+        features["form"],
+        features["points_per_game"],
+        features["ict_index"],
+        features["influence"],
+        features["creativity"],
+        features["threat"],
+        features["cost"],
+        features["avg_fdr"],
+        features["rotation_risk"],
+        features["avg_minutes_recent"],
+        features["start_pct"],
+        features["pct_60plus"],
+        features["recent_xgi_per_game_5"],
+        features["recent_xg_per_game_5"],
+        features["recent_xa_per_game_5"],
+        features["recent_points_per_game_5"],
+        features["recent_goals_per_game_5"],
+        features["recent_assists_per_game_5"],
+        features["recent_bonus_per_game_5"],
+        features["recent_bps_per_game_5"],
+        features["recent_points_per_game_3"],
+        features["recent_xgi_per_game_3"],
+        features["recent_points_per_game_10"],
+        features["total_minutes"],
+        features["total_starts"],
+        features["games_played"],
+        features["home_ppg"],
+        features["away_ppg"],
+        features["home_fixture_pct"],
+        features["team_strength"],
+        features["team_form"],
+        features["bonus_potential"],
+        features["selected_by"],
+        features["transfer_trend"],
+        features["transfer_ratio"],
+        features["ep_next"],
+        features["ep_this"],
+        features["value_form"],
+        features["value_season"],
+        features["total_goals"],
+        features["total_assists"],
+        features["total_bonus"],
+        features["total_bps"],
+        features["season_minutes"],
+        features["season_starts"],
+        features["yellow_cards"],
+        features["red_cards"],
+        features["defcon_points_pct"],
+        features["defcon_per_90"],
+        features["recent_defcon_per_game_5"],
+        features["recent_clean_sheets_per_game_5"],
+        features["team_clean_sheets_season"],
+        features["team_goals_conceded_season"],
+        features["team_clean_sheet_rate"],
+        features["team_goals_conceded_per_game"],
+    ]
+
+
+FEATURE_NAMES = [
+    "xgi_per_90",
+    "xg_per_90",
+    "xa_per_90",
+    "form",
+    "points_per_game",
+    "ict_index",
+    "influence",
+    "creativity",
+    "threat",
+    "cost",
+    "avg_fdr",
+    "rotation_risk",
+    "avg_minutes_recent",
+    "start_pct",
+    "pct_60plus",
+    "recent_xgi_per_game_5",
+    "recent_xg_per_game_5",
+    "recent_xa_per_game_5",
+    "recent_points_per_game_5",
+    "recent_goals_per_game_5",
+    "recent_assists_per_game_5",
+    "recent_bonus_per_game_5",
+    "recent_bps_per_game_5",
+    "recent_points_per_game_3",
+    "recent_xgi_per_game_3",
+    "recent_points_per_game_10",
+    "total_minutes",
+    "total_starts",
+    "games_played",
+    "home_ppg",
+    "away_ppg",
+    "home_fixture_pct",
+    "team_strength",
+    "team_form",
+    "bonus_potential",
+    "selected_by",
+    "transfer_trend",
+    "transfer_ratio",
+    "ep_next",
+    "ep_this",
+    "value_form",
+    "value_season",
+    "total_goals",
+    "total_assists",
+    "total_bonus",
+    "total_bps",
+    "season_minutes",
+    "season_starts",
+    "yellow_cards",
+    "red_cards",
+    "defcon_points_pct",
+    "defcon_per_90",
+    "recent_defcon_per_game_5",
+    "recent_clean_sheets_per_game_5",
+    "team_clean_sheets_season",
+    "team_goals_conceded_season",
+    "team_clean_sheet_rate",
+    "team_goals_conceded_per_game",
+]
+
+
+def _add_team_defensive_features(
+    features: Dict,
+    fixtures: List[Dict],
+    team_id: int,
+    up_to_gw: int,
+) -> None:
+    """Mutate features dict to add team defensive stats (season up to up_to_gw)."""
+    stats = get_team_defensive_stats(fixtures, team_id, up_to_gw)
+    features["team_clean_sheets_season"] = float(stats["clean_sheets"])
+    features["team_goals_conceded_season"] = float(stats["goals_conceded"])
+    features["team_clean_sheet_rate"] = stats["clean_sheet_rate"]
+    features["team_goals_conceded_per_game"] = stats["goals_conceded_per_game"]
+
+
+def prepare_training_data(
+    bootstrap_data: Dict,
+    fixtures: List[Dict],
+    min_gw: int = 1,
+    max_gw: Optional[int] = None,
+) -> Tuple[List[List[float]], List[int]]:
+    """Prepare training data from historical gameweeks for defenders.
+
+    Iterates from min_gw; samples exist only for gameweeks where a player has
+    at least 3 past rounds (get_player_features_for_prediction requirement).
+    """
+    players = bootstrap_data.get("elements", [])
+    defenders = [p for p in players if p.get("element_type") == DEFENDER_ELEMENT_TYPE]
+
+    if max_gw is None:
+        events = bootstrap_data.get("events", [])
+        finished_events = [e for e in events if e.get("finished")]
+        if finished_events:
+            max_gw = max(e.get("id", 0) for e in finished_events)
+        else:
+            max_gw = min_gw
+
+    X = []
+    y = []
+
+    for gw in range(min_gw, max_gw + 1):
+        team_points = calculate_team_points_from_fixtures_for_gw(
+            fixtures, up_to_gw=gw - 1
+        )
+
+        for player in defenders:
+            player_id = player.get("id")
+            player_history = load_player_history(player_id)
+
+            recent_form = calculate_recent_form(player_history, gw - 1)
+            features = get_player_features_for_prediction(
+                player,
+                player_history,
+                gw,
+                fixtures,
+                bootstrap_data,
+                team_points,
+                recent_form,
+            )
+
+            if features is None:
+                continue
+
+            actual_points = get_actual_points_next_5_games(player_history, gw)
+
+            if actual_points is None:
+                continue
+
+            _add_team_defensive_features(features, fixtures, player.get("team"), gw - 1)
+            X.append(_defender_feature_vector(features))
+            y.append(actual_points)
+
+    return X, y
+
+
+def train_prediction_model(
+    bootstrap_data: Dict, fixtures: List[Dict], current_gw: int, verbose: bool = False
+) -> Optional[Any]:
+    """Train prediction model on defender data and return the best model."""
+    if verbose:
+        print("Preparing training data for defender prediction model...")
+    X, y = prepare_training_data(bootstrap_data, fixtures, min_gw=1, max_gw=None)
+
+    if len(X) < 50:
+        if verbose:
+            print(
+                "Not enough training data for prediction model. Skipping ML predictions."
+            )
+        return None
+
+    if verbose:
+        print(f"Training samples: {len(X)}")
+
+    X_array = np.array(X)
+    y_array = np.array(y)
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_array, y_array, test_size=0.2, random_state=42
+    )
+
+    models_to_train = []
+
+    models_to_train.append(
+        (
+            RandomForestRegressor(
+                n_estimators=150,
+                max_depth=12,
+                min_samples_split=5,
+                min_samples_leaf=2,
+                max_features="sqrt",
+                random_state=42,
+                n_jobs=-1,
+            ),
+            "Random Forest",
+        )
+    )
+
+    models_to_train.append((Ridge(alpha=2.0, random_state=42), "Ridge Regression"))
+
+    if XGBOOST_AVAILABLE:
+        models_to_train.append(
+            (
+                XGBRegressor(
+                    n_estimators=150,
+                    max_depth=7,
+                    learning_rate=0.08,
+                    subsample=0.8,
+                    colsample_bytree=0.8,
+                    min_child_weight=3,
+                    reg_alpha=0.1,
+                    reg_lambda=1.5,
+                    random_state=42,
+                    n_jobs=-1,
+                ),
+                "XGBoost",
+            )
+        )
+
+    if LIGHTGBM_AVAILABLE:
+        models_to_train.append(
+            (
+                LGBMRegressor(
+                    n_estimators=150,
+                    max_depth=7,
+                    learning_rate=0.08,
+                    subsample=0.8,
+                    colsample_bytree=0.8,
+                    min_child_samples=20,
+                    reg_alpha=0.1,
+                    reg_lambda=1.5,
+                    random_state=42,
+                    n_jobs=-1,
+                    verbose=-1,
+                ),
+                "LightGBM",
+            )
+        )
+
+    results = []
+
+    for model, name in models_to_train:
+        metrics = train_and_evaluate_model(
+            model, name, X_train, X_test, y_train, y_test, FEATURE_NAMES
+        )
+        results.append(metrics)
+
+    if verbose:
+        print("Model Performance:")
+        for r in results:
+            print(
+                f"  {r['name']}: Test MAE={r['test_mae']:.2f}, R2={r['test_r2']:.3f}, "
+                f"Correlation={r['test_corr']:.3f}"
+            )
+
+    best_model_metrics = min(results, key=lambda x: x["test_mae"])
+
+    if verbose:
+        print(f"Using best model: {best_model_metrics['name']}")
+        print()
+
+    return best_model_metrics["model"]
+
+
+def predict_player_points(
+    model: Any,
+    player: Dict,
+    player_history: Optional[Dict],
+    prediction_start_gw: int,
+    fixtures: List[Dict],
+    bootstrap_data: Dict,
+    team_points: Dict[int, int],
+    recent_form: Dict,
+) -> Optional[float]:
+    """Predict points for next 5 games starting from prediction_start_gw."""
+    features = get_player_features_for_prediction(
+        player,
+        player_history,
+        prediction_start_gw,
+        fixtures,
+        bootstrap_data,
+        team_points,
+        recent_form,
+    )
+
+    if features is None:
+        return None
+
+    _add_team_defensive_features(
+        features, fixtures, player.get("team"), prediction_start_gw - 1
+    )
+    predicted_points = model.predict([_defender_feature_vector(features)])[0]
+    return float(predicted_points)
+
+
+def calculate_value_score_defender(player: Dict, points_per_game: float) -> float:
+    """Calculate value score for defenders (points per game per million)."""
+    cost = player.get("now_cost", 100) / 10.0
+    if cost == 0:
+        return 0.0
+    return points_per_game / cost
+
+
+def recent_clean_sheets_per_game(
+    player_history: Optional[Dict], current_gw: int, num_games: int = 5
+) -> float:
+    """Clean sheets per game over the last num_games."""
+    if not player_history or not player_history.get("history"):
+        return 0.0
+
+    history = player_history["history"]
+    recent = [h for h in history if h.get("round", 999) <= current_gw - 1]
+    recent = sorted(recent, key=lambda x: x.get("round", 0), reverse=True)[:num_games]
+
+    if not recent:
+        return 0.0
+
+    total_cs = sum(safe_float(h.get("clean_sheets"), 0) for h in recent)
+    games_played = len([h for h in recent if safe_float(h.get("minutes"), 0) > 0])
+    return total_cs / max(games_played, 1)
+
+
+def analyze_defenders(
+    bootstrap_data: Dict,
+    fixtures: List[Dict],
+    current_gw: int,
+    prediction_model: Optional[Any] = None,
+    next_gw: Optional[int] = None,
+    min_minutes: int = 180,
+    min_games: int = 2,
+    max_price: Optional[float] = None,
+) -> List[Dict]:
+    """Analyze all defenders and return ranked list."""
+    if next_gw is None:
+        next_gw = get_next_gameweek(bootstrap_data)
+
+    players = bootstrap_data.get("elements", [])
+    teams = {t["id"]: t["name"] for t in bootstrap_data.get("teams", [])}
+
+    team_points = calculate_team_points_from_fixtures(fixtures)
+
+    defenders = [p for p in players if p.get("element_type") == DEFENDER_ELEMENT_TYPE]
+
+    results = []
+
+    for player in defenders:
+        player_id = player.get("id")
+        minutes = player.get("minutes", 0)
+        cost = player.get("now_cost", 0) / 10.0
+
+        if minutes < min_minutes:
+            continue
+
+        if max_price is not None and cost > max_price:
+            continue
+
+        player_history = load_player_history(player_id)
+        recent_form = calculate_recent_form(player_history, current_gw)
+
+        if recent_form["games_played"] < min_games:
+            continue
+
+        chance_playing = player.get("chance_of_playing_next_round", 100)
+        status = player.get("status", "")
+        news = player.get("news", "")
+
+        avg_minutes_recent = recent_form["avg_minutes_per_game"]
+        games_60plus = recent_form["games_60plus_minutes"]
+        start_pct = recent_form["start_percentage"]
+
+        if avg_minutes_recent < 50:
+            continue
+
+        is_injured = status == "i" or (
+            chance_playing is not None and chance_playing < 75
+        )
+
+        team_id = player.get("team")
+        upcoming_fixtures = get_upcoming_fixtures(
+            fixtures, team_id, next_gw, num_games=5
+        )
+        avg_fdr = calculate_fixture_difficulty_score(
+            upcoming_fixtures, team_id, bootstrap_data, team_points
+        )
+
+        clean_sheets = int(player.get("clean_sheets", 0) or 0)
+        defcon = player.get("defensive_contribution", 0)
+        defcon_per_90 = float(player.get("defensive_contribution_per_90", 0.0) or 0.0)
+        games_played_season = player.get("games_played", 0) or (
+            player.get("starts", 0) + player.get("sub_appearances", 0)
+        )
+        clean_sheets_per_game = (
+            clean_sheets / max(games_played_season, 1)
+            if games_played_season > 0
+            else 0.0
+        )
+        defcon_per_game = (
+            defcon / max(games_played_season, 1) if games_played_season > 0 else 0.0
+        )
+
+        total_points = player.get("total_points", 0)
+        total_defcon = 0
+        games_with_defcon_10plus = 0
+        total_games_played = 0
+        if player_history and player_history.get("history"):
+            for h in player_history["history"]:
+                defcon_value = safe_float(h.get("defensive_contribution", 0), 0)
+                total_defcon += defcon_value
+                minutes = safe_float(h.get("minutes", 0), 0)
+                if minutes > 0:
+                    total_games_played += 1
+                    if defcon_value >= 10:
+                        games_with_defcon_10plus += 1
+        defcon_points = (total_defcon / 10.0) * 2.0
+        defcon_points_pct = (
+            (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+        )
+        defcon_10plus_pct = (
+            (games_with_defcon_10plus / max(total_games_played, 1) * 100)
+            if total_games_played > 0
+            else 0.0
+        )
+
+        xgi_per_90 = float(player.get("expected_goal_involvements_per_90", 0.0) or 0.0)
+        form = float(player.get("form", 0.0))
+        points_per_game = float(player.get("points_per_game", 0.0))
+        ict_index = float(player.get("ict_index", 0.0))
+        bonus_points = player.get("bonus", 0)
+        bonus_potential = (
+            (bonus_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+        )
+
+        rotation_risk_score = 0.0
+        if recent_form["games_played"] >= 3:
+            games_played_recent = recent_form["games_played"]
+            pct_60plus = (
+                (games_60plus / games_played_recent * 100)
+                if games_played_recent > 0
+                else 0
+            )
+            rotation_risk_score = 1.0 - min(pct_60plus / 100.0, start_pct / 100.0)
+
+        value_score = calculate_value_score_defender(player, points_per_game)
+
+        recent_cs_per_game = recent_clean_sheets_per_game(
+            player_history, current_gw, num_games=5
+        )
+
+        team_defensive = get_team_defensive_stats(
+            fixtures, team_id, up_to_gw=current_gw
+        )
+        team_clean_sheet_rate = team_defensive["clean_sheet_rate"]
+        team_goals_conceded_per_game = team_defensive["goals_conceded_per_game"]
+
+        predicted_points = None
+        if prediction_model is not None:
+            predicted_points = predict_player_points(
+                prediction_model,
+                player,
+                player_history,
+                next_gw,
+                fixtures,
+                bootstrap_data,
+                team_points,
+                recent_form,
+            )
+
+        fdr_score = 6.0 - avg_fdr
+        rotation_score = 1.0 - rotation_risk_score
+        recent_xgi_per_game = recent_form["recent_xgi"] / max(
+            recent_form["games_played"], 1
+        )
+
+        composite_score = (
+            defcon_per_90 * METRIC_WEIGHTS["defcon_per_90"]
+            + clean_sheets_per_game * METRIC_WEIGHTS["clean_sheets_per_game"]
+            + recent_cs_per_game * METRIC_WEIGHTS["clean_sheets_per_game"] * 0.6
+            + fdr_score * METRIC_WEIGHTS["fdr_score"]
+            + form * METRIC_WEIGHTS["form"]
+            + value_score * METRIC_WEIGHTS["value_score"]
+            + rotation_score * METRIC_WEIGHTS["rotation_score"]
+            + recent_xgi_per_game * METRIC_WEIGHTS["recent_xgi_per_game"]
+            + ict_index * METRIC_WEIGHTS["ict_index"]
+            + bonus_potential * METRIC_WEIGHTS["bonus_potential"]
+            + defcon_points_pct * METRIC_WEIGHTS["defcon_points_pct"]
+            + team_clean_sheet_rate * METRIC_WEIGHTS["team_clean_sheet_rate"]
+            + team_goals_conceded_per_game
+            * METRIC_WEIGHTS["team_goals_conceded_per_game"]
+        )
+
+        if predicted_points is not None:
+            composite_score += predicted_points * METRIC_WEIGHTS["predicted_points"]
+
+        result = {
+            "id": player_id,
+            "name": f"{player.get('first_name', '')} {player.get('second_name', '')}".strip(),
+            "team": teams.get(team_id, "Unknown"),
+            "team_id": team_id,
+            "cost": cost,
+            "clean_sheets": clean_sheets,
+            "clean_sheets_per_game": clean_sheets_per_game,
+            "recent_clean_sheets_per_game": recent_cs_per_game,
+            "defcon": defcon,
+            "defcon_per_90": defcon_per_90,
+            "defcon_per_game": defcon_per_game,
+            "defcon_points_pct": defcon_points_pct,
+            "defcon_10plus_pct": defcon_10plus_pct,
+            "form": form,
+            "points_per_game": points_per_game,
+            "total_points": total_points,
+            "minutes": minutes,
+            "starts": player.get("starts", 0),
+            "rotation_risk": rotation_risk_score,
+            "selected_by": float(player.get("selected_by_percent", 0.0)),
+            "ict_index": ict_index,
+            "avg_fdr": avg_fdr,
+            "upcoming_fixtures": upcoming_fixtures,
+            "value_score": value_score,
+            "composite_score": composite_score,
+            "recent_form": recent_form,
+            "bonus_points": bonus_points,
+            "bps": player.get("bps", 0),
+            "is_injured": is_injured,
+            "chance_playing_next": chance_playing,
+            "status": status,
+            "news": news,
+            "predicted_points": predicted_points,
+            "xgi_per_90": xgi_per_90,
+            "goals": player.get("goals_scored", 0),
+            "assists": player.get("assists", 0),
+            "team_clean_sheets_season": team_defensive["clean_sheets"],
+            "team_goals_conceded_season": team_defensive["goals_conceded"],
+            "team_clean_sheet_rate": team_clean_sheet_rate,
+            "team_goals_conceded_per_game": team_goals_conceded_per_game,
+        }
+
+        results.append(result)
+
+    return sorted(results, key=lambda x: x["composite_score"], reverse=True)
+
+
+def print_recommendations(
+    results: List[Dict], top_n: int = 30, team_points: Optional[Dict[int, int]] = None
+) -> None:
+    """Print formatted defender recommendations."""
+    bootstrap_data = json.load(open(DATA_DIR / "bootstrap-static.json"))
+    teams = {t["id"]: t["name"] for t in bootstrap_data.get("teams", [])}
+
+    if team_points is None:
+        fixtures = load_fixtures()
+        team_points = calculate_team_points_from_fixtures(fixtures)
+
+    print("=" * 100)
+    print("TOP DEFENDER TRANSFER TARGETS - DATA-DRIVEN ANALYSIS")
+    print("=" * 100)
+    print()
+
+    for i, player in enumerate(results[:top_n], 1):
+        print(f"{i}. {player['name']} ({player['team']}) - {player['cost']:.1f}m")
+
+        chance_playing_next = player.get("chance_playing_next")
+        if player.get("is_injured") or (
+            chance_playing_next is not None and chance_playing_next < 100
+        ):
+            status_info = f"Status: {player.get('status', 'Unknown')}"
+            if player.get("chance_playing_next") is not None:
+                status_info += (
+                    f" | Chance of playing: {player.get('chance_playing_next')}%"
+                )
+            if player.get("news"):
+                status_info += f" | News: {player.get('news', '')[:50]}"
+            print(f"   {status_info}")
+
+        print(f"   Composite Score: {player['composite_score']:.2f}")
+        print(
+            f"   Clean Sheets: {player['clean_sheets']} | Per game: {player['clean_sheets_per_game']:.2f} | Recent (last 5): {player['recent_clean_sheets_per_game']:.2f}/game"
+        )
+        print(
+            f"   Team defensive (season): CS {player.get('team_clean_sheets_season', 0)} | GA {player.get('team_goals_conceded_season', 0)} | CS rate {player.get('team_clean_sheet_rate', 0):.2f} | GA/game {player.get('team_goals_conceded_per_game', 0):.2f}"
+        )
+        print(
+            f"   Defcon: {player['defcon']} total | {player['defcon_per_90']:.2f} per 90 | {player['defcon_per_game']:.2f} per game | {player['defcon_points_pct']:.1f}% of points | {player.get('defcon_10plus_pct', 0):.1f}% games >=10 defcon"
+        )
+        print(
+            f"   Form: {player['form']:.1f} | PPG: {player['points_per_game']:.1f} | Total Points: {player['total_points']}"
+        )
+
+        recent = player["recent_form"]
+        if recent["games_played"] > 0:
+            avg_mins = recent.get("avg_minutes_per_game", 0)
+            pct_60plus = (
+                (recent.get("games_60plus_minutes", 0) / recent["games_played"] * 100)
+                if recent["games_played"] > 0
+                else 0
+            )
+            start_pct = recent.get("start_percentage", 0)
+            print(
+                f"   Recent Minutes: Avg {avg_mins:.0f} min/game | {pct_60plus:.0f}% games 60+ min | {start_pct:.0f}% starts"
+            )
+            print(
+                f"   Recent Form (last 5): {recent['games_played']} games, {recent['recent_points']} pts"
+            )
+
+        print(
+            f"   Rotation Risk: {player['rotation_risk']:.1%} | Minutes: {player['minutes']} | Starts: {player['starts']}"
+        )
+        print(f"   ICT Index: {player['ict_index']:.1f}")
+        print(
+            f"   Bonus Points: {player.get('bonus_points', 0)} | BPS: {player.get('bps', 0)}"
+        )
+        print(f"   Ownership: {player['selected_by']:.1f}%")
+        print(f"   Value Score (PPG per million): {player['value_score']:.3f}")
+        print(f"   Average FDR (next 5): {player['avg_fdr']:.1f} (lower is easier)")
+        if player.get("xgi_per_90", 0) > 0:
+            print(
+                f"   xGI per 90: {player['xgi_per_90']:.2f} | G: {player.get('goals', 0)} A: {player.get('assists', 0)}"
+            )
+        if player.get("predicted_points") is not None:
+            print(
+                f"   Predicted Points (next 5 games): {player['predicted_points']:.1f}"
+            )
+
+        print("   Upcoming Fixtures:")
+        for fixture in player["upcoming_fixtures"][:5]:
+            print(
+                f"     - {format_fixture(fixture, player['team_id'], teams, bootstrap_data, team_points)}"
+            )
+
+        print()
+
+
+def main() -> None:
+    """Main function."""
+    parser = argparse.ArgumentParser(
+        description="Find potential FPL defenders with good underlying stats"
+    )
+    parser.add_argument(
+        "--max-price",
+        type=float,
+        default=None,
+        help="Maximum price in millions (e.g., 6.0 for 6.0m)",
+    )
+    args = parser.parse_args()
+
+    print("Loading data...")
+    bootstrap_data = load_bootstrap_data()
+    fixtures = load_fixtures()
+
+    current_gw = get_current_gameweek(bootstrap_data)
+    next_gw = get_next_gameweek(bootstrap_data)
+    print(f"Current Gameweek: {current_gw}")
+    print(f"Next Gameweek (for transfers): {next_gw}")
+    if args.max_price is not None:
+        print(f"Maximum price filter: {args.max_price:.1f}m")
+    print()
+
+    print("Training prediction model...")
+    prediction_model = train_prediction_model(
+        bootstrap_data, fixtures, current_gw, verbose=True
+    )
+
+    print("Analyzing defenders...")
+    results = analyze_defenders(
+        bootstrap_data,
+        fixtures,
+        current_gw,
+        prediction_model=prediction_model,
+        next_gw=next_gw,
+        max_price=args.max_price,
+    )
+
+    team_points = calculate_team_points_from_fixtures(fixtures)
+
+    print(f"Found {len(results)} defenders meeting criteria")
+    print()
+
+    print_recommendations(results, top_n=30, team_points=team_points)
+
+
+if __name__ == "__main__":
+    main()

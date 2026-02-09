@@ -35,15 +35,16 @@ except (ImportError, Exception):
 DATA_DIR = Path("data")
 
 METRIC_WEIGHTS = {
-    "xgi_per_90": 3.0,
-    "fdr_score": 0.5,
-    "form": 0.3,
-    "value_score": 2.0,
-    "rotation_score": 0.5,
-    "recent_xgi_per_game": 0.5,
-    "ict_index": 0.1,
-    "bonus_potential": 0.02,
-    "conversion_efficiency": 0.4,
+    "xgi_per_90": 0.6303,
+    "fdr_score": 0.3385,
+    "form": 1.4768,
+    "value_score": 0.3684,
+    "rotation_score": 1.4657,
+    "recent_xgi_per_game": 1.1756,
+    "ict_index": 1.8310,
+    "bonus_potential": 1.5263,
+    "conversion_efficiency": 0.5365,
+    "defcon_points_pct": 0.3115,
     "predicted_points": 0.15,
 }
 
@@ -343,6 +344,8 @@ def get_player_features_for_prediction(
                 "home_points": 0.0,
                 "away_games": 0,
                 "away_points": 0.0,
+                "total_defcon": 0,
+                "total_clean_sheets": 0,
             }
 
         total_xgi = sum(
@@ -357,6 +360,12 @@ def get_player_features_for_prediction(
         total_bps = sum(safe_float(h.get("bps"), 0) for h in games_list)
         total_minutes = sum(safe_float(h.get("minutes"), 0) for h in games_list)
         total_starts = sum(safe_float(h.get("starts"), 0) for h in games_list)
+        total_defcon = sum(
+            safe_float(h.get("defensive_contribution"), 0) for h in games_list
+        )
+        total_clean_sheets = sum(
+            safe_float(h.get("clean_sheets"), 0) for h in games_list
+        )
 
         home_games = [
             h
@@ -387,6 +396,8 @@ def get_player_features_for_prediction(
             "home_points": home_points,
             "away_games": len(away_games),
             "away_points": away_points,
+            "total_defcon": total_defcon,
+            "total_clean_sheets": total_clean_sheets,
         }
 
     stats_5 = calc_recent_stats(recent_5)
@@ -477,6 +488,32 @@ def get_player_features_for_prediction(
     starts = player.get("starts", 0)
     yellow_cards = player.get("yellow_cards", 0)
     red_cards = player.get("red_cards", 0)
+    defcon = player.get("defensive_contribution", 0)
+    defcon_per_90 = float(player.get("defensive_contribution_per_90", 0.0) or 0.0)
+    clean_sheets = player.get("clean_sheets", 0)
+
+    total_defcon = 0
+    games_with_defcon_10plus = 0
+    total_games_played = 0
+    if player_history and player_history.get("history"):
+        history = player_history["history"]
+        for h in history:
+            defcon_value = safe_float(h.get("defensive_contribution", 0), 0)
+            total_defcon += defcon_value
+            minutes = safe_float(h.get("minutes", 0), 0)
+            if minutes > 0:
+                total_games_played += 1
+                if defcon_value >= 10:
+                    games_with_defcon_10plus += 1
+    defcon_points = (total_defcon / 10.0) * 2.0
+    defcon_points_pct = (
+        (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+    )
+    defcon_10plus_pct = (
+        (games_with_defcon_10plus / max(total_games_played, 1) * 100)
+        if total_games_played > 0
+        else 0.0
+    )
 
     team_strength = calculate_team_strength_score(player_team, team_points, team_id)
     team_form_str = player_team.get("form", "")
@@ -581,6 +618,19 @@ def get_player_features_for_prediction(
         "season_starts": starts,
         "yellow_cards": yellow_cards,
         "red_cards": red_cards,
+        "defcon": defcon,
+        "defcon_per_90": defcon_per_90,
+        "clean_sheets": clean_sheets,
+        "defcon_points_pct": defcon_points_pct,
+        "recent_defcon_per_game_5": stats_5["total_defcon"]
+        / max(stats_5["games_played"], 1),
+        "recent_clean_sheets_per_game_5": stats_5["total_clean_sheets"]
+        / max(stats_5["games_played"], 1),
+        "recent_defcon_per_game_3": (
+            stats_3["total_defcon"] / max(stats_3["games_played"], 1)
+            if stats_3["games_played"] > 0
+            else 0.0
+        ),
     }
 
     return features
@@ -648,10 +698,14 @@ def calculate_team_points_from_fixtures_for_gw(
 def prepare_training_data(
     bootstrap_data: Dict,
     fixtures: List[Dict],
-    min_gw: int = 3,
+    min_gw: int = 1,
     max_gw: Optional[int] = None,
 ) -> Tuple[List[List[float]], List[int]]:
-    """Prepare training data from historical gameweeks."""
+    """Prepare training data from historical gameweeks.
+
+    Iterates from min_gw; samples exist only for gameweeks where a player has
+    at least 3 past rounds (get_player_features_for_prediction requirement).
+    """
     players = bootstrap_data.get("elements", [])
     midfielders = [p for p in players if p.get("element_type") == 3]
 
@@ -745,6 +799,7 @@ def prepare_training_data(
                 features["season_starts"],
                 features["yellow_cards"],
                 features["red_cards"],
+                features["defcon_points_pct"],
             ]
 
             X.append(feature_vector)
@@ -794,7 +849,7 @@ def train_prediction_model(
     """Train prediction model and return the best model."""
     if verbose:
         print("Preparing training data for prediction model...")
-    X, y = prepare_training_data(bootstrap_data, fixtures, min_gw=3, max_gw=None)
+    X, y = prepare_training_data(bootstrap_data, fixtures, min_gw=1, max_gw=None)
 
     if len(X) < 50:
         if verbose:
@@ -864,6 +919,7 @@ def train_prediction_model(
         "season_starts",
         "yellow_cards",
         "red_cards",
+        "defcon_points_pct",
     ]
 
     models_to_train = []
@@ -1027,6 +1083,7 @@ def predict_player_points(
         features["season_starts"],
         features["yellow_cards"],
         features["red_cards"],
+        features["defcon_points_pct"],
     ]
 
     predicted_points = model.predict([feature_vector])[0]
@@ -1048,7 +1105,7 @@ def analyze_midfielders(
     prediction_model: Optional[Any] = None,
     next_gw: Optional[int] = None,
     min_minutes: int = 180,
-    min_games: int = 3,
+    min_games: int = 2,
     max_price: Optional[float] = None,
 ) -> List[Dict]:
     """Analyze all midfielders and return ranked list."""
@@ -1089,21 +1146,12 @@ def analyze_midfielders(
         games_60plus = recent_form["games_60plus_minutes"]
         start_pct = recent_form["start_percentage"]
 
+        if avg_minutes_recent < 50:
+            continue
+
         is_injured = status == "i" or (
             chance_playing is not None and chance_playing < 75
         )
-
-        if not is_injured:
-            if recent_form["games_played"] >= 3:
-                games_played_recent = recent_form["games_played"]
-                pct_60plus = (
-                    (games_60plus / games_played_recent * 100)
-                    if games_played_recent > 0
-                    else 0
-                )
-
-                if avg_minutes_recent < 60 or pct_60plus < 60 or start_pct < 80:
-                    continue
 
         team_id = player.get("team")
         next_gw = get_next_gameweek(bootstrap_data)
@@ -1142,6 +1190,39 @@ def analyze_midfielders(
 
         bonus_points = player.get("bonus", 0)
         bps = player.get("bps", 0)
+        defcon = player.get("defensive_contribution", 0)
+        defcon_per_90 = float(player.get("defensive_contribution_per_90", 0.0) or 0.0)
+        clean_sheets = player.get("clean_sheets", 0)
+
+        games_played_season = player.get("games_played", 0) or player.get(
+            "starts", 0
+        ) + player.get("sub_appearances", 0)
+        defcon_per_game = (
+            defcon / max(games_played_season, 1) if games_played_season > 0 else 0.0
+        )
+
+        total_defcon = 0
+        games_with_defcon_10plus = 0
+        total_games_played = 0
+        if player_history and player_history.get("history"):
+            history = player_history["history"]
+            for h in history:
+                defcon_value = safe_float(h.get("defensive_contribution", 0), 0)
+                total_defcon += defcon_value
+                minutes = safe_float(h.get("minutes", 0), 0)
+                if minutes > 0:
+                    total_games_played += 1
+                    if defcon_value >= 10:
+                        games_with_defcon_10plus += 1
+        defcon_points = (total_defcon / 10.0) * 2.0
+        defcon_points_pct = (
+            (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+        )
+        defcon_10plus_pct = (
+            (games_with_defcon_10plus / max(total_games_played, 1) * 100)
+            if total_games_played > 0
+            else 0.0
+        )
 
         rotation_risk_score = 0.0
         if recent_form["games_played"] >= 3:
@@ -1188,6 +1269,7 @@ def analyze_midfielders(
             + ict_index * METRIC_WEIGHTS["ict_index"]
             + bonus_potential * METRIC_WEIGHTS["bonus_potential"]
             + conversion_efficiency * METRIC_WEIGHTS["conversion_efficiency"]
+            + defcon_points_pct * METRIC_WEIGHTS["defcon_points_pct"]
         )
 
         if predicted_points is not None:
@@ -1232,6 +1314,12 @@ def analyze_midfielders(
             "status": status,
             "news": news,
             "predicted_points": predicted_points,
+            "defcon": defcon,
+            "defcon_per_90": defcon_per_90,
+            "defcon_per_game": defcon_per_game,
+            "defcon_points_pct": defcon_points_pct,
+            "defcon_10plus_pct": defcon_10plus_pct,
+            "clean_sheets": clean_sheets,
         }
 
         results.append(result)
@@ -1280,7 +1368,7 @@ def format_fixture(
 
 
 def print_recommendations(
-    results: List[Dict], top_n: int = 20, team_points: Optional[Dict[int, int]] = None
+    results: List[Dict], top_n: int = 30, team_points: Optional[Dict[int, int]] = None
 ):
     """Print formatted recommendations."""
     bootstrap_data = json.load(open(DATA_DIR / "bootstrap-static.json"))
@@ -1351,6 +1439,11 @@ def print_recommendations(
         print(f"   Ownership: {player['selected_by']:.1f}%")
         print(f"   Value Score (xGI/90 per £m): {player['value_score']:.3f}")
         print(f"   Average FDR (next 5): {player['avg_fdr']:.1f} (lower is easier)")
+        if player.get("defcon", 0) > 0:
+            print(
+                f"   Defcon: {player.get('defcon', 0)} total | {player.get('defcon_per_90', 0):.2f} per 90 | {player.get('defcon_per_game', 0):.2f} per game | {player.get('defcon_points_pct', 0):.1f}% of points | {player.get('defcon_10plus_pct', 0):.1f}% games >=10 defcon"
+            )
+            print(f"   Clean Sheets: {player.get('clean_sheets', 0)}")
         if player.get("predicted_points") is not None:
             print(
                 f"   Predicted Points (next 5 games): {player['predicted_points']:.1f}"
@@ -1410,7 +1503,7 @@ def main():
     print(f"Found {len(results)} midfielders meeting criteria")
     print()
 
-    print_recommendations(results, top_n=20, team_points=team_points)
+    print_recommendations(results, top_n=30, team_points=team_points)
 
 
 if __name__ == "__main__":

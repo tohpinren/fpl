@@ -2,7 +2,7 @@
 Script to find potential midfielders with good underlying stats for FPL transfers.
 
 Analyzes expected goals involvement (xGI), fixture difficulty, form, and other key metrics.
-Uses machine learning model to predict points in next 5 games.
+Uses machine learning model to predict points over a configurable lookahead (default next 5 GWs).
 """
 
 import argparse
@@ -307,6 +307,8 @@ def get_player_features_for_prediction(
     bootstrap_data: Dict,
     team_points: Dict[int, int],
     recent_form: Dict,
+    *,
+    lookahead_gws: int,
 ) -> Optional[Dict]:
     """Extract comprehensive features for prediction model from player data."""
     if not player_history or not player_history.get("history"):
@@ -423,7 +425,7 @@ def get_player_features_for_prediction(
     upcoming_fixtures = []
     for fixture in fixtures:
         event = fixture.get("event")
-        if event is not None and current_gw <= event < current_gw + 5:
+        if event is not None and current_gw <= event < current_gw + lookahead_gws:
             if fixture.get("team_h") == team_id or fixture.get("team_a") == team_id:
                 upcoming_fixtures.append(fixture)
 
@@ -636,10 +638,13 @@ def get_player_features_for_prediction(
     return features
 
 
-def get_actual_points_next_5_games(
-    player_history: Optional[Dict], current_gw: int
+def get_actual_points_next_n_games(
+    player_history: Optional[Dict],
+    *,
+    current_gw: int,
+    lookahead_gws: int,
 ) -> Optional[int]:
-    """Get actual points scored in next 5 games from current gameweek."""
+    """Get actual points scored over the next `lookahead_gws` gameweeks from `current_gw`."""
     if not player_history or not player_history.get("history"):
         return None
 
@@ -647,7 +652,8 @@ def get_actual_points_next_5_games(
     future_games = [
         h
         for h in history
-        if h.get("round", 999) >= current_gw and h.get("round", 999) < current_gw + 5
+        if h.get("round", 999) >= current_gw
+        and h.get("round", 999) < current_gw + lookahead_gws
     ]
 
     if len(future_games) == 0:
@@ -700,6 +706,8 @@ def prepare_training_data(
     fixtures: List[Dict],
     min_gw: int = 1,
     max_gw: Optional[int] = None,
+    *,
+    lookahead_gws: int,
 ) -> Tuple[List[List[float]], List[int]]:
     """Prepare training data from historical gameweeks.
 
@@ -738,12 +746,17 @@ def prepare_training_data(
                 bootstrap_data,
                 team_points,
                 recent_form,
+                lookahead_gws=lookahead_gws,
             )
 
             if features is None:
                 continue
 
-            actual_points = get_actual_points_next_5_games(player_history, gw)
+            actual_points = get_actual_points_next_n_games(
+                player_history,
+                current_gw=gw,
+                lookahead_gws=lookahead_gws,
+            )
 
             if actual_points is None:
                 continue
@@ -844,12 +857,23 @@ def train_and_evaluate_model(
 
 
 def train_prediction_model(
-    bootstrap_data: Dict, fixtures: List[Dict], current_gw: int, verbose: bool = False
+    bootstrap_data: Dict,
+    fixtures: List[Dict],
+    current_gw: int,
+    *,
+    lookahead_gws: int,
+    verbose: bool = False,
 ) -> Optional[Any]:
     """Train prediction model and return the best model."""
     if verbose:
         print("Preparing training data for prediction model...")
-    X, y = prepare_training_data(bootstrap_data, fixtures, min_gw=1, max_gw=None)
+    X, y = prepare_training_data(
+        bootstrap_data,
+        fixtures,
+        min_gw=1,
+        max_gw=None,
+        lookahead_gws=lookahead_gws,
+    )
 
     if len(X) < 50:
         if verbose:
@@ -1014,11 +1038,10 @@ def predict_player_points(
     bootstrap_data: Dict,
     team_points: Dict[int, int],
     recent_form: Dict,
+    *,
+    lookahead_gws: int,
 ) -> Optional[float]:
-    """Predict points for next 5 games starting from prediction_start_gw.
-
-    The model predicts total points for prediction_start_gw to prediction_start_gw + 4.
-    """
+    """Predict total points over the next `lookahead_gws` gameweeks from prediction_start_gw."""
     features = get_player_features_for_prediction(
         player,
         player_history,
@@ -1027,6 +1050,7 @@ def predict_player_points(
         bootstrap_data,
         team_points,
         recent_form,
+        lookahead_gws=lookahead_gws,
     )
 
     if features is None:
@@ -1104,13 +1128,16 @@ def analyze_midfielders(
     current_gw: int,
     prediction_model: Optional[Any] = None,
     next_gw: Optional[int] = None,
+    *,
+    lookahead_gws: int = DEFAULT_LOOKAHEAD_GAMEWEEKS,
     min_minutes: int = 180,
     min_games: int = 2,
     max_price: Optional[float] = None,
 ) -> List[Dict]:
     """Analyze all midfielders and return ranked list."""
-    if next_gw is None:
-        next_gw = current_gw + 1
+    effective_next_gw = (
+        next_gw if next_gw is not None else get_next_gameweek(bootstrap_data)
+    )
 
     players = bootstrap_data.get("elements", [])
     teams = {t["id"]: t["name"] for t in bootstrap_data.get("teams", [])}
@@ -1154,9 +1181,11 @@ def analyze_midfielders(
         )
 
         team_id = player.get("team")
-        next_gw = get_next_gameweek(bootstrap_data)
         upcoming_fixtures = get_upcoming_fixtures(
-            fixtures, team_id, next_gw, num_games=5
+            fixtures,
+            team_id,
+            effective_next_gw,
+            num_games=lookahead_gws,
         )
         avg_fdr = calculate_fixture_difficulty_score(
             upcoming_fixtures, team_id, bootstrap_data, team_points
@@ -1246,11 +1275,12 @@ def analyze_midfielders(
                 prediction_model,
                 player,
                 player_history,
-                next_gw,
+                effective_next_gw,
                 fixtures,
                 bootstrap_data,
                 team_points,
                 recent_form,
+                lookahead_gws=lookahead_gws,
             )
 
         fdr_score = 6.0 - avg_fdr
@@ -1368,7 +1398,11 @@ def format_fixture(
 
 
 def print_recommendations(
-    results: List[Dict], top_n: int = 30, team_points: Optional[Dict[int, int]] = None
+    results: List[Dict],
+    top_n: int = 30,
+    team_points: Optional[Dict[int, int]] = None,
+    *,
+    lookahead_gws: int = DEFAULT_LOOKAHEAD_GAMEWEEKS,
 ):
     """Print formatted recommendations."""
     bootstrap_data = json.load(open(DATA_DIR / "bootstrap-static.json"))
@@ -1438,7 +1472,9 @@ def print_recommendations(
         )
         print(f"   Ownership: {player['selected_by']:.1f}%")
         print(f"   Value Score (xGI/90 per £m): {player['value_score']:.3f}")
-        print(f"   Average FDR (next 5): {player['avg_fdr']:.1f} (lower is easier)")
+        print(
+            f"   Average FDR (next {lookahead_gws}): {player['avg_fdr']:.1f} (lower is easier)"
+        )
         if player.get("defcon", 0) > 0:
             print(
                 f"   Defcon: {player.get('defcon', 0)} total | {player.get('defcon_per_90', 0):.2f} per 90 | {player.get('defcon_per_game', 0):.2f} per game | {player.get('defcon_points_pct', 0):.1f}% of points | {player.get('defcon_10plus_pct', 0):.1f}% games >=10 defcon"
@@ -1446,11 +1482,11 @@ def print_recommendations(
             print(f"   Clean Sheets: {player.get('clean_sheets', 0)}")
         if player.get("predicted_points") is not None:
             print(
-                f"   Predicted Points (next 5 games): {player['predicted_points']:.1f}"
+                f"   Predicted Points (next {lookahead_gws} GWs): {player['predicted_points']:.1f}"
             )
 
         print("   Upcoming Fixtures:")
-        for fixture in player["upcoming_fixtures"][:5]:
+        for fixture in player["upcoming_fixtures"][:lookahead_gws]:
             print(
                 f"     - {format_fixture(fixture, player['team_id'], teams, bootstrap_data, team_points)}"
             )
@@ -1469,7 +1505,21 @@ def main():
         default=None,
         help="Maximum price in millions (e.g., 8.5 for £8.5m)",
     )
+    parser.add_argument(
+        "--lookahead-gws",
+        type=int,
+        default=DEFAULT_LOOKAHEAD_GAMEWEEKS,
+        metavar="N",
+        help=(
+            "How many upcoming gameweeks from the next GW to use for fixtures, "
+            "FDR, ML targets/features, and predicted points "
+            "(default: %(default)s; use e.g. 4 late in the season)"
+        ),
+    )
     args = parser.parse_args()
+
+    if args.lookahead_gws < 1:
+        parser.error("--lookahead-gws must be at least 1")
 
     print("Loading data...")
     bootstrap_data = load_bootstrap_data()
@@ -1481,11 +1531,16 @@ def main():
     print(f"Next Gameweek (for transfers): {next_gw}")
     if args.max_price is not None:
         print(f"Maximum price filter: £{args.max_price:.1f}m")
+    print(f"Lookahead gameweeks: {args.lookahead_gws}")
     print()
 
     print("Training prediction model...")
     prediction_model = train_prediction_model(
-        bootstrap_data, fixtures, current_gw, verbose=True
+        bootstrap_data,
+        fixtures,
+        current_gw,
+        lookahead_gws=args.lookahead_gws,
+        verbose=True,
     )
 
     print("Analyzing midfielders...")
@@ -1495,6 +1550,7 @@ def main():
         current_gw,
         prediction_model=prediction_model,
         next_gw=next_gw,
+        lookahead_gws=args.lookahead_gws,
         max_price=args.max_price,
     )
 
@@ -1503,7 +1559,12 @@ def main():
     print(f"Found {len(results)} midfielders meeting criteria")
     print()
 
-    print_recommendations(results, top_n=30, team_points=team_points)
+    print_recommendations(
+        results,
+        top_n=30,
+        team_points=team_points,
+        lookahead_gws=args.lookahead_gws,
+    )
 
 
 if __name__ == "__main__":

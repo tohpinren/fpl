@@ -34,6 +34,8 @@ except (ImportError, Exception):
 
 DATA_DIR = Path("data")
 
+DEFAULT_LOOKAHEAD_GAMEWEEKS = 5
+
 METRIC_WEIGHTS = {
     "xgi_per_90": 0.6303,
     "fdr_score": 0.3385,

@@ -35,6 +35,11 @@ class DashboardHTTPTests(unittest.TestCase):
         response = connection.getresponse()
         return response.status, response.read(), response.headers
 
+    def assert_refresh_lock_released(self):
+        # The client can receive the response just before the handler's finally block runs.
+        self.assertTrue(serve.REFRESH_LOCK.acquire(timeout=1))
+        serve.REFRESH_LOCK.release()
+
     def test_frontend_and_api_are_served(self):
         status, body, _ = self.request("GET", "/")
         self.assertEqual(status, 200)
@@ -73,7 +78,7 @@ class DashboardHTTPTests(unittest.TestCase):
         with patch.object(serve.subprocess, "run", return_value=result):
             status, _, _ = self.request("POST", "/api/refresh")
         self.assertEqual(status, 502)
-        self.assertFalse(serve.REFRESH_LOCK.locked())
+        self.assert_refresh_lock_released()
 
     def test_timeout_reports_failure_and_releases_lock(self):
         with patch.object(
@@ -81,7 +86,7 @@ class DashboardHTTPTests(unittest.TestCase):
         ):
             status, _, _ = self.request("POST", "/api/refresh")
         self.assertEqual(status, 504)
-        self.assertFalse(serve.REFRESH_LOCK.locked())
+        self.assert_refresh_lock_released()
 
     def test_overlapping_refresh_is_rejected(self):
         with serve.REFRESH_LOCK:

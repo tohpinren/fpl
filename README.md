@@ -2,6 +2,10 @@
 
 A Python script to download all available Fantasy Premier League (FPL) API data for the current season.
 
+Updated for **2026/27**. The official API always serves the active season; players,
+positions, teams, fixtures, points and bonus statistics come from that data rather
+than a hardcoded season roster. See the [official 2026/27 changes](https://www.premierleague.com/en/news/4679873).
+
 ## Features
 
 - Downloads bootstrap-static data (players, teams, gameweeks, events, etc.)
@@ -10,6 +14,7 @@ A Python script to download all available Fantasy Premier League (FPL) API data 
 - Downloads gameweek live data
 - Organizes data in a structured directory format
 - Includes retry logic and error handling
+- Detects season changes and archives the previous season before refreshing reused player IDs
 
 ## Installation
 
@@ -68,7 +73,17 @@ Run the download script:
 python download_fpl_data.py
 ```
 
-The script will download all available data and save it to the `data/` directory with the following structure:
+Run this before analysis to refresh the active season. The script downloads all
+players and fixtures, plus live data for completed and current gameweeks. Future
+gameweeks are skipped until they start.
+
+When the opening gameweek deadline identifies a new season, existing data is moved
+to `data/archive/<previous-season>/` before the new bootstrap data is saved. This
+preserves your old downloads and prevents previous-season player histories from
+being used when the API reuses player IDs. For example, upgrading from 2025/26
+preserves the old files in `data/archive/2025-26/`.
+
+The active data stays in `data/`, so existing analysis commands keep working:
 
 ```
 data/
@@ -82,6 +97,8 @@ data/
 │   ├── 1.json
 │   ├── 2.json
 │   └── ...
+├── archive/                   # Previous seasons, preserved on season changes
+│   └── 2025-26/
 ├── leagues/                   # League standings (if downloaded)
 └── teams/                     # Team data (if downloaded)
 ```
@@ -94,6 +111,21 @@ data/
 - `/event/{gameweek}/live/` - Live gameweek data
 
 ## Analysis Scripts
+
+All analysis scripts use the refreshed current-season data:
+
+```bash
+python find_defenders.py --max-price 6.0 --lookahead-gws 5
+python find_midfielders.py --max-price 8.5 --lookahead-gws 5
+python find_forwards.py --max-price 9.0
+```
+
+Defensive contribution points follow the [official FPL rules](https://fantasy.premierleague.com/help/faqs):
+defenders earn two points for at least 10 contributions in a match; midfielders
+and forwards need 12. Points are capped at two per match. Rankings and prediction
+features count qualifying matches, rather than estimating points from season
+contribution totals. Midfielder and defender output includes the percentage of
+appearances meeting the relevant threshold.
 
 ### Find Midfielders (`find_midfielders.py`)
 
@@ -172,6 +204,13 @@ The script automatically trains a prediction model using historical data and inc
 ## Command Line Options
 
 - `--max-price`: Filter results by maximum price in millions (e.g., `--max-price 8.5` for £8.5m maximum)
+- `--lookahead-gws`: Number of upcoming gameweeks for midfielder and defender analysis (default: 5)
+
+## Tests
+
+```bash
+python -m unittest discover -s tests -v
+```
 
 ## Notes
 

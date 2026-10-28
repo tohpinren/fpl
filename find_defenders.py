@@ -1,7 +1,7 @@
 """
 Script to find potential defenders with good underlying stats for FPL transfers.
 
-FPL defender scoring: 4 pts clean sheet (60+ min), 2 pts per 10 defensive contributions;
+FPL defender scoring: 4 pts clean sheet (60+ min), 2 pts for 10+ defensive contributions per match;
 6 pts per goal, 3 per assist; 1 pt for 1-60 min, 2 pts for 60+; -1 per 2 goals conceded;
 bonus up to 3 (BPS). Metrics and weights align to these: clean sheets, defcon, CS rate,
 attacking xGI for goal/assist potential, rotation (60+), bonus. Also uses team defensive
@@ -15,10 +15,13 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
+
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
+
+from fpl_scoring import calculate_defcon_stats
 
 try:
     from xgboost import XGBRegressor
@@ -58,7 +61,7 @@ DATA_DIR = Path("data")
 
 DEFENDER_ELEMENT_TYPE = 2
 
-# Weights aligned to FPL defender scoring: clean sheet 4 pts, defcon 2 pts per 10,
+# Weights aligned to FPL defender scoring: clean sheet 4 pts, defcon capped at 2 pts per match for 10+,
 # goal 6 pts, assist 3 pts; appearance 1/2 pts; bonus up to 3.
 # team_clean_sheet_rate / team_goals_conceded_per_game = season-long team defensive strength.
 METRIC_WEIGHTS = {
@@ -628,27 +631,13 @@ def analyze_defenders(
         )
 
         total_points = player.get("total_points", 0)
-        total_defcon = 0
-        games_with_defcon_10plus = 0
-        total_games_played = 0
-        if player_history and player_history.get("history"):
-            for h in player_history["history"]:
-                defcon_value = safe_float(h.get("defensive_contribution", 0), 0)
-                total_defcon += defcon_value
-                minutes = safe_float(h.get("minutes", 0), 0)
-                if minutes > 0:
-                    total_games_played += 1
-                    if defcon_value >= 10:
-                        games_with_defcon_10plus += 1
-        defcon_points = (total_defcon / 10.0) * 2.0
+        defcon_stats = calculate_defcon_stats(
+            (player_history or {}).get("history", []), player.get("element_type")
+        )
         defcon_points_pct = (
-            (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+            defcon_stats["points"] / max(total_points, 1) * 100 if total_points > 0 else 0.0
         )
-        defcon_10plus_pct = (
-            (games_with_defcon_10plus / max(total_games_played, 1) * 100)
-            if total_games_played > 0
-            else 0.0
-        )
+        defcon_threshold_pct = defcon_stats["threshold_pct"]
 
         xgi_per_90 = float(player.get("expected_goal_involvements_per_90", 0.0) or 0.0)
         form = float(player.get("form", 0.0))
@@ -734,7 +723,7 @@ def analyze_defenders(
             "defcon_per_90": defcon_per_90,
             "defcon_per_game": defcon_per_game,
             "defcon_points_pct": defcon_points_pct,
-            "defcon_10plus_pct": defcon_10plus_pct,
+            "defcon_threshold_pct": defcon_threshold_pct,
             "form": form,
             "points_per_game": points_per_game,
             "total_points": total_points,
@@ -813,7 +802,7 @@ def print_recommendations(
             f"   Team defensive (season): CS {player.get('team_clean_sheets_season', 0)} | GA {player.get('team_goals_conceded_season', 0)} | CS rate {player.get('team_clean_sheet_rate', 0):.2f} | GA/game {player.get('team_goals_conceded_per_game', 0):.2f}"
         )
         print(
-            f"   Defcon: {player['defcon']} total | {player['defcon_per_90']:.2f} per 90 | {player['defcon_per_game']:.2f} per game | {player['defcon_points_pct']:.1f}% of points | {player.get('defcon_10plus_pct', 0):.1f}% games >=10 defcon"
+            f"   Defcon: {player['defcon']} total | {player['defcon_per_90']:.2f} per 90 | {player['defcon_per_game']:.2f} per game | {player['defcon_points_pct']:.1f}% of points | {player.get('defcon_threshold_pct', 0):.1f}% games >=10 defcon"
         )
         print(
             f"   Form: {player['form']:.1f} | PPG: {player['points_per_game']:.1f} | Total Points: {player['total_points']}"

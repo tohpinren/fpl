@@ -11,6 +11,8 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 
+from fpl_scoring import calculate_defcon_stats
+
 DATA_DIR = Path("data")
 
 
@@ -333,14 +335,11 @@ def calculate_metric_weights() -> Dict[str, float]:
             defcon / max(games_played_season, 1) if games_played_season > 0 else 0.0
         )
 
-        total_defcon = 0
-        if player_history and player_history.get("history"):
-            history = player_history["history"]
-            for h in history:
-                total_defcon += safe_float(h.get("defensive_contribution", 0), 0)
-        defcon_points = (total_defcon / 10.0) * 2.0
+        defcon_stats = calculate_defcon_stats(
+            (player_history or {}).get("history", []), player.get("element_type")
+        )
         defcon_points_pct = (
-            (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+            defcon_stats["points"] / max(total_points, 1) * 100 if total_points > 0 else 0.0
         )
 
         metric_data["xgi_per_90"].append(xgi_per_90)

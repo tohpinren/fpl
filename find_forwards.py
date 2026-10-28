@@ -13,10 +13,13 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
+
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
+
+from fpl_scoring import calculate_defcon_stats
 
 try:
     from xgboost import XGBRegressor
@@ -498,14 +501,9 @@ def get_player_features_for_prediction(
     defcon_per_90 = float(player.get("defensive_contribution_per_90", 0.0) or 0.0)
     clean_sheets = player.get("clean_sheets", 0)
 
-    total_defcon = 0
-    if player_history and player_history.get("history"):
-        history = player_history["history"]
-        for h in history:
-            total_defcon += safe_float(h.get("defensive_contribution", 0), 0)
-    defcon_points = (total_defcon / 10.0) * 2.0
+    defcon_stats = calculate_defcon_stats(past_games, player.get("element_type"))
     defcon_points_pct = (
-        (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+        defcon_stats["points"] / max(total_points, 1) * 100 if total_points > 0 else 0.0
     )
 
     team_strength = calculate_team_strength_score(player_team, team_points, team_id)
@@ -1097,28 +1095,13 @@ def analyze_forwards(
             defcon / max(games_played_season, 1) if games_played_season > 0 else 0.0
         )
 
-        total_defcon = 0
-        games_with_defcon_10plus = 0
-        total_games_played = 0
-        if player_history and player_history.get("history"):
-            history = player_history["history"]
-            for h in history:
-                defcon_value = safe_float(h.get("defensive_contribution", 0), 0)
-                total_defcon += defcon_value
-                minutes = safe_float(h.get("minutes", 0), 0)
-                if minutes > 0:
-                    total_games_played += 1
-                    if defcon_value >= 10:
-                        games_with_defcon_10plus += 1
-        defcon_points = (total_defcon / 10.0) * 2.0
+        defcon_stats = calculate_defcon_stats(
+            (player_history or {}).get("history", []), player.get("element_type")
+        )
         defcon_points_pct = (
-            (defcon_points / max(total_points, 1) * 100) if total_points > 0 else 0.0
+            defcon_stats["points"] / max(total_points, 1) * 100 if total_points > 0 else 0.0
         )
-        defcon_10plus_pct = (
-            (games_with_defcon_10plus / max(total_games_played, 1) * 100)
-            if total_games_played > 0
-            else 0.0
-        )
+        defcon_threshold_pct = defcon_stats["threshold_pct"]
 
         rotation_risk_score = 0.0
         if recent_form["games_played"] >= 3:
@@ -1216,7 +1199,7 @@ def analyze_forwards(
             "defcon_per_90": defcon_per_90,
             "defcon_per_game": defcon_per_game,
             "defcon_points_pct": defcon_points_pct,
-            "defcon_10plus_pct": defcon_10plus_pct,
+            "defcon_threshold_pct": defcon_threshold_pct,
             "clean_sheets": clean_sheets,
         }
 

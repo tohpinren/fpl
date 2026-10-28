@@ -6,13 +6,14 @@ This script fetches data from the official FPL API endpoints and saves them loca
 
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from pathlib import Path
+from shutil import move
 from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-
 
 BASE_URL = "https://fantasy.premierleague.com/api"
 DATA_DIR = Path("data")
@@ -45,7 +46,7 @@ def save_json(data: Any, filepath: Path) -> None:
     print(f"Saved: {filepath}")
 
 
-def fetch_endpoint(session: requests.Session, endpoint: str) -> Optional[Dict[str, Any]]:
+def fetch_endpoint(session: requests.Session, endpoint: str) -> Optional[Any]:
     """Fetch data from an API endpoint."""
     url = f"{BASE_URL}{endpoint}"
     try:
@@ -62,10 +63,34 @@ def _fetch_and_save(
 ) -> Tuple[bool, str]:
     """Fetch endpoint and save to filepath. Returns (success, endpoint) for use in executor."""
     data = fetch_endpoint(session, endpoint)
-    if data:
+    if data is not None:
         save_json(data, filepath)
         return True, endpoint
     return False, endpoint
+
+
+def get_season(bootstrap_data: Dict[str, Any]) -> str:
+    """Identify the API season from its opening gameweek deadline."""
+    first_event = min(bootstrap_data["events"], key=lambda event: event["id"])
+    year = datetime.fromisoformat(first_event["deadline_time"].replace("Z", "+00:00")).year
+    return f"{year}-{str(year + 1)[-2:]}"
+
+
+def prepare_data_directory(bootstrap_data: Dict[str, Any]) -> str:
+    """Archive an old season before player and gameweek IDs are reused."""
+    season = get_season(bootstrap_data)
+    bootstrap_file = DATA_DIR / "bootstrap-static.json"
+    if bootstrap_file.exists():
+        with bootstrap_file.open(encoding="utf-8") as f:
+            previous_season = get_season(json.load(f))
+        if previous_season != season:
+            archive_dir = DATA_DIR / "archive" / previous_season
+            archive_dir.mkdir(parents=True, exist_ok=False)
+            for path in DATA_DIR.iterdir():
+                if path.name != "archive":
+                    move(str(path), str(archive_dir / path.name))
+            print(f"Archived {previous_season} data to: {archive_dir}")
+    return season
 
 
 def download_bootstrap_static(session: requests.Session) -> Optional[Dict[str, Any]]:
@@ -73,6 +98,8 @@ def download_bootstrap_static(session: requests.Session) -> Optional[Dict[str, A
     print("Downloading bootstrap-static data...")
     data = fetch_endpoint(session, "/bootstrap-static/")
     if data:
+        season = prepare_data_directory(data)
+        print(f"FPL season: {season}")
         save_json(data, DATA_DIR / "bootstrap-static.json")
     return data
 
@@ -81,7 +108,7 @@ def download_fixtures(session: requests.Session) -> None:
     """Download all fixtures data."""
     print("Downloading fixtures data...")
     data = fetch_endpoint(session, "/fixtures/")
-    if data:
+    if data is not None:
         save_json(data, DATA_DIR / "fixtures.json")
 
 
@@ -90,6 +117,8 @@ def download_player_summaries(session: requests.Session, player_ids: List[int]) 
     print(f"Downloading player summaries for {len(player_ids)} players...")
     players_dir = DATA_DIR / "players"
     players_dir.mkdir(parents=True, exist_ok=True)
+    if not player_ids:
+        return
     workers = min(MAX_WORKERS, len(player_ids))
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
@@ -119,20 +148,23 @@ def download_gameweek_data(session: requests.Session, gameweek: int) -> None:
         save_json(data, DATA_DIR / "gameweeks" / f"{gameweek}.json")
 
 
-def download_all_gameweeks(session: requests.Session, num_gameweeks: int) -> None:
-    """Download data for all gameweeks in parallel."""
-    print(f"Downloading data for {num_gameweeks} gameweeks...")
+def download_all_gameweeks(session: requests.Session, gameweek_ids: List[int]) -> None:
+    """Download live data for started gameweeks in parallel."""
+    if not gameweek_ids:
+        print("No gameweeks have started yet.")
+        return
+    print(f"Downloading data for {len(gameweek_ids)} gameweeks...")
     (DATA_DIR / "gameweeks").mkdir(parents=True, exist_ok=True)
-    workers = min(MAX_WORKERS, num_gameweeks)
+    workers = min(MAX_WORKERS, len(gameweek_ids))
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = [
             executor.submit(download_gameweek_data, session, gw)
-            for gw in range(1, num_gameweeks + 1)
+            for gw in gameweek_ids
         ]
         for f in as_completed(futures):
             f.result()
-    print(f"Gameweeks: {num_gameweeks} downloaded")
+    print(f"Gameweek downloads finished: {len(gameweek_ids)} requested")
 
 
 def download_league_data(session: requests.Session, league_id: int) -> None:
@@ -178,14 +210,14 @@ def main() -> None:
         else []
     )
     events = bootstrap_data.get("events") or []
-    max_gameweek = max((e.get("id", 0) for e in events), default=0)
+    gameweek_ids = [e["id"] for e in events if e.get("finished") or e.get("is_current")]
 
     with ThreadPoolExecutor(max_workers=3) as executor:
         futures = [executor.submit(download_fixtures, session)]
         if player_ids:
             futures.append(executor.submit(download_player_summaries, session, player_ids))
-        if max_gameweek > 0:
-            futures.append(executor.submit(download_all_gameweeks, session, max_gameweek))
+        if gameweek_ids:
+            futures.append(executor.submit(download_all_gameweeks, session, gameweek_ids))
         for f in as_completed(futures):
             f.result()
 

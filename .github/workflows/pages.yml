@@ -5,8 +5,8 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # 08:17 and 20:17 Singapore time. Scheduled runs may be delayed by GitHub.
-    - cron: "17 0,12 * * *"
+    # Fridays at 08:17 Singapore time. Scheduled runs may be delayed by GitHub.
+    - cron: "17 0 * * 5"
 
 permissions:
   contents: read

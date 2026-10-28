@@ -75,9 +75,27 @@
             <h1>Small margins. Better moves.</h1>
             <p>Your next transfer, with a little more perspective.</p>
           </div>
-          <button class="button refresh-button" id="refresh-button">
-            <span data-icon="refresh"></span><span>Refresh data</span>
-          </button>
+          <div class="heading-actions">
+            <button
+              class="button refresh-button"
+              id="refresh-button"
+              aria-label="Refresh data"
+            >
+              <span data-icon="refresh"></span><span>Refresh data</span>
+            </button>
+            <a
+              class="button update-button"
+              id="update-data"
+              href="https://github.com/tohpinren/fpl/actions/workflows/pages.yml"
+              target="_blank"
+              rel="noopener"
+              aria-label="Update data via GitHub"
+              aria-describedby="update-help"
+              hidden
+            >
+              <span data-icon="arrow-up-right"></span><span>Update data</span>
+            </a>
+          </div>
         </section>
 
         <div class="gameweek-strip">
@@ -91,6 +109,12 @@
             ><span id="updated-label">Reading your latest data…</span>
           </div>
         </div>
+
+        <p class="update-help" id="update-help" hidden>
+          Updates every Friday at 08:17 SGT. To update now, choose
+          <strong>Update data</strong>, then <strong>Run workflow</strong> in
+          GitHub. Repository access required.
+        </p>
 
         <div
           class="status-message"

@@ -2,11 +2,16 @@ const $ = (selector) => document.querySelector(selector);
 const STATIC_MODE = $('meta[name="dashboard-mode"]').content === "static";
 if (STATIC_MODE) {
   $("#refresh-button span:last-child").textContent = "Refresh view";
+  $("#refresh-button").setAttribute("aria-label", "Refresh view");
   $("#refresh-button").title =
-    "Reload the latest published data. Updates are scheduled twice daily.";
+    "Reload the latest published data. Automatic updates run Fridays at 08:17 Singapore time.";
+  $("#update-data").hidden = false;
+  $("#update-help").hidden = false;
+  $("#update-data").title =
+    "Open GitHub and choose Run workflow to download and publish fresh data. Repository access required.";
   $("#analysis-source").textContent = "Published FPL analysis";
   $("#method-note").textContent +=
-    " Data updates twice daily. Refresh view reloads the latest published results.";
+    " Data updates Fridays at 08:17 Singapore time, and on demand via Update data → Run workflow in GitHub. Refresh view reloads the latest published results.";
 }
 const icons = {
   sliders:

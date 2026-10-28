@@ -380,15 +380,39 @@ h1 + p {
 .button:hover {
   background: #eef2e9;
 }
-.refresh-button {
+.heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 19px;
 }
-.refresh-button svg {
+.heading-actions .button {
+  white-space: nowrap;
+}
+.update-button {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+.update-button:hover {
+  background: #245447;
+}
+.refresh-button svg,
+.update-button svg {
   height: 14px;
   width: 14px;
 }
 .refresh-button.busy svg {
   animation: spin 1.5s linear infinite;
+}
+.update-help {
+  margin: -13px 0 25px;
+  color: #78866d;
+  font-size: 10px;
+  line-height: 1.8;
+}
+.update-help strong {
+  font-weight: 550;
 }
 @keyframes spin {
   to {
@@ -1516,7 +1540,8 @@ th:last-child {
   .page-heading {
     margin-bottom: 25px;
   }
-  .refresh-button {
+  .refresh-button,
+  .update-button {
     font-size: 10px;
   }
 }
@@ -1607,16 +1632,21 @@ th:last-child {
     line-height: 1.7;
     margin-top: 9px;
   }
-  .refresh-button {
+  .heading-actions {
+    margin-top: 24px;
+  }
+  .refresh-button,
+  .update-button {
     font-size: 0;
     padding: 8px;
     min-height: 32px;
-    margin-top: 24px;
   }
-  .refresh-button span:last-child {
+  .refresh-button span:last-child,
+  .update-button span:last-child {
     display: none;
   }
-  .refresh-button svg {
+  .refresh-button svg,
+  .update-button svg {
     width: 15px;
     height: 15px;
   }

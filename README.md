@@ -74,7 +74,7 @@ pip install -r requirements.txt
 The dashboard can be published as a static site using
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml). Set the repository's
 **Settings → Pages → Source** to **GitHub Actions**. The workflow deploys on pushes
-to `main`, on manual runs, and twice daily at 08:17 and 20:17 Singapore time
+to `main`, on manual runs, and every Friday at 08:17 Singapore time
 (GitHub may delay scheduled runs).
 
 Each deployment downloads current FPL data, runs the existing position analysis,
@@ -82,7 +82,9 @@ and exports only the frontend and `dashboard.json`. Raw player files and season
 archives are excluded. An incomplete download fails the deployment and leaves
 the previous published site available.
 
-On the hosted site, **Refresh view** reloads the latest published results. Search,
+On the hosted site, **Update data** opens the GitHub workflow. Sign in with
+repository access and choose **Run workflow** to download fresh FPL data and
+publish a new snapshot. **Refresh view** reloads the latest published results. Search,
 filters, player details, the fixture planner and watchlists run in the browser.
 Watchlists are stored on the visitor's browser, separately for each season.
 

@@ -8,7 +8,7 @@ import json
 import subprocess
 import sys
 from datetime import datetime, timezone
-from functools import partial
+from functools import lru_cache, partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Lock
@@ -20,8 +20,19 @@ FRONTEND_DIR = ROOT / "frontend"
 REFRESH_LOCK = Lock()
 
 
+@lru_cache(maxsize=2)
+def forecast_snapshot(data_directory, bootstrap_stamp, fixture_stamp, config_stamp):
+    """Reuse forecasts until the local data or selected configuration changes."""
+    from forecasting import live_forecasts
+
+    data_directory = Path(data_directory)
+    bootstrap = json.loads((data_directory / "bootstrap-static.json").read_text())
+    fixtures = json.loads((data_directory / "fixtures.json").read_text())
+    return live_forecasts(bootstrap, fixtures, data_directory)
+
+
 def build_dashboard():
-    """Adapt local analysis results for the browser without training models per request."""
+    """Adapt metric rankings and cached point forecasts for the browser."""
     with (DATA_DIR / "bootstrap-static.json").open(encoding="utf-8") as stream:
         bootstrap = json.load(stream)
     with (DATA_DIR / "fixtures.json").open(encoding="utf-8") as stream:
@@ -39,6 +50,12 @@ def build_dashboard():
     next_event = next((event for event in bootstrap["events"] if event.get("is_next")), None)
     current_gw = find_midfielders.get_current_gameweek(bootstrap)
     next_gw = next_event["id"] if next_event else current_gw + 1
+    forecasts, model_info = forecast_snapshot(
+        str(DATA_DIR.resolve()),
+        (DATA_DIR / "bootstrap-static.json").stat().st_mtime_ns,
+        (DATA_DIR / "fixtures.json").stat().st_mtime_ns,
+        (ROOT / "model_config.json").stat().st_mtime_ns,
+    )
     output = []
     for position, analyze in (
         ("DEF", find_defenders.analyze_defenders),
@@ -84,6 +101,9 @@ def build_dashboard():
                     "position": position,
                     "rank": rank,
                     "score": round(result["composite_score"], 1),
+                    "predicted_points": round(forecasts[player["id"]]["points"], 1)
+                    if player["id"] in forecasts
+                    else None,
                     "price": result["cost"],
                     "form": result["form"],
                     "points": result["total_points"],
@@ -114,6 +134,7 @@ def build_dashboard():
         "deadline": next_event["deadline_time"] if next_event else None,
         "updated_at": updated.isoformat(),
         "players": output,
+        "model": model_info,
     }
 
 

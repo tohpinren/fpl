@@ -1,0 +1,33 @@
+**FPL model review: 2025/26**
+
+This is a retrospective reproduction, not an audit of saved live forecasts: the repository did not retain historical model predictions. The website previously used a weighted metric score, not the ML forecasts.
+
+**Data validation.** The pinned [source archive](https://github.com/vaastav/Fantasy-Premier-League/tree/d7b05b51d137bfefef4b692386d18c610975b9b9/data/2025-26) contains 841 players, 380 finished fixtures and all 38 gameweeks. Ten identical duplicate rows were removed, leaving 29,747 unique player-fixture rows. No required expected-goal/defensive fields are missing. Every player's history reconciles exactly with the final bootstrap point total. Checksums and the source revision are recorded in the JSON report. The preserved local archive only had 34 completed gameweeks; it was not used as if it were a complete season. Its 26,314 completed-match rows were cross-checked: 0 missing reference rows and 0 point discrepancies.
+
+**What the original evaluation showed.** Re-running the original random 80/20 split selected XGBoost and reported MAE 2.82 for defenders, 3.32 for midfielders and 3.65 for forwards. Those numbers are optimistic: end-of-season totals appear in earlier feature rows, neighboring overlapping targets cross the split, partial end-of-season targets are included, and the test set also selects the algorithm. The original split contains a different, broader player population, so these apparent scores should not be compared numerically with the eligible-transfer-player table below.
+
+**Fair validation.** Five-gameweek targets are restricted to completed horizons. Development uses GW16–20 and GW21–24, each with training labels completed before its first origin. Model configurations are frozen before GW25–34. The final test refits at every origin using only fully matured earlier labels; an earlier test window may enter training only after its outcomes become known. Players need 180 past minutes, at least two recent appearances and 50 recent average minutes to enter the reported transfer-candidate cohort. Both pipelines use exactly the same test players and targets. The honest old baseline rebuilds its aggregates from past matches and neutralizes unavailable historical ownership/FPL forecast fields.
+
+**Held-out results.** MAE is the mean error in total points across the next five gameweeks; lower is better. Top-five return is actual five-GW points per selected player, averaged across ten origins; higher is better.
+
+| Position | Forecasts | Honest old MAE | Revised MAE | Change | Old top-5 return | Revised top-5 return |
+|---|---:|---:|---:|---:|---:|---:|
+| DEF | 788 | 7.06 | 6.87 | 2.7% lower | 20.16 | 21.00 |
+| MID | 847 | 6.57 | 6.54 | 0.6% lower | 21.08 | 20.08 |
+| FWD | 211 | 7.60 | 6.65 | 12.5% lower | 18.34 | 20.66 |
+
+Across 1846 eligible player-origins, MAE moves from **6.90 to 6.69**, versus **8.01** for repeating recent points per match across upcoming fixtures. The same player appears at multiple origins, so these are not independent observations.
+
+The midfielder error improvement is small and its top-five return falls. Defender top-five returns improve over the honest old model but remain below the simple recent-form baseline (22.00). This is not evidence that the revised model is universally best at choosing transfers. The site's existing metric ranking remains the default; forecasts are a separate estimate and optional sort.
+
+**Top five improvements, incorporated.**
+
+1. **Remove future information.** Reconstruct cumulative and rolling statistics at each cutoff, infer historical teams from past fixtures, and exclude bootstrap season totals, future expected-points values, final fixture ratings and unavailable historical news. Matches in earlier numbered rounds that actually occur after the cutoff are excluded too.
+2. **Validate in time order with a horizon gap.** Replace random row splitting with purged, expanding-history evaluation. Require both a disjoint target horizon and a completed label timestamp. Use development weeks for algorithm selection and the later origins for the reported comparison.
+3. **Validate the dataset and target.** Pin and checksum the full source; remove only identical duplicates; reject conflicting duplicates, missing fixtures and unfinished seasons. Require complete five-GW horizons, count missing future appearances as zero, and include zero-minute rows in recent form/minutes denominators.
+4. **Model opportunity as well as attacking rates.** Include recent minutes, starts, appearance/60-minute rates, shrunk xG/xA per 90, defensive contributions, clean sheets, past-only team strengths and the actual number of fixtures, including blanks and doubles. Early team strengths shrink toward neutral priors.
+5. **Use regularized, shared models and honest baselines.** Compare recent form, minutes-adjusted form, standardized Ridge, constrained Random Forest, constrained boosting and a Ridge/form blend on development data. The revised pipeline selects Ridge for DEF/FWD and Random Forest for MID. Shared feature/training/prediction code replaces three duplicated pipelines. Production trains on complete 2025/26 examples plus fully observed current-season examples. The revised family is selected internally on development MAE; the old forward pipeline had a better development score, although the revised forward model did better in the final test.
+
+**Limits and uncertainty.** Final fixture assignments stand in for unavailable historical schedule snapshots. Cutoff timestamps are conservatively approximated by the first kickoff minus 90 minutes; this cannot fully replay the fixture information known to a manager at the time. Injury news and historical availability flags are absent. Top-five selection is an unbudgeted diagnostic, without squad constraints or historical injury exclusions. The five-GW windows overlap, and only ten final origins are available. Five-GW block-bootstrap intervals in the JSON report are indicative, not a guarantee of an accuracy gain. Custom CLI horizons reuse the selected configuration and have not received this five-GW validation. Bonus-rule changes in 2026/27 can cause drift. No further tuning was performed on the final test results.
+
+Reproduce with `uv run review_models.py` from a checkout containing legacy commit `4974355c621f5eb07b84b70152762ae16f8f9e3e`. The JSON report contains per-model development scores, RMSE, R², tie-aware rank correlations and block intervals. The CSV is the complete held-out prediction ledger, including players outside the transfer-candidate cohort. Raw source data stays under ignored `data/history/`.

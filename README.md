@@ -114,9 +114,11 @@ sorting, a browser-saved watchlist, player details and an upcoming fixture plann
 **Refresh data** downloads the current FPL season through the existing downloader.
 If no local data exists yet, use that button to get started.
 
-Rankings reuse the existing Python analysis without training ML models on page
-loads. Scores are compared within a position; fixture colours use official FPL
-difficulty ratings. The frontend uses plain HTML, CSS and JavaScript, and the
+Rankings keep the existing metric score. Separate point forecasts use models
+reviewed on 2025/26; the sidebar shows the next five-gameweek estimate and the
+sort menu can order players by it. Local forecasts are cached until data or model
+configuration changes. Scores are compared within a position; fixture colours use
+official FPL difficulty ratings. The frontend uses plain HTML, CSS and JavaScript, and the
 local server uses Python's standard library. No frontend install or build step
 is needed. The server listens on loopback for personal, local use.
 
@@ -205,56 +207,44 @@ python find_midfielders.py --max-price 8.5
 
 The script ranks midfielders by a composite score that combines:
 
-- xGI per 90 (weighted 3.0)
+- xGI per 90
 - Fixture difficulty (easier fixtures = higher score)
 - Recent form
 - Value for money
 - Rotation risk (lower risk = higher score)
 - **ML Predicted Points** (weighted 0.15) - Machine learning prediction of points in next 5 games
 
-**Machine Learning Integration:**
+**Point-in-time prediction models:**
 
-The script automatically trains a prediction model using historical data and includes predicted points as a metric:
+All three position scripts now share `forecasting.py`. Predictions use 34 features
+built from matches completed before the forecast cutoff, including zero-minute
+absences, minutes/starts, shrunk xG/xA rates, defensive statistics and upcoming
+fixture counts. Current bootstrap aggregates and FPL expected-points fields are
+excluded from historical features.
 
-- Trains multiple models (Random Forest, XGBoost, LightGBM, Ridge) and selects the best
-- Uses all available historical gameweeks for training
-- Predicts total points for next 5 games for each midfielder
-- Shows model performance metrics during training
-- Displays predicted points alongside other metrics in the output
-- Optimized hyperparameters for high-dimensional feature space (49 features)
+The historical data importer pins and verifies a complete 2025/26 archive, removes
+identical duplicate rows and checks that player points reconcile. Production
+fits the configurations in `model_config.json` using historical examples plus
+fully completed current-season horizons. Configuration selection used development
+weeks, with disjoint target windows; it does not rerun random test-set selection
+on each invocation.
 
-**Comprehensive Feature Set (49 features):**
+Read the [2025/26 model review](reports/model-review-2025-26.md),
+[metrics and data audit](reports/model-review-2025-26.json), or
+[held-out prediction ledger](reports/model-review-2025-26-predictions.csv).
+The review includes five implemented improvements, limitations and a comparison
+with the old method. The default website metric ranking remains unchanged because
+lower forecast error did not consistently improve top-five player selection.
 
-**Player Performance:**
+```bash
+# Reproduce the original evaluation and honest historical comparison
+uv run review_models.py
+```
 
-- Expected metrics: xGI, xG, xA (per 90 and recent averages)
-- Recent form: Points, goals, assists, bonus points (3, 5, and 10 game windows)
-- ICT breakdown: Influence, Creativity, Threat (separate metrics)
-- Season totals: Goals, assists, bonus points, minutes, starts
-
-**Team & Fixture Context:**
-
-- Team strength and form
-- Fixture difficulty (FDR) based on current league standings
-- Home/away performance splits
-- Percentage of upcoming home fixtures
-
-**Availability & Rotation:**
-
-- Rotation risk metrics
-- Recent minutes and start percentages
-- Games with 60+ minutes played
-
-**Market & Value:**
-
-- Cost and value metrics (value_form, value_season)
-- Ownership percentage
-- Transfer trends (in/out ratios)
-- FPL expected points (ep_next, ep_this)
-
-**Disciplinary:**
-
-- Yellow and red cards
+This downloads roughly 7 MB of pinned source CSVs into ignored `data/history/`
+on first use. It needs the legacy Git commit listed in the report to be present
+in the checkout. Five-gameweek forecasts were evaluated; custom CLI horizons
+reuse the same configurations and are not separately validated.
 
 ## Command Line Options
 
@@ -272,5 +262,5 @@ python -m unittest discover -s tests -v
 - The script includes rate limiting to avoid overwhelming the API
 - Data is saved as JSON files for easy analysis
 - The `data/` directory is excluded from version control (see `.gitignore`)
-- The ML model uses 49 features and is optimized for high-dimensional tabular data
-- Model automatically selects the best performing algorithm (typically XGBoost or LightGBM)
+- Forecast configurations are selected on chronological development data and shared across the CLI and website.
+- Forecasts are estimates; historical injury news and exact schedule snapshots were unavailable for the backtest.

@@ -145,8 +145,10 @@
             Rankings use your Python analysis: form, underlying stats, fixture
             strength, value, minutes and defensive contributions. Scores are
             position-specific and should be compared within the same position.
-            This dashboard uses the metric score without ML predictions. Fixture
-            colours use the official FPL difficulty rating.
+            The score remains the metric ranking. Separate five-gameweek point
+            forecasts use past-only match data and models reviewed on 2025/26.
+            Forecasts are estimates; check availability before a transfer.
+            Fixture colours use the official FPL difficulty rating.
           </div>
           <div class="analysis-layout">
             <section class="players-panel" aria-label="Player rankings">
@@ -206,6 +208,9 @@
                       <option value="score">Best ranked</option>
                       <option value="form">Best form</option>
                       <option value="points">Most points</option>
+                      <option value="predicted_points">
+                        Highest 5-GW forecast
+                      </option>
                       <option value="xgi_per_90">Highest xGI / 90</option>
                       <option value="price">Lowest price</option>
                       <option value="fixtures">Easiest fixtures</option></select

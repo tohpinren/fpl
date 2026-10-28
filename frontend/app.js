@@ -232,6 +232,7 @@ function renderDetail() {
   $("#player-detail").innerHTML = `
     <div class="detail-heading"><div class="detail-topline"><span>PLAYER SPOTLIGHT</span>${watchButton(player, true)}</div><div class="detail-player">${shirt(player.team)}<div><h3>${esc(player.name)}</h3><p>${esc(player.team_name)} · ${positionNames[player.position]}</p></div><span class="detail-price">${money(player.price)}</span></div><div class="availability ${available ? "" : "warning"}"><span></span>${availability}</div>${player.news ? `<p class="news-note">${esc(player.news)}</p>` : ""}</div>
     <div class="detail-stats"><div class="detail-stat"><span>Season points</span><strong>${player.points}<small>pts</small></strong></div><div class="detail-stat"><span>Points per game</span><strong>${decimal(player.points_per_game)}</strong></div><div class="detail-stat"><span>xGI per 90</span><strong>${decimal(player.xgi_per_90, 2)}</strong></div><div class="detail-stat"><span>Selected by</span><strong>${decimal(player.ownership)}<small>%</small></strong></div></div>
+    ${player.predicted_points != null ? `<div class="forecast-estimate"><div><span>Next ${state.data.model?.horizon || 5} gameweeks</span><small>Historical model estimate</small></div><strong>${decimal(player.predicted_points)}<small>pts</small></strong></div>` : ""}
     <div class="detail-section"><div class="detail-section-label">Recent returns<span>Last ${player.recent.length} matches</span></div>${player.recent.length ? `<div class="form-chart" role="img" aria-label="${esc(player.recent.map((game) => `Gameweek ${game.gameweek}: ${game.points} points`).join(", "))}">${player.recent.map((game) => `<div class="form-bar-wrap"><span class="bar-value">${game.points}</span><div class="form-bar" style="height:${Math.max(4, (game.points / maxPoints) * 64)}px"></div><span class="bar-label">GW${game.gameweek}</span></div>`).join("")}</div>` : '<p class="planner-note">No completed matches yet.</p>'}</div>
     <div class="detail-section"><div class="detail-section-label">The road ahead<span>FPL difficulty</span></div><div class="detail-fixtures">${player.fixtures.length ? player.fixtures.map((fixture) => `<div class="detail-fixture"><span class="fixture-gw">GW${fixture.gameweek}</span><span class="opponent-name">${esc(fixture.opponent_name)}</span><span class="home-away">${fixture.home ? "H" : "A"}</span><span class="difficulty-number fdr-${fixture.difficulty}">${fixture.difficulty}</span></div>`).join("") : '<p class="planner-note">No upcoming fixtures scheduled.</p>'}</div></div>`;
 }
@@ -347,12 +348,18 @@ function render() {
   else {
     $("#players-table").classList.remove("fixture-planner");
     $("#players-table thead").innerHTML = originalTableHead;
+    const forecastSort = $("#sort-select").value === "predicted_points";
+    if (forecastSort) {
+      const heading = $("#players-table thead th:nth-last-child(2) abbr");
+      heading.textContent = "5-GW pts";
+      heading.title = "Estimated total points over the next five gameweeks";
+    }
     const players = filteredPlayers();
     state.visible = players;
     $("#player-rows").innerHTML = players
       .map(
         (player) =>
-          `<tr data-player="${player.id}" tabindex="0" class="${player.id === state.selectedId ? "selected" : ""}" aria-selected="${player.id === state.selectedId}" aria-label="View ${esc(player.name)} details"><td class="rank-cell">${player.rank}</td><td><div class="player-cell">${shirt(player.team)}<div><div class="player-name">${esc(player.name)}${player.status !== "a" ? '<span class="status-dot" title="Availability concern"></span>' : ""}</div><div class="player-subtitle">${esc(player.team)}<span class="position-mini">${player.position}</span></div></div></div></td><td class="numeric price-cell">${money(player.price)}</td><td class="numeric ${player.form >= 5 ? "form-good" : "form-normal"}">${decimal(player.form)}</td><td class="numeric xgi-column form-normal">${decimal(player.xgi_per_90, 2)}</td><td class="fixtures-column"><div class="fixture-list">${player.fixtures.map((fixture) => fixtureChip(fixture)).join("") || '<span class="planner-empty">—</span>'}</div></td><td class="numeric score-cell"><span>${decimal(player.score)}</span></td><td>${watchButton(player)}</td></tr>`,
+          `<tr data-player="${player.id}" tabindex="0" class="${player.id === state.selectedId ? "selected" : ""}" aria-selected="${player.id === state.selectedId}" aria-label="View ${esc(player.name)} details"><td class="rank-cell">${player.rank}</td><td><div class="player-cell">${shirt(player.team)}<div><div class="player-name">${esc(player.name)}${player.status !== "a" ? '<span class="status-dot" title="Availability concern"></span>' : ""}</div><div class="player-subtitle">${esc(player.team)}<span class="position-mini">${player.position}</span></div></div></div></td><td class="numeric price-cell">${money(player.price)}</td><td class="numeric ${player.form >= 5 ? "form-good" : "form-normal"}">${decimal(player.form)}</td><td class="numeric xgi-column form-normal">${decimal(player.xgi_per_90, 2)}</td><td class="fixtures-column"><div class="fixture-list">${player.fixtures.map((fixture) => fixtureChip(fixture)).join("") || '<span class="planner-empty">—</span>'}</div></td><td class="numeric score-cell"><span>${forecastSort ? (player.predicted_points == null ? "—" : decimal(player.predicted_points)) : decimal(player.score)}</span></td><td>${watchButton(player)}</td></tr>`,
       )
       .join("");
     $("#empty-state").hidden = players.length > 0;

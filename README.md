@@ -2,6 +2,8 @@
 
 A Python script to download all available Fantasy Premier League (FPL) API data for the current season.
 
+[Open the Touchline dashboard](https://tohpinren.github.io/fpl/)
+
 Updated for **2026/27**. The official API always serves the active season; players,
 positions, teams, fixtures, points and bonus statistics come from that data rather
 than a hardcoded season roster. See the [official 2026/27 changes](https://www.premierleague.com/en/news/4679873).
@@ -66,6 +68,57 @@ pip install -r requirements.txt
 - `uv pip install <package>` - Install a package directly (alternative to `uv add`)
 
 ## Usage
+
+### GitHub Pages
+
+The dashboard can be published as a static site using
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml). Set the repository's
+**Settings → Pages → Source** to **GitHub Actions**. The workflow deploys on pushes
+to `main`, on manual runs, and twice daily at 08:17 and 20:17 Singapore time
+(GitHub may delay scheduled runs).
+
+Each deployment downloads current FPL data, runs the existing position analysis,
+and exports only the frontend and `dashboard.json`. Raw player files and season
+archives are excluded. An incomplete download fails the deployment and leaves
+the previous published site available.
+
+On the hosted site, **Refresh view** reloads the latest published results. Search,
+filters, player details, the fixture planner and watchlists run in the browser.
+Watchlists are stored on the visitor's browser, separately for each season.
+
+Build and preview the static version locally:
+
+```bash
+uv run build_site.py --refresh
+python -m http.server 8080 --directory dist
+```
+
+Omit `--refresh` to build from existing local downloads. GitHub Pages needs a
+public repository on GitHub Free, or a plan that supports Pages for private
+repositories.
+
+### Web dashboard
+
+Open the local transfer dashboard with the same Python environment as the analysis scripts:
+
+```bash
+uv run serve.py
+# Or: python serve.py
+```
+
+Visit `http://127.0.0.1:8000`. Use `--port 8080` to choose another port.
+The dashboard includes position rankings, player and club search, price filters,
+sorting, a browser-saved watchlist, player details and an upcoming fixture planner.
+**Refresh data** downloads the current FPL season through the existing downloader.
+If no local data exists yet, use that button to get started.
+
+Rankings reuse the existing Python analysis without training ML models on page
+loads. Scores are compared within a position; fixture colours use official FPL
+difficulty ratings. The frontend uses plain HTML, CSS and JavaScript, and the
+local server uses Python's standard library. No frontend install or build step
+is needed. The server listens on loopback for personal, local use.
+
+### Download data from the command line
 
 Run the download script:
 

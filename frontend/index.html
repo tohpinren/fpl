@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173f35" />
+    <meta name="dashboard-mode" content="local" />
+    <meta
+      name="description"
+      content="A clearer view of your next FPL transfer. Explore player rankings, recent form and upcoming fixtures using your current-season analysis."
+    />
+    <title>Touchline — FPL transfer room</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to player analysis</a>
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="./" aria-label="Touchline home"
+        ><span class="brand-mark" aria-hidden="true"><i></i></span
+        >touchline<span class="brand-dot">.</span></a
+      >
+      <div class="workspace-label">YOUR FPL WORKSPACE</div>
+      <nav>
+        <button class="nav-item active" data-view="targets">
+          <span data-icon="sliders"></span>Transfer targets<span
+            class="nav-active-dot"
+          ></span>
+        </button>
+        <button class="nav-item" data-view="watchlist">
+          <span data-icon="bookmark"></span>Watchlist<span
+            class="nav-count"
+            id="watchlist-count"
+            >0</span
+          >
+        </button>
+        <button class="nav-item" data-view="fixtures">
+          <span data-icon="calendar"></span>Fixture planner
+        </button>
+      </nav>
+      <div class="sidebar-note">
+        <span class="small-pitch" aria-hidden="true"></span
+        ><strong>A little insight.<br />A better gameweek.</strong>
+        <p>Find the numbers behind<br />your next move.</p>
+      </div>
+      <div class="sidebar-footer">
+        <span class="connection-dot"></span
+        ><span id="analysis-source">Local FPL analysis</span>
+        <span data-icon="arrow-up-right"></span>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          Workspace <span>/</span>
+          <strong id="breadcrumb-view">Transfer targets</strong>
+        </div>
+        <div class="topbar-right">
+          <span class="season-tag" id="season-tag">FPL season</span
+          ><a
+            href="https://fantasy.premierleague.com/"
+            target="_blank"
+            rel="noopener"
+            class="fpl-link"
+            >Open FPL <span data-icon="arrow-up-right"></span
+          ></a>
+        </div>
+      </header>
+      <main id="main">
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow"><span></span> THE TRANSFER ROOM</div>
+            <h1>Small margins. Better moves.</h1>
+            <p>Your next transfer, with a little more perspective.</p>
+          </div>
+          <button class="button refresh-button" id="refresh-button">
+            <span data-icon="refresh"></span><span>Refresh data</span>
+          </button>
+        </section>
+
+        <div class="gameweek-strip">
+          <div class="gameweek-left">
+            <span class="gw-pill" id="gw-label">Loading season</span
+            ><span class="deadline-label">Next deadline</span
+            ><strong id="deadline">—</strong>
+          </div>
+          <div class="updated">
+            <span class="connection-dot"></span
+            ><span id="updated-label">Reading your latest data…</span>
+          </div>
+        </div>
+
+        <div
+          class="status-message"
+          id="status-message"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+        <section class="insights" aria-label="Transfer insights" id="insights">
+          <div class="insight-card loading-card"></div>
+          <div class="insight-card loading-card"></div>
+          <div class="insight-card loading-card"></div>
+        </section>
+
+        <section class="analysis-section">
+          <div class="section-heading">
+            <div>
+              <h2 id="section-title">The shortlist</h2>
+              <p id="section-description">
+                Good players. Useful numbers. A clearer decision.
+              </p>
+            </div>
+            <button class="text-button" id="method-button">
+              <span data-icon="info"></span>How we rank
+            </button>
+          </div>
+          <div class="method-note" id="method-note" hidden>
+            Rankings use your Python analysis: form, underlying stats, fixture
+            strength, value, minutes and defensive contributions. Scores are
+            position-specific and should be compared within the same position.
+            This dashboard uses the metric score without ML predictions. Fixture
+            colours use the official FPL difficulty rating.
+          </div>
+          <div class="analysis-layout">
+            <section class="players-panel" aria-label="Player rankings">
+              <div class="position-bar">
+                <div
+                  class="position-tabs"
+                  role="tablist"
+                  aria-label="Player position"
+                >
+                  <button role="tab" aria-selected="false" data-position="DEF">
+                    Defenders <span id="count-DEF">—</span></button
+                  ><button
+                    class="active"
+                    role="tab"
+                    aria-selected="true"
+                    data-position="MID"
+                  >
+                    Midfielders <span id="count-MID">—</span></button
+                  ><button role="tab" aria-selected="false" data-position="FWD">
+                    Forwards <span id="count-FWD">—</span>
+                  </button>
+                </div>
+              </div>
+              <div class="filter-bar">
+                <label class="search-field"
+                  ><span data-icon="search"></span
+                  ><input
+                    type="search"
+                    id="search"
+                    placeholder="Find a player or club"
+                    aria-label="Search players or clubs"
+                  /><kbd>/</kbd></label
+                >
+                <div class="filter-selects">
+                  <label class="select-wrap"
+                    ><span data-icon="coins"></span
+                    ><select
+                      id="price-filter"
+                      aria-label="Maximum player price"
+                    >
+                      <option value="99">Any price</option>
+                      <option value="4.5">Up to £4.5m</option>
+                      <option value="5">Up to £5.0m</option>
+                      <option value="5.5">Up to £5.5m</option>
+                      <option value="6">Up to £6.0m</option>
+                      <option value="6.5">Up to £6.5m</option>
+                      <option value="7">Up to £7.0m</option>
+                      <option value="7.5">Up to £7.5m</option>
+                      <option value="8">Up to £8.0m</option>
+                      <option value="8.5">Up to £8.5m</option>
+                      <option value="9">Up to £9.0m</option>
+                      <option value="10">Up to £10.0m</option>
+                      <option value="12">Up to £12.0m</option>
+                    </select></label
+                  ><label class="select-wrap sort-wrap"
+                    ><select id="sort-select" aria-label="Sort players">
+                      <option value="score">Best ranked</option>
+                      <option value="form">Best form</option>
+                      <option value="points">Most points</option>
+                      <option value="xgi_per_90">Highest xGI / 90</option>
+                      <option value="price">Lowest price</option>
+                      <option value="fixtures">Easiest fixtures</option></select
+                    ><span data-icon="chevron-down"></span
+                  ></label>
+                </div>
+              </div>
+              <div class="table-scroll">
+                <table id="players-table">
+                  <caption class="sr-only">
+                    Players ranked within their position. Select a player for
+                    more details.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th class="rank-cell">#</th>
+                      <th>Player</th>
+                      <th class="numeric">Price</th>
+                      <th class="numeric">Form</th>
+                      <th class="numeric xgi-column">
+                        <abbr title="Expected goal involvements per 90 minutes"
+                          >xGI / 90</abbr
+                        >
+                      </th>
+                      <th class="fixtures-column">Next 5 fixtures</th>
+                      <th class="numeric">
+                        <abbr
+                          title="Composite score from the position-specific analysis"
+                          >Score</abbr
+                        >
+                      </th>
+                      <th><span class="sr-only">Watchlist</span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="player-rows"></tbody>
+                </table>
+              </div>
+              <div class="empty-state" id="empty-state" hidden>
+                <span data-icon="search"></span>
+                <h3>No players in view</h3>
+                <p>Try another position or loosen your filters.</p>
+                <button class="button" id="reset-filters">Reset filters</button>
+              </div>
+              <div class="table-footer">
+                <span id="results-count">Loading players…</span>
+                <div class="difficulty-key">
+                  <span>Fixtures</span><i class="fdr-2"></i><span>Easier</span
+                  ><i class="fdr-4"></i><span>Harder</span>
+                </div>
+              </div>
+            </section>
+            <aside
+              class="detail-panel"
+              id="player-detail"
+              aria-label="Selected player details"
+            >
+              <div class="detail-placeholder">
+                <span data-icon="pitch"></span>
+                <p>Select a player to take<br />a closer look.</p>
+              </div>
+            </aside>
+          </div>
+        </section>
+        <footer class="page-footer">
+          <span>Made for the thoughtful manager.</span
+          ><span>Official FPL data <span>·</span> Independent analysis</span>
+        </footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </body>
+</html>

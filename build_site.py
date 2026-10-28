@@ -4,6 +4,7 @@ Run `python build_site.py --refresh` to download fresh FPL data before building.
 """
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
@@ -47,6 +48,9 @@ def build_site(output_dir: Path, refresh: bool = False) -> None:
     html = html.replace(
         'name="dashboard-mode" content="local"', 'name="dashboard-mode" content="static"'
     )
+    for name in ("app.js", "styles.css", "favicon.svg"):
+        version = hashlib.sha256((output_dir / name).read_bytes()).hexdigest()[:12]
+        html = html.replace(f'./{name}"', f'./{name}?v={version}"')
     (output_dir / "index.html").write_text(html, encoding="utf-8")
     (output_dir / "dashboard.json").write_text(snapshot, encoding="utf-8")
     (output_dir / ".nojekyll").touch()

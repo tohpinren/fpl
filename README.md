@@ -122,6 +122,41 @@ official FPL difficulty ratings. The frontend uses plain HTML, CSS and JavaScrip
 local server uses Python's standard library. No frontend install or build step
 is needed. The server listens on loopback for personal, local use.
 
+### Availability rollout and prospective testing
+
+Defender point forecasts now include dated availability, chance of playing and
+first-choice penalty/corner roles. Historical training vectors are pinned in
+`model_data/defender-context-2025-26.json`; stale or unknown context has an explicit
+missing flag. Today's injuries are never filled into past training examples.
+Midfield and forward live model choices remain unchanged.
+
+Every Friday deployment and **Update data** run also records the first forecast
+before each gameweek deadline. A midfield per-fixture component model runs as a
+challenger alongside the live forest. Defender forecasts are compared with the
+previous Ridge model. Frozen cohorts, input hashes, availability and fixtures are
+saved on the separate [`codex/forecast-ledger` branch](https://github.com/tohpinren/fpl/tree/codex/forecast-ledger).
+Manual reruns update the website but preserve that first forecast.
+
+Once all five target gameweeks and any originally scheduled postponed fixtures
+finish, the next deployment scores MAE and actual points from each model's top
+five picks. Results accumulate in `evaluations/<season>.json` on the history
+branch. Incomplete windows stay pending; the challenger never promotes itself.
+Overlapping five-week windows are correlated, so a few good weeks are insufficient
+evidence for a model change. The schedule remains Friday-only, with manual updates.
+
+For a local test without publishing forecast history:
+
+```bash
+uv run prospective.py
+```
+
+The Pages workflow uses `build_site.py --refresh --forecast-repository tohpinren/fpl`
+to restore and persist history. Its repository write token stays inside Actions;
+only the frontend and compact dashboard snapshot are published to Pages.
+
+See the [experiment results](reports/model-improvements-2025-26.md) and
+[rollout notes](reports/model-rollout-2026-10-30.md).
+
 ### Download data from the command line
 
 Run the download script:

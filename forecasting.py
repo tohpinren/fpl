@@ -11,6 +11,7 @@ from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
+from availability import add_training_context, context_features
 from sklearn.ensemble import HistGradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.pipeline import make_pipeline
@@ -264,7 +265,7 @@ def training_before(samples, origin, cutoff, horizon):
 
 
 def estimator(name):
-    if name in ("ridge", "ridge_blend"):
+    if name in ("ridge", "ridge_blend", "ridge_availability"):
         return make_pipeline(StandardScaler(), Ridge(alpha=100))
     if name == "forest":
         return RandomForestRegressor(
@@ -290,6 +291,7 @@ def estimator(name):
 class PointModel:
     name: str
     model: object = None
+    context_captured_at: float = None
 
     def predict(self, rows):
         x = np.asarray([row["x"] if isinstance(row, dict) else row for row in rows], dtype=float)
@@ -328,17 +330,26 @@ def load_live_histories(data_dir, bootstrap):
 
 
 @lru_cache(maxsize=4)
-def historical_samples(horizon):
+def historical_samples(horizon, availability=False):
     from historical_data import load_history
 
     bootstrap, fixtures, histories, _ = load_history()
-    return make_samples(bootstrap, fixtures, histories, horizon)
+    samples = make_samples(bootstrap, fixtures, histories, horizon)
+    return add_training_context(samples, ROOT / "data", "2025-26") if availability else samples
+
+
+def training_samples(bootstrap, fixtures, histories, data_dir, horizon, start, cutoff, availability):
+    from download_fpl_data import get_season
+
+    season = get_season(bootstrap)
+    current = training_before(make_samples(bootstrap, fixtures, histories, horizon), start, cutoff, horizon)
+    if availability:
+        current = add_training_context(current, data_dir, season)
+    return (historical_samples(horizon, availability) if season != "2025-26" else []) + current
 
 
 def train_position_model(bootstrap, fixtures, data_dir, position, horizon=5, verbose=False):
     """Fit a validation-selected configuration; never select using live/test targets."""
-    from download_fpl_data import get_season
-
     config = json.loads((ROOT / "model_config.json").read_text())
     histories = load_live_histories(data_dir, bootstrap)
     next_event = next((event for event in bootstrap["events"] if event.get("is_next")), None)
@@ -351,15 +362,13 @@ def train_position_model(bootstrap, fixtures, data_dir, position, horizon=5, ver
     cutoff = min(
         prediction_cutoff(bootstrap, fixtures, start), datetime.now(timezone.utc).timestamp()
     )
-    samples = training_before(
-        make_samples(bootstrap, fixtures, histories, horizon), start, cutoff, horizon
-    )
-    if get_season(bootstrap) != "2025-26":
-        samples = historical_samples(horizon) + samples
+    samples = training_samples(bootstrap, fixtures, histories, data_dir, horizon, start, cutoff,
+                               config["models"].get("DEF") == "ridge_availability")
     samples = [sample for sample in samples if sample["position"] == position]
     if not samples:
         return fit_model("recent_baseline", [])
     model = fit_model(config["models"][position], samples)
+    model.context_captured_at = (Path(data_dir) / "bootstrap-static.json").stat().st_mtime
     if verbose:
         print(
             f"Using {position} {model.name}: {len(samples)} completed, past-only training samples; {horizon}-GW targets."
@@ -374,26 +383,27 @@ def predict_from_history(model, player, history, start_gw, fixtures, bootstrap, 
     features = make_features(
         player, (history or {}).get("history", []), fixtures, start_gw, horizon, cutoff, live=True
     )
+    if features is not None and model.name == "ridge_availability":
+        features["x"] += context_features(player, model.context_captured_at, cutoff)
     return None if features is None else float(model.predict([features])[0])
 
 
 def live_forecasts(bootstrap, fixtures, data_dir, horizon=5):
     """Train the preselected models on completed historical/current labels."""
     config = json.loads((ROOT / "model_config.json").read_text())
-    historic_samples = historical_samples(horizon)
     histories = load_live_histories(data_dir, bootstrap)
     next_event = next((event for event in bootstrap["events"] if event.get("is_next")), None)
     if next_event is None:
         return {}, {"horizon": horizon, "models": {}, "training_season": "2025/26"}
     start = next_event["id"]
     cutoff = min(timestamp(next_event["deadline_time"]), datetime.now(timezone.utc).timestamp())
-    current_samples = training_before(
-        make_samples(bootstrap, fixtures, histories, horizon), start, cutoff, horizon
-    )
+    samples = training_samples(bootstrap, fixtures, histories, data_dir, horizon, start, cutoff,
+                               config["models"].get("DEF") == "ridge_availability")
+    captured_at = (Path(data_dir) / "bootstrap-static.json").stat().st_mtime
     table = team_table(fixtures, start, cutoff)
     forecasts = {}
     for element_type, position in POSITIONS.items():
-        train = [s for s in historic_samples + current_samples if s["position"] == position]
+        train = [s for s in samples if s["position"] == position]
         model = fit_model(config["models"][position], train)
         for player in bootstrap["elements"]:
             if player["element_type"] != element_type:
@@ -409,6 +419,8 @@ def live_forecasts(bootstrap, fixtures, data_dir, horizon=5):
                 live=True,
             )
             if features is not None:
+                if model.name == "ridge_availability":
+                    features["x"] += context_features(player, captured_at, cutoff)
                 forecasts[player["id"]] = {
                     "points": float(model.predict([features])[0]),
                     "model": model.name,
@@ -418,4 +430,5 @@ def live_forecasts(bootstrap, fixtures, data_dir, horizon=5):
         "models": config["models"],
         "training_season": "2025/26",
         "review": "reports/model-review-2025-26.md",
+        "defender_context": "Availability and set-piece roles from dated FPL snapshots",
     }

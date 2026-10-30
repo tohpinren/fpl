@@ -20,7 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: read
+      # Forecasts are appended to the separate codex/forecast-ledger data branch.
+      contents: write
       pages: read
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +34,9 @@ jobs:
       - name: Run regression tests
         run: uv run --no-sync python -m unittest discover -s tests -v
       - name: Download FPL data and build snapshot
-        run: uv run --no-sync python build_site.py --refresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: uv run --no-sync python build_site.py --refresh --forecast-repository "${{ github.repository }}"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

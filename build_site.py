@@ -14,7 +14,7 @@ from pathlib import Path
 from serve import DATA_DIR, FRONTEND_DIR, ROOT, build_dashboard
 
 
-def build_site(output_dir: Path, refresh: bool = False) -> None:
+def build_site(output_dir: Path, refresh: bool = False, forecast_repository=None) -> None:
     if refresh:
         result = subprocess.run(
             [sys.executable, str(ROOT / "download_fpl_data.py")],
@@ -37,9 +37,29 @@ def build_site(output_dir: Path, refresh: bool = False) -> None:
     ]
     if missing:
         raise RuntimeError(f"Missing {len(missing)} player summaries. Run the downloader again.")
-    snapshot = json.dumps(
-        build_dashboard(), ensure_ascii=False, allow_nan=False, separators=(",", ":")
-    )
+    github = None
+    if forecast_repository:
+        from download_fpl_data import get_season
+        from prospective import github_ledger
+
+        github = github_ledger(forecast_repository)
+        github.restore(DATA_DIR / "forecast-ledger", get_season(bootstrap))
+    dashboard = build_dashboard()
+    if github:
+        from download_fpl_data import get_season
+        from forecasting import load_live_histories
+        from prospective import LEDGER_BRANCH, capture, evaluate
+
+        fixtures = json.loads((DATA_DIR / "fixtures.json").read_text())
+        ledger_dir = DATA_DIR / "forecast-ledger"
+        capture(ledger_dir, DATA_DIR, bootstrap, fixtures)
+        report = evaluate(ledger_dir, bootstrap, fixtures, load_live_histories(DATA_DIR, bootstrap))
+        github.publish(ledger_dir, get_season(bootstrap))
+        dashboard["model"]["prospective_test"] = dict(challenger="components_single", position="MID",
+            pending_origins=report["pending_origins"],
+            completed_origins=[r["origin"] for r in report["completed_windows"] if r["position"] == "MID"],
+            history_url=f"https://github.com/{forecast_repository}/tree/{LEDGER_BRANCH}")
+    snapshot = json.dumps(dashboard, ensure_ascii=False, allow_nan=False, separators=(",", ":"))
     output_dir.mkdir(parents=True, exist_ok=True)
     # Only publish the frontend and its compact data snapshot, never the raw data archive.
     for name in ("app.js", "styles.css", "favicon.svg"):
@@ -63,8 +83,9 @@ def main():
     parser.add_argument(
         "--refresh", action="store_true", help="Download fresh FPL data before building"
     )
+    parser.add_argument("--forecast-repository", help="Persist prospective forecasts on the GitHub history branch")
     args = parser.parse_args()
-    build_site(args.output, refresh=args.refresh)
+    build_site(args.output, refresh=args.refresh, forecast_repository=args.forecast_repository)
 
 
 if __name__ == "__main__":

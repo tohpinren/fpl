@@ -62,6 +62,26 @@ class StaticBuildTests(unittest.TestCase):
             build_site.build_site(self.output, refresh=True)
         self.assertFalse(self.output.exists())
 
+    def test_history_is_restored_before_forecasting_and_saved_before_export(self):
+        self.data.joinpath("fixtures.json").write_text("[]")
+        snapshot = {"model": {}, "players": []}
+        report = dict(pending_origins=[9], completed_windows=[])
+        with patch("prospective.github_ledger") as factory, patch("prospective.capture") as capture, \
+                patch("prospective.evaluate", return_value=report), \
+                patch("download_fpl_data.get_season", return_value="2026-27"), \
+                patch("forecasting.load_live_histories", return_value={}), \
+                patch.object(build_site, "build_dashboard", return_value=snapshot) as dashboard:
+            parent = Mock()
+            parent.attach_mock(factory.return_value.restore, "restore")
+            parent.attach_mock(dashboard, "dashboard")
+            parent.attach_mock(capture, "capture")
+            parent.attach_mock(factory.return_value.publish, "publish")
+            build_site.build_site(self.output, forecast_repository="owner/repo")
+        self.assertEqual([c[0] for c in parent.mock_calls], ["restore", "dashboard", "capture", "publish"])
+        result = json.loads((self.output / "dashboard.json").read_text())
+        self.assertEqual(result["model"]["prospective_test"]["pending_origins"], [9])
+        self.assertFalse((self.output / "forecast-ledger").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

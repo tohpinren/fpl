@@ -1,10 +1,12 @@
 {
   "models": {
-    "DEF": "ridge",
+    "DEF": "ridge_availability",
     "MID": "forest",
     "FWD": "ridge"
   },
   "horizon_gameweeks": 5,
   "selected_on": "2025/26 GW16\u201324 only",
-  "source_revision": "d7b05b51d137bfefef4b692386d18c610975b9b9"
+  "source_revision": "d7b05b51d137bfefef4b692386d18c610975b9b9",
+  "defender_review": "reports/model-improvements-2025-26.md",
+  "midfield_challenger": "components_single"
 }

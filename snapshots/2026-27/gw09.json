@@ -1,0 +1,3167 @@
+{
+  "schema_version": 1,
+  "season": "2026-27",
+  "origin": 9,
+  "horizon": 5,
+  "cutoff": 1793373646.861092,
+  "deadline": "2026-10-31T11:00:00Z",
+  "models": {
+    "DEF": "ridge_availability vs ridge",
+    "MID": "components_single vs forest"
+  },
+  "code_sha256": "8f63358e74e3742274974c064328386bdd721dc01248f573083a770cd2627a4e",
+  "config_sha256": "8c337743eea03969b8cef4d4d4431d0821577c80d1bfc840e09b6e695b90cdbc",
+  "data_sha256": {
+    "bootstrap-static.json": "32bea01aafbc731bc19ff6b650f0ac8da5484cd9c33dcc18140125f0cfb438bd",
+    "fixtures.json": "e3121fb934c0f4fde739ba40fc037dcdebfb41ab23e613ac5789cd2164615970",
+    "histories": "67865c61ceedf50d98c496e9d5776440ebbfb95f7ae1e997bd9f9cbd35b90e1e"
+  },
+  "bootstrap_captured_at": 1793373635.9876056,
+  "defender_context": {
+    "4": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "5": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.272929Z"
+    },
+    "6": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.289376Z"
+    },
+    "8": {
+      "status": "d",
+      "chance_of_playing_next_round": 75,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-24T18:30:08.735545Z"
+    },
+    "9": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-12T15:00:07.550884Z"
+    },
+    "10": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-20T19:30:08.247780Z"
+    },
+    "11": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-04T14:00:08.080310Z"
+    },
+    "31": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-05T09:30:09.853316Z"
+    },
+    "30": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-10T14:03:30.089007Z"
+    },
+    "32": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 4,
+      "news_added": "2026-09-09T14:30:08.192142Z"
+    },
+    "33": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "34": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-12T18:00:08.712707Z"
+    },
+    "36": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-12T18:00:08.729468Z"
+    },
+    "37": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "38": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-21T13:24:48.628998Z"
+    },
+    "39": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-19T13:56:46.385411Z"
+    },
+    "596": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-10T18:00:10.750593Z"
+    },
+    "606": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "611": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-17T19:30:10.120990Z"
+    },
+    "630": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "60": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "61": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "62": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "63": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-06T10:00:10.456051Z"
+    },
+    "64": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "65": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-09T08:00:05.645826Z"
+    },
+    "66": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-15T16:30:07.021055Z"
+    },
+    "566": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "573": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "84": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-05T18:00:06.182495Z"
+    },
+    "85": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-15T15:30:06.416627Z"
+    },
+    "87": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "88": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "89": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-27T16:30:09.444144Z"
+    },
+    "90": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "92": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "93": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-10T18:00:10.423378Z"
+    },
+    "620": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "660": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "113": {
+      "status": "d",
+      "chance_of_playing_next_round": 75,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 3,
+      "news_added": "2026-10-25T17:30:09.883815Z"
+    },
+    "114": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "115": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 2,
+      "news_added": null
+    },
+    "116": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-22T09:30:09.629652Z"
+    },
+    "117": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "118": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-02T15:38:15.529699Z"
+    },
+    "119": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "120": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "130": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-04T09:30:08.612904Z"
+    },
+    "328": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-16T17:30:09.428175Z"
+    },
+    "504": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "614": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "142": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 3,
+      "news_added": "2026-10-10T13:30:08.699019Z"
+    },
+    "143": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-10T14:03:50.769483Z"
+    },
+    "144": {
+      "status": "d",
+      "chance_of_playing_next_round": 75,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 5,
+      "news_added": "2026-10-29T22:00:09.886054Z"
+    },
+    "145": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.464591Z"
+    },
+    "146": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-25T14:03:47.079414Z"
+    },
+    "148": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-29T22:00:09.909621Z"
+    },
+    "149": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "150": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-29T00:34:23.077418Z"
+    },
+    "151": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "152": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-24T18:30:07.421239Z"
+    },
+    "200": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-28T23:00:10.088612Z"
+    },
+    "561": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-23T19:00:08.536705Z"
+    },
+    "583": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-17T12:00:10.154091Z"
+    },
+    "91": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "173": {
+      "status": "d",
+      "chance_of_playing_next_round": 50,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-24T17:00:09.115906Z"
+    },
+    "174": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-02T16:21:03.612394Z"
+    },
+    "175": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-19T16:00:09.486751Z"
+    },
+    "176": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "177": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-27T14:56:28.704361Z"
+    },
+    "178": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "179": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "180": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-27T14:56:28.718566Z"
+    },
+    "181": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-29T00:35:59.980316Z"
+    },
+    "182": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-17T07:30:09.329041Z"
+    },
+    "656": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "153": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-12T15:30:09.445078Z"
+    },
+    "202": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "203": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "204": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "205": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-02T16:03:25.710518Z"
+    },
+    "206": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-22T18:00:07.352049Z"
+    },
+    "207": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "220": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-12T14:08:46.501813Z"
+    },
+    "577": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-21T13:30:09.030724Z"
+    },
+    "588": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-04T22:00:08.963040Z"
+    },
+    "633": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "643": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-15T20:30:08.876514Z"
+    },
+    "229": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "230": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-16T17:00:07.929499Z"
+    },
+    "231": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "232": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "233": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-24T19:00:09.907289Z"
+    },
+    "234": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-02T16:05:23.326971Z"
+    },
+    "235": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-01T13:23:16.934847Z"
+    },
+    "649": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "253": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.516350Z"
+    },
+    "254": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": 2,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-09T11:30:11.109085Z"
+    },
+    "255": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "256": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-18T12:30:09.546158Z"
+    },
+    "257": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "258": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "269": {
+      "status": "s",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 3,
+      "news_added": "2026-10-17T16:30:09.374216Z"
+    },
+    "610": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-28T11:30:08.336405Z"
+    },
+    "650": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-29T08:30:08.436091Z"
+    },
+    "277": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "278": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-02T09:00:11.030017Z"
+    },
+    "279": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-22T17:30:07.668197Z"
+    },
+    "280": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-29T16:30:08.151841Z"
+    },
+    "281": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-02T16:09:06.479140Z"
+    },
+    "282": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 4,
+      "news_added": null
+    },
+    "283": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-02T09:00:11.038361Z"
+    },
+    "284": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "285": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-09T13:30:08.327907Z"
+    },
+    "556": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-17T14:00:26.419938Z"
+    },
+    "585": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "586": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-16T12:30:09.976274Z"
+    },
+    "638": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-21T08:30:09.561308Z"
+    },
+    "259": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "303": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "304": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "305": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 4,
+      "news_added": null
+    },
+    "306": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "307": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-04T12:36:56.236331Z"
+    },
+    "308": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "592": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "327": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "329": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-30T16:00:08.564382Z"
+    },
+    "330": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "331": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-08T20:00:07.546568Z"
+    },
+    "332": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "333": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-19T13:56:14.645970Z"
+    },
+    "334": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "598": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-25T17:00:10.080582Z"
+    },
+    "603": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "641": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "356": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "357": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-17T15:30:09.979166Z"
+    },
+    "358": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "359": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-26T08:30:10.078473Z"
+    },
+    "360": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.565711Z"
+    },
+    "361": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "362": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-06T00:30:10.323830Z"
+    },
+    "363": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.596909Z"
+    },
+    "364": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 5,
+      "news_added": null
+    },
+    "365": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-26T14:05:26.748768Z"
+    },
+    "579": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "387": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-19T15:30:09.078291Z"
+    },
+    "388": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "389": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": 4,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-19T15:30:09.094655Z"
+    },
+    "390": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "391": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "392": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "393": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "394": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-18T14:11:56.324656Z"
+    },
+    "395": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "396": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "622": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "416": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.690880Z"
+    },
+    "417": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "418": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "419": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-18T16:30:09.955038Z"
+    },
+    "420": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "421": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-20T20:00:09.902224Z"
+    },
+    "422": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-04T21:30:08.533022Z"
+    },
+    "423": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 4,
+      "news_added": "2026-10-12T21:30:08.995810Z"
+    },
+    "424": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "425": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-18T14:12:31.904433Z"
+    },
+    "445": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "446": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-15T16:30:07.209742Z"
+    },
+    "447": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "448": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-23T18:00:08.367241Z"
+    },
+    "449": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 1,
+      "news_added": null
+    },
+    "450": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-19T14:00:09.046677Z"
+    },
+    "451": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-12T14:05:29.224600Z"
+    },
+    "593": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-17T14:30:09.823731Z"
+    },
+    "609": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-11T14:41:57.406766Z"
+    },
+    "663": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "201": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "469": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 2,
+      "news_added": "2026-10-24T00:00:10.181593Z"
+    },
+    "470": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-02T16:19:54.503286Z"
+    },
+    "471": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-12T14:00:09.705107Z"
+    },
+    "472": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.801183Z"
+    },
+    "473": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "474": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-12T14:00:09.724349Z"
+    },
+    "475": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-07-23T12:01:23.816304Z"
+    },
+    "476": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "477": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-02T16:19:54.536676Z"
+    },
+    "478": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "479": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-01T13:16:05.383880Z"
+    },
+    "581": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "112": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-30T16:00:09.552205Z"
+    },
+    "147": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-29T17:00:09.335810Z"
+    },
+    "498": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "499": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 1,
+      "news_added": "2026-09-19T12:00:08.823872Z"
+    },
+    "500": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-17T13:49:05.465401Z"
+    },
+    "502": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 6,
+      "news_added": "2026-10-19T22:30:08.861525Z"
+    },
+    "503": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-21T15:00:07.610517Z"
+    },
+    "505": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-18T14:13:08.454214Z"
+    },
+    "506": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-19T22:30:08.875960Z"
+    },
+    "507": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-18T14:13:08.474144Z"
+    },
+    "508": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "509": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "510": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "511": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-01T13:24:26.858636Z"
+    },
+    "501": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-18T13:30:09.387826Z"
+    },
+    "532": {
+      "status": "i",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-25T21:30:10.370384Z"
+    },
+    "533": {
+      "status": "d",
+      "chance_of_playing_next_round": 75,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-29T18:30:09.458031Z"
+    },
+    "534": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": 3,
+      "news_added": null
+    },
+    "535": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-09T08:30:05.962393Z"
+    },
+    "536": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-09-12T21:30:09.421687Z"
+    },
+    "537": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-29T00:34:52.425076Z"
+    },
+    "538": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-12T14:08:03.081789Z"
+    },
+    "539": {
+      "status": "a",
+      "chance_of_playing_next_round": null,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": null
+    },
+    "540": {
+      "status": "u",
+      "chance_of_playing_next_round": 0,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-12T14:08:03.097784Z"
+    },
+    "541": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-10-10T16:30:09.200467Z"
+    },
+    "612": {
+      "status": "a",
+      "chance_of_playing_next_round": 100,
+      "penalties_order": null,
+      "corners_and_indirect_freekicks_order": null,
+      "news_added": "2026-08-28T13:00:08.950445Z"
+    }
+  },
+  "predictions": [
+    {
+      "id": 12,
+      "name": "Saka",
+      "position": "MID",
+      "price": 9.6,
+      "baseline": 18.880109004839618,
+      "candidate": 17.29230250827932
+    },
+    {
+      "id": 13,
+      "name": "Rice",
+      "position": "MID",
+      "price": 7.3,
+      "baseline": 22.721073542698814,
+      "candidate": 20.967424734489114
+    },
+    {
+      "id": 15,
+      "name": "\u00d8degaard",
+      "position": "MID",
+      "price": 6.8,
+      "baseline": 19.218157932123592,
+      "candidate": 16.79803951828996
+    },
+    {
+      "id": 41,
+      "name": "Buend\u00eda",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 13.705223606064026,
+      "candidate": 15.585504368242447
+    },
+    {
+      "id": 45,
+      "name": "McGinn",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 16.343954840689566,
+      "candidate": 16.652702762063004
+    },
+    {
+      "id": 47,
+      "name": "Kamara",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.85329378794558,
+      "candidate": 15.99511592629134
+    },
+    {
+      "id": 53,
+      "name": "Manzambi",
+      "position": "MID",
+      "price": 6.0,
+      "baseline": 14.929918738393294,
+      "candidate": 14.48990976342166
+    },
+    {
+      "id": 54,
+      "name": "Gomes",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 12.752495184340214,
+      "candidate": 15.004746862165852
+    },
+    {
+      "id": 67,
+      "name": "Rayan",
+      "position": "MID",
+      "price": 6.3,
+      "baseline": 14.768897394943384,
+      "candidate": 17.97202595290367
+    },
+    {
+      "id": 68,
+      "name": "Tavernier",
+      "position": "MID",
+      "price": 6.2,
+      "baseline": 15.897234171702229,
+      "candidate": 14.841145419591188
+    },
+    {
+      "id": 73,
+      "name": "Adams",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.69516968314719,
+      "candidate": 15.171514397886886
+    },
+    {
+      "id": 75,
+      "name": "Christie",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 11.488930916484774,
+      "candidate": 12.73373336564044
+    },
+    {
+      "id": 86,
+      "name": "Lewis-Potter",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.954622944409703,
+      "candidate": 13.85622873952201
+    },
+    {
+      "id": 94,
+      "name": "Schade",
+      "position": "MID",
+      "price": 6.2,
+      "baseline": 13.640391179276106,
+      "candidate": 13.568556536434766
+    },
+    {
+      "id": 98,
+      "name": "Janelt",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.604734702160039,
+      "candidate": 15.385631600435445
+    },
+    {
+      "id": 105,
+      "name": "Anthony",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 12.984950414349159,
+      "candidate": 13.130209609775832
+    },
+    {
+      "id": 565,
+      "name": "M.Sangar\u00e9",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 12.482552565386667,
+      "candidate": 11.45159442401307
+    },
+    {
+      "id": 124,
+      "name": "Gro\u00df",
+      "position": "MID",
+      "price": 6.2,
+      "baseline": 17.85011316559301,
+      "candidate": 19.14064761539104
+    },
+    {
+      "id": 127,
+      "name": "Gomez",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 16.82623469065125,
+      "candidate": 20.319137103198493
+    },
+    {
+      "id": 129,
+      "name": "Ayari",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 15.467726644346413,
+      "candidate": 18.548790045560974
+    },
+    {
+      "id": 639,
+      "name": "Andr\u00e9s",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.520914953014527,
+      "candidate": 16.12082630581135
+    },
+    {
+      "id": 40,
+      "name": "Rogers",
+      "position": "MID",
+      "price": 8.0,
+      "baseline": 20.57909393080596,
+      "candidate": 21.522247958978184
+    },
+    {
+      "id": 101,
+      "name": "Henderson",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 14.818648336211236,
+      "candidate": 14.834211302400462
+    },
+    {
+      "id": 154,
+      "name": "Palmer",
+      "position": "MID",
+      "price": 9.8,
+      "baseline": 19.101344975449994,
+      "candidate": 23.065624049047365
+    },
+    {
+      "id": 156,
+      "name": "Neto",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 17.8307436152462,
+      "candidate": 18.41610564664824
+    },
+    {
+      "id": 159,
+      "name": "Caicedo",
+      "position": "MID",
+      "price": 5.3,
+      "baseline": 10.299255278295997,
+      "candidate": 11.40702230358906
+    },
+    {
+      "id": 183,
+      "name": "Rudoni",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 17.017894945519622,
+      "candidate": 16.709586371730587
+    },
+    {
+      "id": 184,
+      "name": "Grimes",
+      "position": "MID",
+      "price": 4.8,
+      "baseline": 12.88455493065538,
+      "candidate": 13.953204909779972
+    },
+    {
+      "id": 575,
+      "name": "Yirenkyi",
+      "position": "MID",
+      "price": 4.8,
+      "baseline": 11.860961707259541,
+      "candidate": 12.532983779140503
+    },
+    {
+      "id": 210,
+      "name": "Wharton",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 14.377223865061008,
+      "candidate": 13.45498802518953
+    },
+    {
+      "id": 211,
+      "name": "Yeremy",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 13.38860252707232,
+      "candidate": 13.649740367722348
+    },
+    {
+      "id": 214,
+      "name": "Kamada",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.528436414343526,
+      "candidate": 15.001081241311391
+    },
+    {
+      "id": 644,
+      "name": "Timber",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.861397357398905,
+      "candidate": 13.047946722575482
+    },
+    {
+      "id": 209,
+      "name": "Johnson",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 10.502735934917332,
+      "candidate": 13.082349015358925
+    },
+    {
+      "id": 236,
+      "name": "Dewsbury-Hall",
+      "position": "MID",
+      "price": 6.6,
+      "baseline": 18.59007157798103,
+      "candidate": 18.229878566368615
+    },
+    {
+      "id": 238,
+      "name": "Grealish",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 12.028756405784664,
+      "candidate": 12.3107187637929
+    },
+    {
+      "id": 239,
+      "name": "Garner",
+      "position": "MID",
+      "price": 6.0,
+      "baseline": 14.534290173553888,
+      "candidate": 15.815688688774474
+    },
+    {
+      "id": 244,
+      "name": "Armstrong",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.904814969896043,
+      "candidate": 14.825702518364764
+    },
+    {
+      "id": 261,
+      "name": "Iwobi",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 16.199796627252223,
+      "candidate": 15.645453613954375
+    },
+    {
+      "id": 264,
+      "name": "Bobb",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 16.227478086662565,
+      "candidate": 16.328693229818104
+    },
+    {
+      "id": 265,
+      "name": "Berge",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 13.595795949267226,
+      "candidate": 11.713399952594013
+    },
+    {
+      "id": 268,
+      "name": "King",
+      "position": "MID",
+      "price": 5.6,
+      "baseline": 16.20957367178666,
+      "candidate": 16.270809202020626
+    },
+    {
+      "id": 580,
+      "name": "Charles",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 15.0405667629546,
+      "candidate": 15.506640608182375
+    },
+    {
+      "id": 286,
+      "name": "Belloumi",
+      "position": "MID",
+      "price": 5.2,
+      "baseline": 16.08418797233072,
+      "candidate": 14.373502529140081
+    },
+    {
+      "id": 290,
+      "name": "Slater",
+      "position": "MID",
+      "price": 4.5,
+      "baseline": 13.178077832756864,
+      "candidate": 11.963846831690665
+    },
+    {
+      "id": 591,
+      "name": "Enciso",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 16.440346458172602,
+      "candidate": 16.85321409422627
+    },
+    {
+      "id": 619,
+      "name": "Palacios",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.873205556979666,
+      "candidate": 15.27793569683125
+    },
+    {
+      "id": 335,
+      "name": "Stach",
+      "position": "MID",
+      "price": 6.0,
+      "baseline": 15.492314229519405,
+      "candidate": 15.928540410815348
+    },
+    {
+      "id": 336,
+      "name": "Okafor",
+      "position": "MID",
+      "price": 5.8,
+      "baseline": 13.00164348590288,
+      "candidate": 12.53020830750554
+    },
+    {
+      "id": 338,
+      "name": "Ampadu",
+      "position": "MID",
+      "price": 5.3,
+      "baseline": 15.034927117335378,
+      "candidate": 15.562846025933887
+    },
+    {
+      "id": 345,
+      "name": "Tanaka",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 14.184474983139207,
+      "candidate": 12.881924155112344
+    },
+    {
+      "id": 366,
+      "name": "Wirtz",
+      "position": "MID",
+      "price": 7.2,
+      "baseline": 21.535315731255704,
+      "candidate": 17.763108172043147
+    },
+    {
+      "id": 372,
+      "name": "Mac Allister",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 13.300876034164196,
+      "candidate": 13.867115596997449
+    },
+    {
+      "id": 627,
+      "name": "Barcola",
+      "position": "MID",
+      "price": 8.0,
+      "baseline": 21.641014796902773,
+      "candidate": 19.16388100771315
+    },
+    {
+      "id": 155,
+      "name": "Enzo",
+      "position": "MID",
+      "price": 6.9,
+      "baseline": 17.486766740594835,
+      "candidate": 17.150827137895696
+    },
+    {
+      "id": 237,
+      "name": "Ndiaye",
+      "position": "MID",
+      "price": 5.8,
+      "baseline": 14.615342240630538,
+      "candidate": 15.797388183290272
+    },
+    {
+      "id": 397,
+      "name": "Semenyo",
+      "position": "MID",
+      "price": 8.3,
+      "baseline": 15.648151545274626,
+      "candidate": 14.702031862938556
+    },
+    {
+      "id": 399,
+      "name": "Cherki",
+      "position": "MID",
+      "price": 8.0,
+      "baseline": 17.971826848260108,
+      "candidate": 16.328322456322752
+    },
+    {
+      "id": 481,
+      "name": "Anderson",
+      "position": "MID",
+      "price": 6.3,
+      "baseline": 13.76194459059319,
+      "candidate": 13.769099621514377
+    },
+    {
+      "id": 43,
+      "name": "Tielemans",
+      "position": "MID",
+      "price": 5.7,
+      "baseline": 13.96699861453032,
+      "candidate": 15.022098026884036
+    },
+    {
+      "id": 426,
+      "name": "B.Fernandes",
+      "position": "MID",
+      "price": 11.8,
+      "baseline": 22.340642111887743,
+      "candidate": 21.582660600783225
+    },
+    {
+      "id": 427,
+      "name": "Mbeumo",
+      "position": "MID",
+      "price": 7.9,
+      "baseline": 21.977589417663733,
+      "candidate": 19.199934119533015
+    },
+    {
+      "id": 428,
+      "name": "Cunha",
+      "position": "MID",
+      "price": 7.9,
+      "baseline": 19.719639330546457,
+      "candidate": 18.679741287624953
+    },
+    {
+      "id": 432,
+      "name": "Mainoo",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.4488164647595,
+      "candidate": 13.076983104130317
+    },
+    {
+      "id": 405,
+      "name": "N.Gonzalez",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 13.443301990487921,
+      "candidate": 12.281797360565456
+    },
+    {
+      "id": 453,
+      "name": "Barnes",
+      "position": "MID",
+      "price": 6.1,
+      "baseline": 16.731154447401703,
+      "candidate": 16.842393347768674
+    },
+    {
+      "id": 457,
+      "name": "J.Murphy",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 11.036271124526378,
+      "candidate": 10.593290470562039
+    },
+    {
+      "id": 459,
+      "name": "L.Miley",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 12.57577229416205,
+      "candidate": 14.056962778491014
+    },
+    {
+      "id": 460,
+      "name": "Willock",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.776229038602171,
+      "candidate": 12.42366250474479
+    },
+    {
+      "id": 480,
+      "name": "Gibbs-White",
+      "position": "MID",
+      "price": 7.9,
+      "baseline": 24.38971990868112,
+      "candidate": 21.03408692732646
+    },
+    {
+      "id": 483,
+      "name": "Ndoye",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 15.324859281255003,
+      "candidate": 14.713256600130157
+    },
+    {
+      "id": 486,
+      "name": "McAtee",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.476302309006432,
+      "candidate": 16.589459044912076
+    },
+    {
+      "id": 558,
+      "name": "Schlager",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.471019416278267,
+      "candidate": 14.589496800983552
+    },
+    {
+      "id": 403,
+      "name": "S\u00e1vio",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 11.612984455111311,
+      "candidate": 13.09817350144968
+    },
+    {
+      "id": 455,
+      "name": "Tonali",
+      "position": "MID",
+      "price": 5.3,
+      "baseline": 16.481219042242305,
+      "candidate": 16.534583467119877
+    },
+    {
+      "id": 512,
+      "name": "Kudus",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 14.74500086237296,
+      "candidate": 13.547402718647778
+    },
+    {
+      "id": 522,
+      "name": "Gray",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 14.04767329088922,
+      "candidate": 14.616445477337543
+    },
+    {
+      "id": 542,
+      "name": "E.Le F\u00e9e",
+      "position": "MID",
+      "price": 5.7,
+      "baseline": 16.89178674688986,
+      "candidate": 16.94271570041436
+    },
+    {
+      "id": 544,
+      "name": "Xhaka",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 16.076475030265183,
+      "candidate": 16.123500322065013
+    },
+    {
+      "id": 545,
+      "name": "Sadiki",
+      "position": "MID",
+      "price": 4.8,
+      "baseline": 13.03608748740936,
+      "candidate": 13.054495603021424
+    },
+    {
+      "id": 551,
+      "name": "N.Angulo",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 12.086486804798332,
+      "candidate": 12.05511307920962
+    },
+    {
+      "id": 4,
+      "name": "Gabriel",
+      "position": "DEF",
+      "price": 7.9,
+      "baseline": 23.609301572839456,
+      "candidate": 23.85719556538646
+    },
+    {
+      "id": 8,
+      "name": "Calafiori",
+      "position": "DEF",
+      "price": 6.0,
+      "baseline": 17.991472388919323,
+      "candidate": 15.532627697130888
+    },
+    {
+      "id": 10,
+      "name": "White",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 12.354654702337296,
+      "candidate": 13.55872545590805
+    },
+    {
+      "id": 31,
+      "name": "Konsa",
+      "position": "DEF",
+      "price": 4.6,
+      "baseline": 13.818159399639677,
+      "candidate": 13.550435314788416
+    },
+    {
+      "id": 32,
+      "name": "Cash",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 12.996143945443462,
+      "candidate": 13.461074394542393
+    },
+    {
+      "id": 33,
+      "name": "Mings",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.921781495401579,
+      "candidate": 12.7789380637339
+    },
+    {
+      "id": 37,
+      "name": "Lindel\u00f6f",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 14.950546068213086,
+      "candidate": 14.726385559798482
+    },
+    {
+      "id": 611,
+      "name": "Wan-Bissaka",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 10.066019648728565,
+      "candidate": 4.539733993193278
+    },
+    {
+      "id": 60,
+      "name": "Hill",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 17.837961567330442,
+      "candidate": 17.489421279532035
+    },
+    {
+      "id": 61,
+      "name": "Truffert",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 14.304649451769121,
+      "candidate": 14.56359332229374
+    },
+    {
+      "id": 64,
+      "name": "Smith",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 10.605037266408278,
+      "candidate": 10.376896213088292
+    },
+    {
+      "id": 566,
+      "name": "Silva",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 16.896356068087442,
+      "candidate": 16.651802312857747
+    },
+    {
+      "id": 87,
+      "name": "Ajer",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 15.757545160253073,
+      "candidate": 15.99972630395757
+    },
+    {
+      "id": 88,
+      "name": "Kayode",
+      "position": "DEF",
+      "price": 4.6,
+      "baseline": 13.787927099558424,
+      "candidate": 14.07451591010675
+    },
+    {
+      "id": 113,
+      "name": "F.Kad\u0131o\u011flu",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 11.449817505858332,
+      "candidate": 8.666672328947534
+    },
+    {
+      "id": 114,
+      "name": "Boscagli",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.916919876108617,
+      "candidate": 13.139710558475509
+    },
+    {
+      "id": 115,
+      "name": "De Cuyper",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 19.884774178973636,
+      "candidate": 20.3843276265795
+    },
+    {
+      "id": 116,
+      "name": "Dunk",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.383692781073561,
+      "candidate": 13.432484136819426
+    },
+    {
+      "id": 504,
+      "name": "Vuskovic",
+      "position": "DEF",
+      "price": 5.1,
+      "baseline": 20.665741976533063,
+      "candidate": 20.673140603212936
+    },
+    {
+      "id": 149,
+      "name": "Colwill",
+      "position": "DEF",
+      "price": 4.8,
+      "baseline": 14.195449647254057,
+      "candidate": 14.074775956457993
+    },
+    {
+      "id": 151,
+      "name": "Acheampong",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.534044828340093,
+      "candidate": 12.527952059237162
+    },
+    {
+      "id": 200,
+      "name": "Lacroix",
+      "position": "DEF",
+      "price": 5.9,
+      "baseline": 18.37151469274263,
+      "candidate": 12.610113472504867
+    },
+    {
+      "id": 91,
+      "name": "Pinnock",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 14.020792697485684,
+      "candidate": 14.206513134484151
+    },
+    {
+      "id": 173,
+      "name": "Thomas",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 14.792217617554769,
+      "candidate": 12.199822830828285
+    },
+    {
+      "id": 175,
+      "name": "van Ewijk",
+      "position": "DEF",
+      "price": 3.9,
+      "baseline": 10.322908209609054,
+      "candidate": 11.07367151652802
+    },
+    {
+      "id": 176,
+      "name": "Dasilva",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 11.95776810996988,
+      "candidate": 12.938231350390396
+    },
+    {
+      "id": 202,
+      "name": "Richards",
+      "position": "DEF",
+      "price": 4.9,
+      "baseline": 13.42174299416128,
+      "candidate": 13.529601835335306
+    },
+    {
+      "id": 203,
+      "name": "Canvot",
+      "position": "DEF",
+      "price": 4.8,
+      "baseline": 9.501281860579898,
+      "candidate": 10.194416088476485
+    },
+    {
+      "id": 204,
+      "name": "Mitchell",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.61891403807981,
+      "candidate": 13.10902718250689
+    },
+    {
+      "id": 588,
+      "name": "Khalaili",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 12.705876729018005,
+      "candidate": 14.169298948905118
+    },
+    {
+      "id": 229,
+      "name": "Tarkowski",
+      "position": "DEF",
+      "price": 6.2,
+      "baseline": 18.963893914735035,
+      "candidate": 20.698307536471994
+    },
+    {
+      "id": 230,
+      "name": "Branthwaite",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 14.503022107705505,
+      "candidate": 16.230040214194222
+    },
+    {
+      "id": 233,
+      "name": "Mykolenko",
+      "position": "DEF",
+      "price": 4.6,
+      "baseline": 10.891179899586104,
+      "candidate": 12.855852603730956
+    },
+    {
+      "id": 649,
+      "name": "Maitland-Niles",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 10.918758828642344,
+      "candidate": 12.453540507319865
+    },
+    {
+      "id": 254,
+      "name": "Robinson",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 12.532251372739974,
+      "candidate": 13.215667725502605
+    },
+    {
+      "id": 257,
+      "name": "Bassey",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 14.811953514390773,
+      "candidate": 14.635219753868057
+    },
+    {
+      "id": 258,
+      "name": "Castagne",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 13.662661199400166,
+      "candidate": 13.788175613586322
+    },
+    {
+      "id": 650,
+      "name": "Affengruber",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 15.506749885237419,
+      "candidate": 16.11021034424379
+    },
+    {
+      "id": 277,
+      "name": "Egan",
+      "position": "DEF",
+      "price": 4.1,
+      "baseline": 16.149570348745108,
+      "candidate": 16.31438623394654
+    },
+    {
+      "id": 279,
+      "name": "Ajayi",
+      "position": "DEF",
+      "price": 4.2,
+      "baseline": 15.205431410277397,
+      "candidate": 16.03233949513581
+    },
+    {
+      "id": 280,
+      "name": "Coyle",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 10.787738930595282,
+      "candidate": 11.477277384417576
+    },
+    {
+      "id": 282,
+      "name": "Giles",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 12.540372105244193,
+      "candidate": 13.004522698252629
+    },
+    {
+      "id": 585,
+      "name": "Herrington",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 7.680773117997155,
+      "candidate": 7.761748653904674
+    },
+    {
+      "id": 259,
+      "name": "Diop",
+      "position": "DEF",
+      "price": 3.9,
+      "baseline": 13.078096127727171,
+      "candidate": 13.142901786461508
+    },
+    {
+      "id": 304,
+      "name": "O'Shea",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 16.745537405910945,
+      "candidate": 16.523741590603343
+    },
+    {
+      "id": 305,
+      "name": "Davis",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 14.261725019099018,
+      "candidate": 15.33517648050061
+    },
+    {
+      "id": 592,
+      "name": "Ouattara",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 13.040911631937156,
+      "candidate": 12.732284683083826
+    },
+    {
+      "id": 330,
+      "name": "Bogle",
+      "position": "DEF",
+      "price": 4.7,
+      "baseline": 18.1915345547172,
+      "candidate": 19.513837642367587
+    },
+    {
+      "id": 331,
+      "name": "Gudmundsson",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.697502707919623,
+      "candidate": 13.52086162354849
+    },
+    {
+      "id": 332,
+      "name": "Justin",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 16.773779490820353,
+      "candidate": 17.279775535255407
+    },
+    {
+      "id": 334,
+      "name": "Muharemovi\u0107",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 19.21000415116985,
+      "candidate": 19.675922991063317
+    },
+    {
+      "id": 598,
+      "name": "Elvedi",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 11.739631775275837,
+      "candidate": 12.727189531611767
+    },
+    {
+      "id": 356,
+      "name": "Virgil",
+      "position": "DEF",
+      "price": 6.4,
+      "baseline": 18.539110439366432,
+      "candidate": 19.13876935882482
+    },
+    {
+      "id": 358,
+      "name": "Kerkez",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 13.28445265220872,
+      "candidate": 13.372785598741931
+    },
+    {
+      "id": 362,
+      "name": "Jacquet",
+      "position": "DEF",
+      "price": 5.1,
+      "baseline": 16.51912243744841,
+      "candidate": 17.504971010051204
+    },
+    {
+      "id": 579,
+      "name": "Araujo",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 13.667420671344072,
+      "candidate": 14.469388674935612
+    },
+    {
+      "id": 388,
+      "name": "Gu\u00e9hi",
+      "position": "DEF",
+      "price": 6.0,
+      "baseline": 15.30669353212992,
+      "candidate": 16.17358725266709
+    },
+    {
+      "id": 389,
+      "name": "Matheus N.",
+      "position": "DEF",
+      "price": 5.9,
+      "baseline": 11.789178722389586,
+      "candidate": 12.729236188076486
+    },
+    {
+      "id": 390,
+      "name": "R\u00faben",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 14.868750475395007,
+      "candidate": 14.907667439314661
+    },
+    {
+      "id": 391,
+      "name": "Gvardiol",
+      "position": "DEF",
+      "price": 5.8,
+      "baseline": 16.04397078086526,
+      "candidate": 17.355829137852243
+    },
+    {
+      "id": 417,
+      "name": "Dalot",
+      "position": "DEF",
+      "price": 4.8,
+      "baseline": 14.135194868848913,
+      "candidate": 14.16661714897734
+    },
+    {
+      "id": 418,
+      "name": "Maguire",
+      "position": "DEF",
+      "price": 4.7,
+      "baseline": 15.070391570338764,
+      "candidate": 15.180313257874815
+    },
+    {
+      "id": 419,
+      "name": "Martinez",
+      "position": "DEF",
+      "price": 4.9,
+      "baseline": 12.968235386265325,
+      "candidate": 14.108382112173103
+    },
+    {
+      "id": 445,
+      "name": "Thiaw",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 11.225941119418126,
+      "candidate": 11.403261865833272
+    },
+    {
+      "id": 447,
+      "name": "Botman",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 13.913024770901577,
+      "candidate": 14.11768343904074
+    },
+    {
+      "id": 449,
+      "name": "Hall",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 16.119985586421034,
+      "candidate": 11.287488602399028
+    },
+    {
+      "id": 201,
+      "name": "Mu\u00f1oz",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 14.60500669363622,
+      "candidate": 14.714406026252206
+    },
+    {
+      "id": 469,
+      "name": "N.Williams",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 16.824696848881857,
+      "candidate": 18.085887014414634
+    },
+    {
+      "id": 472,
+      "name": "Murillo",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 18.099001308029628,
+      "candidate": 19.59175836337546
+    },
+    {
+      "id": 474,
+      "name": "Jair Cunha",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 10.603816780816024,
+      "candidate": 11.932341178590033
+    },
+    {
+      "id": 581,
+      "name": "Diomande",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 11.644142224976951,
+      "candidate": 12.085470050039634
+    },
+    {
+      "id": 112,
+      "name": "Van Hecke",
+      "position": "DEF",
+      "price": 4.9,
+      "baseline": 18.030271929916346,
+      "candidate": 19.324341393402634
+    },
+    {
+      "id": 502,
+      "name": "Robertson",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 10.69321792583932,
+      "candidate": 12.26252959771436
+    },
+    {
+      "id": 503,
+      "name": "Van de Ven",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 12.991996610194168,
+      "candidate": 13.813052606116116
+    },
+    {
+      "id": 501,
+      "name": "Danso",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 6.8984630524407535,
+      "candidate": 8.308914376027998
+    },
+    {
+      "id": 533,
+      "name": "Mukiele",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 14.695136146636472,
+      "candidate": 12.555343250884563
+    },
+    {
+      "id": 534,
+      "name": "Hume",
+      "position": "DEF",
+      "price": 4.3,
+      "baseline": 11.01347096182917,
+      "candidate": 10.91957119205809
+    },
+    {
+      "id": 536,
+      "name": "Reinildo",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 11.596146872165338,
+      "candidate": 12.394740993635754
+    }
+  ],
+  "fixtures": [
+    {
+      "id": 84,
+      "event": 9,
+      "team_h": 6,
+      "team_a": 16,
+      "kickoff_time": "2026-10-31T12:30:00Z"
+    },
+    {
+      "id": 82,
+      "event": 9,
+      "team_h": 3,
+      "team_a": 13,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 83,
+      "event": 9,
+      "team_h": 4,
+      "team_a": 18,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 85,
+      "event": 9,
+      "team_h": 7,
+      "team_a": 20,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 86,
+      "event": 9,
+      "team_h": 11,
+      "team_a": 12,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 88,
+      "event": 9,
+      "team_h": 15,
+      "team_a": 5,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 90,
+      "event": 9,
+      "team_h": 19,
+      "team_a": 8,
+      "kickoff_time": "2026-10-31T17:30:00Z"
+    },
+    {
+      "id": 81,
+      "event": 9,
+      "team_h": 2,
+      "team_a": 10,
+      "kickoff_time": "2026-10-31T20:00:00Z"
+    },
+    {
+      "id": 87,
+      "event": 9,
+      "team_h": 14,
+      "team_a": 1,
+      "kickoff_time": "2026-11-01T16:30:00Z"
+    },
+    {
+      "id": 89,
+      "event": 9,
+      "team_h": 17,
+      "team_a": 9,
+      "kickoff_time": "2026-11-02T20:00:00Z"
+    },
+    {
+      "id": 94,
+      "event": 10,
+      "team_h": 9,
+      "team_a": 7,
+      "kickoff_time": "2026-11-06T20:00:00Z"
+    },
+    {
+      "id": 97,
+      "event": 10,
+      "team_h": 13,
+      "team_a": 19,
+      "kickoff_time": "2026-11-07T12:30:00Z"
+    },
+    {
+      "id": 91,
+      "event": 10,
+      "team_h": 1,
+      "team_a": 11,
+      "kickoff_time": "2026-11-07T15:00:00Z"
+    },
+    {
+      "id": 95,
+      "event": 10,
+      "team_h": 10,
+      "team_a": 17,
+      "kickoff_time": "2026-11-07T15:00:00Z"
+    },
+    {
+      "id": 99,
+      "event": 10,
+      "team_h": 18,
+      "team_a": 15,
+      "kickoff_time": "2026-11-07T17:30:00Z"
+    },
+    {
+      "id": 92,
+      "event": 10,
+      "team_h": 5,
+      "team_a": 4,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 93,
+      "event": 10,
+      "team_h": 8,
+      "team_a": 14,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 96,
+      "event": 10,
+      "team_h": 12,
+      "team_a": 3,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 100,
+      "event": 10,
+      "team_h": 20,
+      "team_a": 6,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 98,
+      "event": 10,
+      "team_h": 16,
+      "team_a": 2,
+      "kickoff_time": "2026-11-08T16:30:00Z"
+    },
+    {
+      "id": 108,
+      "event": 11,
+      "team_h": 15,
+      "team_a": 10,
+      "kickoff_time": "2026-11-21T12:30:00Z"
+    },
+    {
+      "id": 101,
+      "event": 11,
+      "team_h": 2,
+      "team_a": 20,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 102,
+      "event": 11,
+      "team_h": 3,
+      "team_a": 18,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 104,
+      "event": 11,
+      "team_h": 6,
+      "team_a": 13,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 105,
+      "event": 11,
+      "team_h": 7,
+      "team_a": 8,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 110,
+      "event": 11,
+      "team_h": 19,
+      "team_a": 12,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 109,
+      "event": 11,
+      "team_h": 17,
+      "team_a": 1,
+      "kickoff_time": "2026-11-21T17:30:00Z"
+    },
+    {
+      "id": 106,
+      "event": 11,
+      "team_h": 11,
+      "team_a": 5,
+      "kickoff_time": "2026-11-22T14:00:00Z"
+    },
+    {
+      "id": 107,
+      "event": 11,
+      "team_h": 14,
+      "team_a": 16,
+      "kickoff_time": "2026-11-22T16:30:00Z"
+    },
+    {
+      "id": 103,
+      "event": 11,
+      "team_h": 4,
+      "team_a": 9,
+      "kickoff_time": "2026-11-23T20:00:00Z"
+    },
+    {
+      "id": 119,
+      "event": 12,
+      "team_h": 18,
+      "team_a": 6,
+      "kickoff_time": "2026-11-27T20:00:00Z"
+    },
+    {
+      "id": 117,
+      "event": 12,
+      "team_h": 13,
+      "team_a": 7,
+      "kickoff_time": "2026-11-28T15:00:00Z"
+    },
+    {
+      "id": 118,
+      "event": 12,
+      "team_h": 16,
+      "team_a": 4,
+      "kickoff_time": "2026-11-28T15:00:00Z"
+    },
+    {
+      "id": 116,
+      "event": 12,
+      "team_h": 12,
+      "team_a": 2,
+      "kickoff_time": "2026-11-28T17:30:00Z"
+    },
+    {
+      "id": 114,
+      "event": 12,
+      "team_h": 9,
+      "team_a": 14,
+      "kickoff_time": "2026-11-29T12:00:00Z"
+    },
+    {
+      "id": 112,
+      "event": 12,
+      "team_h": 5,
+      "team_a": 17,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 113,
+      "event": 12,
+      "team_h": 8,
+      "team_a": 11,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 115,
+      "event": 12,
+      "team_h": 10,
+      "team_a": 3,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 120,
+      "event": 12,
+      "team_h": 20,
+      "team_a": 19,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 111,
+      "event": 12,
+      "team_h": 1,
+      "team_a": 15,
+      "kickoff_time": "2026-11-29T16:30:00Z"
+    },
+    {
+      "id": 125,
+      "event": 13,
+      "team_h": 7,
+      "team_a": 12,
+      "kickoff_time": "2026-12-01T20:00:00Z"
+    },
+    {
+      "id": 124,
+      "event": 13,
+      "team_h": 6,
+      "team_a": 8,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 126,
+      "event": 13,
+      "team_h": 11,
+      "team_a": 18,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 127,
+      "event": 13,
+      "team_h": 14,
+      "team_a": 20,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 128,
+      "event": 13,
+      "team_h": 15,
+      "team_a": 13,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 121,
+      "event": 13,
+      "team_h": 2,
+      "team_a": 9,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 122,
+      "event": 13,
+      "team_h": 3,
+      "team_a": 5,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 123,
+      "event": 13,
+      "team_h": 4,
+      "team_a": 1,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 129,
+      "event": 13,
+      "team_h": 17,
+      "team_a": 16,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 130,
+      "event": 13,
+      "team_h": 19,
+      "team_a": 10,
+      "kickoff_time": "2026-12-03T20:00:00Z"
+    }
+  ]
+}

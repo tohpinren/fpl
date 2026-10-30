@@ -1,0 +1,4337 @@
+{
+  "created_at": "2026-10-30T13:32:21.684441+00:00",
+  "season": "2026-27",
+  "forecast_gameweeks": [
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "deadline": "2026-10-31T11:00:00Z",
+  "code_sha256": "8f63358e74e3742274974c064328386bdd721dc01248f573083a770cd2627a4e",
+  "input_sha256": {
+    "bootstrap.json": "05befd2dcffabbc3c48905f50eb31474f126e5533d0988ff407ecd97144ba75a",
+    "fixtures.json": "e3121fb934c0f4fde739ba40fc037dcdebfb41ab23e613ac5789cd2164615970",
+    "histories.json": "a644122e2cd9e955efa6f8fbcf5f536dd0b09b989eb3034cc8b215c2c9bdc6dc"
+  },
+  "refreshed_player_histories": 0,
+  "selected_on": "2025/26 GW16-24 only",
+  "exploratory_selected_on": "Reused GW25-34 audit: MID components_single and FWD components_multi; these require fresh prospective evaluation.",
+  "note": "Research ledger; no outcomes known. Production model unchanged. 2026/27 scoring differs from 2025/26.",
+  "fixtures": [
+    {
+      "id": 84,
+      "event": 9,
+      "team_h": 6,
+      "team_a": 16,
+      "kickoff_time": "2026-10-31T12:30:00Z"
+    },
+    {
+      "id": 82,
+      "event": 9,
+      "team_h": 3,
+      "team_a": 13,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 83,
+      "event": 9,
+      "team_h": 4,
+      "team_a": 18,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 85,
+      "event": 9,
+      "team_h": 7,
+      "team_a": 20,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 86,
+      "event": 9,
+      "team_h": 11,
+      "team_a": 12,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 88,
+      "event": 9,
+      "team_h": 15,
+      "team_a": 5,
+      "kickoff_time": "2026-10-31T15:00:00Z"
+    },
+    {
+      "id": 90,
+      "event": 9,
+      "team_h": 19,
+      "team_a": 8,
+      "kickoff_time": "2026-10-31T17:30:00Z"
+    },
+    {
+      "id": 81,
+      "event": 9,
+      "team_h": 2,
+      "team_a": 10,
+      "kickoff_time": "2026-10-31T20:00:00Z"
+    },
+    {
+      "id": 87,
+      "event": 9,
+      "team_h": 14,
+      "team_a": 1,
+      "kickoff_time": "2026-11-01T16:30:00Z"
+    },
+    {
+      "id": 89,
+      "event": 9,
+      "team_h": 17,
+      "team_a": 9,
+      "kickoff_time": "2026-11-02T20:00:00Z"
+    },
+    {
+      "id": 94,
+      "event": 10,
+      "team_h": 9,
+      "team_a": 7,
+      "kickoff_time": "2026-11-06T20:00:00Z"
+    },
+    {
+      "id": 97,
+      "event": 10,
+      "team_h": 13,
+      "team_a": 19,
+      "kickoff_time": "2026-11-07T12:30:00Z"
+    },
+    {
+      "id": 91,
+      "event": 10,
+      "team_h": 1,
+      "team_a": 11,
+      "kickoff_time": "2026-11-07T15:00:00Z"
+    },
+    {
+      "id": 95,
+      "event": 10,
+      "team_h": 10,
+      "team_a": 17,
+      "kickoff_time": "2026-11-07T15:00:00Z"
+    },
+    {
+      "id": 99,
+      "event": 10,
+      "team_h": 18,
+      "team_a": 15,
+      "kickoff_time": "2026-11-07T17:30:00Z"
+    },
+    {
+      "id": 92,
+      "event": 10,
+      "team_h": 5,
+      "team_a": 4,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 93,
+      "event": 10,
+      "team_h": 8,
+      "team_a": 14,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 96,
+      "event": 10,
+      "team_h": 12,
+      "team_a": 3,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 100,
+      "event": 10,
+      "team_h": 20,
+      "team_a": 6,
+      "kickoff_time": "2026-11-08T14:00:00Z"
+    },
+    {
+      "id": 98,
+      "event": 10,
+      "team_h": 16,
+      "team_a": 2,
+      "kickoff_time": "2026-11-08T16:30:00Z"
+    },
+    {
+      "id": 108,
+      "event": 11,
+      "team_h": 15,
+      "team_a": 10,
+      "kickoff_time": "2026-11-21T12:30:00Z"
+    },
+    {
+      "id": 101,
+      "event": 11,
+      "team_h": 2,
+      "team_a": 20,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 102,
+      "event": 11,
+      "team_h": 3,
+      "team_a": 18,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 104,
+      "event": 11,
+      "team_h": 6,
+      "team_a": 13,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 105,
+      "event": 11,
+      "team_h": 7,
+      "team_a": 8,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 110,
+      "event": 11,
+      "team_h": 19,
+      "team_a": 12,
+      "kickoff_time": "2026-11-21T15:00:00Z"
+    },
+    {
+      "id": 109,
+      "event": 11,
+      "team_h": 17,
+      "team_a": 1,
+      "kickoff_time": "2026-11-21T17:30:00Z"
+    },
+    {
+      "id": 106,
+      "event": 11,
+      "team_h": 11,
+      "team_a": 5,
+      "kickoff_time": "2026-11-22T14:00:00Z"
+    },
+    {
+      "id": 107,
+      "event": 11,
+      "team_h": 14,
+      "team_a": 16,
+      "kickoff_time": "2026-11-22T16:30:00Z"
+    },
+    {
+      "id": 103,
+      "event": 11,
+      "team_h": 4,
+      "team_a": 9,
+      "kickoff_time": "2026-11-23T20:00:00Z"
+    },
+    {
+      "id": 119,
+      "event": 12,
+      "team_h": 18,
+      "team_a": 6,
+      "kickoff_time": "2026-11-27T20:00:00Z"
+    },
+    {
+      "id": 117,
+      "event": 12,
+      "team_h": 13,
+      "team_a": 7,
+      "kickoff_time": "2026-11-28T15:00:00Z"
+    },
+    {
+      "id": 118,
+      "event": 12,
+      "team_h": 16,
+      "team_a": 4,
+      "kickoff_time": "2026-11-28T15:00:00Z"
+    },
+    {
+      "id": 116,
+      "event": 12,
+      "team_h": 12,
+      "team_a": 2,
+      "kickoff_time": "2026-11-28T17:30:00Z"
+    },
+    {
+      "id": 114,
+      "event": 12,
+      "team_h": 9,
+      "team_a": 14,
+      "kickoff_time": "2026-11-29T12:00:00Z"
+    },
+    {
+      "id": 112,
+      "event": 12,
+      "team_h": 5,
+      "team_a": 17,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 113,
+      "event": 12,
+      "team_h": 8,
+      "team_a": 11,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 115,
+      "event": 12,
+      "team_h": 10,
+      "team_a": 3,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 120,
+      "event": 12,
+      "team_h": 20,
+      "team_a": 19,
+      "kickoff_time": "2026-11-29T14:05:00Z"
+    },
+    {
+      "id": 111,
+      "event": 12,
+      "team_h": 1,
+      "team_a": 15,
+      "kickoff_time": "2026-11-29T16:30:00Z"
+    },
+    {
+      "id": 125,
+      "event": 13,
+      "team_h": 7,
+      "team_a": 12,
+      "kickoff_time": "2026-12-01T20:00:00Z"
+    },
+    {
+      "id": 124,
+      "event": 13,
+      "team_h": 6,
+      "team_a": 8,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 126,
+      "event": 13,
+      "team_h": 11,
+      "team_a": 18,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 127,
+      "event": 13,
+      "team_h": 14,
+      "team_a": 20,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 128,
+      "event": 13,
+      "team_h": 15,
+      "team_a": 13,
+      "kickoff_time": "2026-12-02T19:30:00Z"
+    },
+    {
+      "id": 121,
+      "event": 13,
+      "team_h": 2,
+      "team_a": 9,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 122,
+      "event": 13,
+      "team_h": 3,
+      "team_a": 5,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 123,
+      "event": 13,
+      "team_h": 4,
+      "team_a": 1,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 129,
+      "event": 13,
+      "team_h": 17,
+      "team_a": 16,
+      "kickoff_time": "2026-12-02T20:15:00Z"
+    },
+    {
+      "id": 130,
+      "event": 13,
+      "team_h": 19,
+      "team_a": 10,
+      "kickoff_time": "2026-12-03T20:00:00Z"
+    }
+  ],
+  "predictions": [
+    {
+      "id": 4,
+      "name": "Gabriel",
+      "position": "DEF",
+      "price": 7.9,
+      "baseline": 23.609301572839428,
+      "candidate": 23.857187433414175,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Calafiori",
+      "position": "DEF",
+      "price": 6.0,
+      "baseline": 17.991472388919497,
+      "candidate": 15.532619565159106,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 10,
+      "name": "White",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 12.354654702336704,
+      "candidate": 13.558717323935465,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Konsa",
+      "position": "DEF",
+      "price": 4.6,
+      "baseline": 13.818159399639562,
+      "candidate": 13.550427182815948,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Cash",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 12.996143945443439,
+      "candidate": 13.461066262570062,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Mings",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.921781495402623,
+      "candidate": 12.778929931762324,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Lindel\u00f6f",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 14.950546068213322,
+      "candidate": 14.726377427826575,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 611,
+      "name": "Wan-Bissaka",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 10.066019648727652,
+      "candidate": 4.5397258612201545,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        0,
+        1,
+        1,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 60,
+      "name": "Hill",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 17.83796156733009,
+      "candidate": 17.489413147559624,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 61,
+      "name": "Truffert",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 14.304649451768968,
+      "candidate": 14.563585190321437,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 64,
+      "name": "Smith",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 10.60503726640878,
+      "candidate": 10.376888081116604,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 566,
+      "name": "Silva",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 16.896356068087556,
+      "candidate": 16.651794180885723,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 87,
+      "name": "Ajer",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 15.757545160253258,
+      "candidate": 15.999718171985494,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 88,
+      "name": "Kayode",
+      "position": "DEF",
+      "price": 4.6,
+      "baseline": 13.787927099558619,
+      "candidate": 14.074507778134574,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 113,
+      "name": "F.Kad\u0131o\u011flu",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 11.449817505858139,
+      "candidate": 8.66666419697597,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 114,
+      "name": "Boscagli",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.916919876108405,
+      "candidate": 13.139702426503437,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 115,
+      "name": "De Cuyper",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 19.884774178973707,
+      "candidate": 20.38431949460726,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 116,
+      "name": "Dunk",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.383692781073654,
+      "candidate": 13.43247600484729,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 504,
+      "name": "Vuskovic",
+      "position": "DEF",
+      "price": 5.1,
+      "baseline": 20.66574197653307,
+      "candidate": 20.673132471240763,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 149,
+      "name": "Colwill",
+      "position": "DEF",
+      "price": 4.8,
+      "baseline": 14.195449647254248,
+      "candidate": 14.074767824486047,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 151,
+      "name": "Acheampong",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.534044828340152,
+      "candidate": 12.527943927265008,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 200,
+      "name": "Lacroix",
+      "position": "DEF",
+      "price": 5.9,
+      "baseline": 18.371514692742945,
+      "candidate": 15.43319965523115,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 91,
+      "name": "Pinnock",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 14.020792697485787,
+      "candidate": 14.206505002512058,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 173,
+      "name": "Thomas",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 14.79221761755375,
+      "candidate": 12.199814698854652,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 175,
+      "name": "van Ewijk",
+      "position": "DEF",
+      "price": 3.9,
+      "baseline": 10.322908209608775,
+      "candidate": 11.07366338455556,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 176,
+      "name": "Dasilva",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 11.957768109970118,
+      "candidate": 12.938223218418512,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 202,
+      "name": "Richards",
+      "position": "DEF",
+      "price": 4.9,
+      "baseline": 13.421742994161221,
+      "candidate": 13.529593703363172,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 203,
+      "name": "Canvot",
+      "position": "DEF",
+      "price": 4.8,
+      "baseline": 9.501281860580098,
+      "candidate": 10.19440795650457,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 204,
+      "name": "Mitchell",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.618914038079925,
+      "candidate": 13.109019050534735,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 588,
+      "name": "Khalaili",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 12.70587672901843,
+      "candidate": 14.169290816933183,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 229,
+      "name": "Tarkowski",
+      "position": "DEF",
+      "price": 6.2,
+      "baseline": 18.963893914735287,
+      "candidate": 20.69829940450009,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 230,
+      "name": "Branthwaite",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 14.503022107705473,
+      "candidate": 16.230032082222003,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 233,
+      "name": "Mykolenko",
+      "position": "DEF",
+      "price": 4.6,
+      "baseline": 10.891179899586387,
+      "candidate": 12.8558444717591,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 649,
+      "name": "Maitland-Niles",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 10.91875882864165,
+      "candidate": 12.453532375347216,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 254,
+      "name": "Robinson",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 12.532251372739895,
+      "candidate": 13.215659593530344,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 257,
+      "name": "Bassey",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 14.811953514390687,
+      "candidate": 14.635211621895891,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 258,
+      "name": "Castagne",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 13.662661199400352,
+      "candidate": 13.788167481614288,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 650,
+      "name": "Affengruber",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 15.506749885237383,
+      "candidate": 16.110202212271464,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 277,
+      "name": "Egan",
+      "position": "DEF",
+      "price": 4.1,
+      "baseline": 16.14957034874563,
+      "candidate": 16.314378101974757,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 279,
+      "name": "Ajayi",
+      "position": "DEF",
+      "price": 4.2,
+      "baseline": 15.205431410277784,
+      "candidate": 16.032331363163777,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 280,
+      "name": "Coyle",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 10.787738930596031,
+      "candidate": 11.477269252445977,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 282,
+      "name": "Giles",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 12.540372105245016,
+      "candidate": 13.004514566281049,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 585,
+      "name": "Herrington",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 7.680773117996333,
+      "candidate": 7.761740521931934,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 259,
+      "name": "Diop",
+      "position": "DEF",
+      "price": 3.9,
+      "baseline": 13.078096127727404,
+      "candidate": 13.142893654489619,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 304,
+      "name": "O'Shea",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 16.745537405911293,
+      "candidate": 16.52373345863149,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 305,
+      "name": "Davis",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 14.26172501909947,
+      "candidate": 15.335168348528882,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 592,
+      "name": "Ouattara",
+      "position": "DEF",
+      "price": 4.0,
+      "baseline": 13.040911631937528,
+      "candidate": 12.732276551111786,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 330,
+      "name": "Bogle",
+      "position": "DEF",
+      "price": 4.7,
+      "baseline": 18.19153455471759,
+      "candidate": 19.513829510395574,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 331,
+      "name": "Gudmundsson",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 12.697502707919751,
+      "candidate": 13.520853491576306,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 332,
+      "name": "Justin",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 16.773779490820626,
+      "candidate": 17.279767403283383,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 334,
+      "name": "Muharemovi\u0107",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 19.210004151169706,
+      "candidate": 19.675914859091023,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 598,
+      "name": "Elvedi",
+      "position": "DEF",
+      "price": 4.5,
+      "baseline": 11.739631775276003,
+      "candidate": 12.727181399639727,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 356,
+      "name": "Virgil",
+      "position": "DEF",
+      "price": 6.4,
+      "baseline": 18.53911043936648,
+      "candidate": 19.138761226852743,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 358,
+      "name": "Kerkez",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 13.284452652208769,
+      "candidate": 13.372777466769756,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 362,
+      "name": "Jacquet",
+      "position": "DEF",
+      "price": 5.1,
+      "baseline": 16.51912243744854,
+      "candidate": 17.504962878079176,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 579,
+      "name": "Araujo",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 13.66742067134375,
+      "candidate": 14.46938054296332,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 388,
+      "name": "Gu\u00e9hi",
+      "position": "DEF",
+      "price": 6.0,
+      "baseline": 15.306693532128943,
+      "candidate": 16.173579120694136,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 389,
+      "name": "Matheus N.",
+      "position": "DEF",
+      "price": 5.9,
+      "baseline": 11.789178722389629,
+      "candidate": 9.435710283060239,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 390,
+      "name": "R\u00faben",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 14.8687504753952,
+      "candidate": 14.907659307342662,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 391,
+      "name": "Gvardiol",
+      "position": "DEF",
+      "price": 5.8,
+      "baseline": 16.043970780865354,
+      "candidate": 17.355821005880053,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 417,
+      "name": "Dalot",
+      "position": "DEF",
+      "price": 4.8,
+      "baseline": 14.135194868848792,
+      "candidate": 14.166609017004987,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 418,
+      "name": "Maguire",
+      "position": "DEF",
+      "price": 4.7,
+      "baseline": 15.070391570339037,
+      "candidate": 15.180305125902915,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 419,
+      "name": "Martinez",
+      "position": "DEF",
+      "price": 4.9,
+      "baseline": 12.968235386264976,
+      "candidate": 14.108373980200728,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 445,
+      "name": "Thiaw",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 11.225941119418584,
+      "candidate": 11.40325373386146,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 447,
+      "name": "Botman",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 13.913024770901453,
+      "candidate": 14.11767530706845,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 449,
+      "name": "Hall",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 16.119985586420636,
+      "candidate": 11.28748047042686,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 201,
+      "name": "Mu\u00f1oz",
+      "position": "DEF",
+      "price": 5.3,
+      "baseline": 14.605006693636426,
+      "candidate": 14.714397894280202,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 469,
+      "name": "N.Williams",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 16.82469684888181,
+      "candidate": 18.08587888244226,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 472,
+      "name": "Murillo",
+      "position": "DEF",
+      "price": 5.5,
+      "baseline": 18.099001308029685,
+      "candidate": 19.59175023140326,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 474,
+      "name": "Jair Cunha",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 10.603816780816235,
+      "candidate": 11.93233304661802,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 581,
+      "name": "Diomande",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 11.644142224977326,
+      "candidate": 12.085461918067788,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 112,
+      "name": "Van Hecke",
+      "position": "DEF",
+      "price": 4.9,
+      "baseline": 18.03027192991637,
+      "candidate": 19.324333261430418,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 502,
+      "name": "Robertson",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 10.69321792583936,
+      "candidate": 12.262521465742207,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 503,
+      "name": "Van de Ven",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 12.991996610194256,
+      "candidate": 13.813044474143812,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 501,
+      "name": "Danso",
+      "position": "DEF",
+      "price": 5.0,
+      "baseline": 6.898463052440462,
+      "candidate": 8.308906244055713,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 533,
+      "name": "Mukiele",
+      "position": "DEF",
+      "price": 5.4,
+      "baseline": 14.69513614663564,
+      "candidate": 12.555335118912254,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 534,
+      "name": "Hume",
+      "position": "DEF",
+      "price": 4.3,
+      "baseline": 11.013470961829352,
+      "candidate": 10.919563060085988,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 536,
+      "name": "Reinildo",
+      "position": "DEF",
+      "price": 4.4,
+      "baseline": 11.596146872166077,
+      "candidate": 12.39473286166412,
+      "model": "snapshots",
+      "exploratory_challengers": {},
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Saka",
+      "position": "MID",
+      "price": 9.6,
+      "baseline": 18.880109004839618,
+      "candidate": 18.985760144430596,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 17.29143230123873
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        0,
+        1,
+        1,
+        0.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Rice",
+      "position": "MID",
+      "price": 7.3,
+      "baseline": 22.721073542698814,
+      "candidate": 23.34372319719624,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 20.956968384761392
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 15,
+      "name": "\u00d8degaard",
+      "position": "MID",
+      "price": 6.8,
+      "baseline": 19.218157932123596,
+      "candidate": 20.12811782838236,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.79014084886495
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Buend\u00eda",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 13.705223606064026,
+      "candidate": 14.362211100935543,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.585504368242447
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 45,
+      "name": "McGinn",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 16.343954840689566,
+      "candidate": 16.41271884785436,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.652702762063004
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Kamara",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.853293787945578,
+      "candidate": 15.618990182188723,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.99511592629134
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Manzambi",
+      "position": "MID",
+      "price": 6.0,
+      "baseline": 14.929918738393294,
+      "candidate": 14.732216762875815,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.48990976342166
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Gomes",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 12.752495184340212,
+      "candidate": 12.47960407100597,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.004746862165852
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Rayan",
+      "position": "MID",
+      "price": 6.3,
+      "baseline": 14.768897394943384,
+      "candidate": 14.712351380296315,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 17.97202595290367
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 68,
+      "name": "Tavernier",
+      "position": "MID",
+      "price": 6.2,
+      "baseline": 15.897234171702227,
+      "candidate": 16.07155264332305,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.841145419591188
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 73,
+      "name": "Adams",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.695169683147187,
+      "candidate": 13.463924117954548,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.171514397886886
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 75,
+      "name": "Christie",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 11.488930916484774,
+      "candidate": 11.554269639230398,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.73373336564044
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 86,
+      "name": "Lewis-Potter",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.954622944409703,
+      "candidate": 15.184235581088272,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.85622873952201
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 94,
+      "name": "Schade",
+      "position": "MID",
+      "price": 6.2,
+      "baseline": 13.640391179276104,
+      "candidate": 13.438666929180007,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.568556536434766
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 98,
+      "name": "Janelt",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.604734702160039,
+      "candidate": 13.687032907135706,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.385631600435445
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 105,
+      "name": "Anthony",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 12.98495041434916,
+      "candidate": 12.749419637529051,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.130209609775832
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 565,
+      "name": "M.Sangar\u00e9",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 12.482552565386667,
+      "candidate": 13.027914926693517,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 11.45159442401307
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 124,
+      "name": "Gro\u00df",
+      "position": "MID",
+      "price": 6.2,
+      "baseline": 17.850113165593008,
+      "candidate": 18.763114815011008,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 19.14064761539104
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 127,
+      "name": "Gomez",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 16.82623469065125,
+      "candidate": 17.9727464640261,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 20.319137103198493
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 129,
+      "name": "Ayari",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 15.467726644346413,
+      "candidate": 16.167196453458978,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 18.548790045560974
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 639,
+      "name": "Andr\u00e9s",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.520914953014524,
+      "candidate": 14.696835994365669,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.12082630581135
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Rogers",
+      "position": "MID",
+      "price": 8.0,
+      "baseline": 20.57909393080596,
+      "candidate": 20.771058976003,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 21.522247958978184
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 101,
+      "name": "Henderson",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 14.818648336211238,
+      "candidate": 13.581093688443518,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.834211302400462
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 154,
+      "name": "Palmer",
+      "position": "MID",
+      "price": 9.8,
+      "baseline": 19.101344975449994,
+      "candidate": 18.646852074625865,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 23.065624049047365
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 156,
+      "name": "Neto",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 17.8307436152462,
+      "candidate": 17.6392175454107,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 18.41610564664824
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 159,
+      "name": "Caicedo",
+      "position": "MID",
+      "price": 5.3,
+      "baseline": 10.299255278295997,
+      "candidate": 10.862510021189914,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 11.40702230358906
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 183,
+      "name": "Rudoni",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 17.01789494551962,
+      "candidate": 16.86366518358104,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.709586371730587
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 184,
+      "name": "Grimes",
+      "position": "MID",
+      "price": 4.8,
+      "baseline": 12.88455493065538,
+      "candidate": 12.601562401749236,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.953204909779972
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 575,
+      "name": "Yirenkyi",
+      "position": "MID",
+      "price": 4.8,
+      "baseline": 11.860961707259543,
+      "candidate": 11.631425669049824,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.532983779140503
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 210,
+      "name": "Wharton",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 14.377223865061007,
+      "candidate": 14.464812815147525,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.455040013642144
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 211,
+      "name": "Yeremy",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 13.38860252707232,
+      "candidate": 13.430582990361465,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.649866243619801
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 214,
+      "name": "Kamada",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.528436414343524,
+      "candidate": 14.862354292834617,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.001162378899737
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 644,
+      "name": "Timber",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.861397357398905,
+      "candidate": 14.640073746327547,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.048074183500178
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 209,
+      "name": "Johnson",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 10.502735934917332,
+      "candidate": 10.464669694530205,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.082349015358925
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 236,
+      "name": "Dewsbury-Hall",
+      "position": "MID",
+      "price": 6.6,
+      "baseline": 18.590071577981025,
+      "candidate": 18.619012556460948,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 18.229878566368615
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 238,
+      "name": "Grealish",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 12.028756405784664,
+      "candidate": 11.814027429527835,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.3107187637929
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 239,
+      "name": "Garner",
+      "position": "MID",
+      "price": 6.0,
+      "baseline": 14.534290173553888,
+      "candidate": 14.678176662580636,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.815688688774474
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 244,
+      "name": "Armstrong",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.904814969896043,
+      "candidate": 14.6106540287729,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.825702518364764
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 261,
+      "name": "Iwobi",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 16.199796627252223,
+      "candidate": 16.70499079297339,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.646813708047178
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 264,
+      "name": "Bobb",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 16.227478086662565,
+      "candidate": 16.35967319152829,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.322929934362733
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 265,
+      "name": "Berge",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 13.595795949267224,
+      "candidate": 13.499512553725554,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 11.706830168397904
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 268,
+      "name": "King",
+      "position": "MID",
+      "price": 5.6,
+      "baseline": 16.20957367178666,
+      "candidate": 15.828748701328545,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.26478275776052
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 580,
+      "name": "Charles",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 15.0405667629546,
+      "candidate": 15.13522778747474,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.498665536570753
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 286,
+      "name": "Belloumi",
+      "position": "MID",
+      "price": 5.2,
+      "baseline": 16.084187972330717,
+      "candidate": 15.900569529694648,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.367462799254483
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 290,
+      "name": "Slater",
+      "position": "MID",
+      "price": 4.5,
+      "baseline": 13.178077832756863,
+      "candidate": 13.104120072799278,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 11.956392435253266
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 591,
+      "name": "Enciso",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 16.440346458172602,
+      "candidate": 16.34979419727927,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.85321409422627
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 619,
+      "name": "Palacios",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.873205556979666,
+      "candidate": 13.91975127089915,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.27793569683125
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 335,
+      "name": "Stach",
+      "position": "MID",
+      "price": 6.0,
+      "baseline": 15.492314229519405,
+      "candidate": 16.630195715946176,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.928540410815348
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.5,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 336,
+      "name": "Okafor",
+      "position": "MID",
+      "price": 5.8,
+      "baseline": 13.00164348590288,
+      "candidate": 13.242161571062361,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.53020830750554
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 338,
+      "name": "Ampadu",
+      "position": "MID",
+      "price": 5.3,
+      "baseline": 15.034927117335378,
+      "candidate": 15.371177128469713,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.562846025933887
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 345,
+      "name": "Tanaka",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 14.184474983139207,
+      "candidate": 13.954453003921982,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.881924155112344
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 366,
+      "name": "Wirtz",
+      "position": "MID",
+      "price": 7.2,
+      "baseline": 21.535315731255704,
+      "candidate": 20.101538692230914,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 17.763108172043147
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 372,
+      "name": "Mac Allister",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 13.300876034164196,
+      "candidate": 13.589856121749225,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.867115596997449
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 627,
+      "name": "Barcola",
+      "position": "MID",
+      "price": 8.0,
+      "baseline": 21.64101479690277,
+      "candidate": 21.760059254365657,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 19.16388100771315
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 155,
+      "name": "Enzo",
+      "position": "MID",
+      "price": 6.9,
+      "baseline": 17.486766740594838,
+      "candidate": 16.56623869341217,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 17.13201357807594
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 237,
+      "name": "Ndiaye",
+      "position": "MID",
+      "price": 5.8,
+      "baseline": 14.615342240630536,
+      "candidate": 14.853850949804498,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.77935723026737
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 397,
+      "name": "Semenyo",
+      "position": "MID",
+      "price": 8.3,
+      "baseline": 15.648151545274626,
+      "candidate": 16.35316168958146,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.704889339472901
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        0,
+        1,
+        1,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 399,
+      "name": "Cherki",
+      "position": "MID",
+      "price": 8.0,
+      "baseline": 17.971826848260108,
+      "candidate": 18.22404280004243,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.328322456322752
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 481,
+      "name": "Anderson",
+      "position": "MID",
+      "price": 6.3,
+      "baseline": 13.76194459059319,
+      "candidate": 14.398821564338538,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.759875516022618
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Tielemans",
+      "position": "MID",
+      "price": 5.7,
+      "baseline": 13.966998614530318,
+      "candidate": 14.289799357238701,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 15.022098026884036
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 426,
+      "name": "B.Fernandes",
+      "position": "MID",
+      "price": 11.8,
+      "baseline": 22.340642111887743,
+      "candidate": 21.182774792294293,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 21.582660600783225
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 427,
+      "name": "Mbeumo",
+      "position": "MID",
+      "price": 7.9,
+      "baseline": 21.97758941766373,
+      "candidate": 21.62037882233903,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 19.199934119533015
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 428,
+      "name": "Cunha",
+      "position": "MID",
+      "price": 7.9,
+      "baseline": 19.719639330546457,
+      "candidate": 20.47026248543988,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 18.679741287624953
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 432,
+      "name": "Mainoo",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.448816464759497,
+      "candidate": 13.94227541963668,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.076983104130317
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.25,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 405,
+      "name": "N.Gonzalez",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 13.443301990487921,
+      "candidate": 13.107943587730135,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.281098054171645
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 453,
+      "name": "Barnes",
+      "position": "MID",
+      "price": 6.1,
+      "baseline": 16.7311544474017,
+      "candidate": 16.948042864717944,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.8354116847164
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 457,
+      "name": "J.Murphy",
+      "position": "MID",
+      "price": 5.9,
+      "baseline": 11.036271124526378,
+      "candidate": 11.014544847377968,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 10.592546475590005
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 459,
+      "name": "L.Miley",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 12.57577229416205,
+      "candidate": 12.925997236371943,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.056370164817453
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 460,
+      "name": "Willock",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 13.776229038602171,
+      "candidate": 14.12415353864601,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.41655824722148
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 480,
+      "name": "Gibbs-White",
+      "position": "MID",
+      "price": 7.9,
+      "baseline": 24.38971990868112,
+      "candidate": 22.945106723615236,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 21.03408692732646
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 483,
+      "name": "Ndoye",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 15.324859281255003,
+      "candidate": 15.521281171192044,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.69968187678395
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 486,
+      "name": "McAtee",
+      "position": "MID",
+      "price": 5.5,
+      "baseline": 14.476302309006433,
+      "candidate": 15.251046770668633,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.575126472883877
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 558,
+      "name": "Schlager",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 14.471019416278265,
+      "candidate": 15.033301939830535,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.57559069644585
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 403,
+      "name": "S\u00e1vio",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 11.612984455111311,
+      "candidate": 11.552280205475181,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.095679207532402
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        0,
+        1,
+        1,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 455,
+      "name": "Tonali",
+      "position": "MID",
+      "price": 5.3,
+      "baseline": 16.481219042242305,
+      "candidate": 16.630806020453246,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.534583467119877
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 512,
+      "name": "Kudus",
+      "position": "MID",
+      "price": 6.5,
+      "baseline": 14.74500086237296,
+      "candidate": 14.97890871630422,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.54368023047978
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 522,
+      "name": "Gray",
+      "position": "MID",
+      "price": 4.9,
+      "baseline": 14.04767329088922,
+      "candidate": 13.871523345624391,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 14.616916233214369
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 542,
+      "name": "E.Le F\u00e9e",
+      "position": "MID",
+      "price": 5.7,
+      "baseline": 16.89178674688986,
+      "candidate": 17.924205361746708,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.94271570041436
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 544,
+      "name": "Xhaka",
+      "position": "MID",
+      "price": 5.4,
+      "baseline": 16.076475030265183,
+      "candidate": 15.52215935957438,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 16.123500322065013
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 545,
+      "name": "Sadiki",
+      "position": "MID",
+      "price": 4.8,
+      "baseline": 13.03608748740936,
+      "candidate": 12.430520936960809,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 13.054495603021424
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 551,
+      "name": "N.Angulo",
+      "position": "MID",
+      "price": 5.0,
+      "baseline": 12.08648680479833,
+      "candidate": 11.54476609258396,
+      "model": "defcon",
+      "exploratory_challengers": {
+        "components_single": 12.05511307920962
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Havertz",
+      "position": "FWD",
+      "price": 7.5,
+      "baseline": 14.748305558431625,
+      "candidate": 16.02400475104107,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 14.90820919924825
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 166,
+      "name": "N.Jackson",
+      "position": "FWD",
+      "price": 6.6,
+      "baseline": 19.779781417813705,
+      "candidate": 22.025212467239292,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 20.408948529241293
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 79,
+      "name": "Evanilson",
+      "position": "FWD",
+      "price": 6.1,
+      "baseline": 20.216458978532646,
+      "candidate": 22.278154581535645,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 21.040505917367117
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 106,
+      "name": "Thiago",
+      "position": "FWD",
+      "price": 7.8,
+      "baseline": 16.331392016476975,
+      "candidate": 22.119703880389313,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 21.065973892842052
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 138,
+      "name": "Kostoulas",
+      "position": "FWD",
+      "price": 5.7,
+      "baseline": 13.184443556403998,
+      "candidate": 16.071845395531525,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 16.20314515382693
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 165,
+      "name": "Jo\u00e3o Pedro",
+      "position": "FWD",
+      "price": 7.9,
+      "baseline": 16.01341486687616,
+      "candidate": 16.713672295670293,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 14.17577183366539
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        0,
+        1,
+        1,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 194,
+      "name": "Thomas-Asante",
+      "position": "FWD",
+      "price": 5.0,
+      "baseline": 12.587279589436658,
+      "candidate": 11.942349758065891,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 12.854980955100235
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 222,
+      "name": "Strand Larsen",
+      "position": "FWD",
+      "price": 6.0,
+      "baseline": 12.777611780216764,
+      "candidate": 14.297409808320388,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 13.736656026082649
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 249,
+      "name": "Barry",
+      "position": "FWD",
+      "price": 5.7,
+      "baseline": 14.645273538984544,
+      "candidate": 17.203708721969953,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 19.17259887061983
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 569,
+      "name": "Gonzalo",
+      "position": "FWD",
+      "price": 6.1,
+      "baseline": 16.053221841723442,
+      "candidate": 17.478283164518754,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 17.303806607231664
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 295,
+      "name": "McBurnie",
+      "position": "FWD",
+      "price": 5.5,
+      "baseline": 13.404325067225761,
+      "candidate": 14.199911350253327,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 14.89869028903424
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 316,
+      "name": "Emersonn",
+      "position": "FWD",
+      "price": 5.6,
+      "baseline": 12.472762547668527,
+      "candidate": 13.530255931087364,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 13.907588735567899
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 346,
+      "name": "Calvert-Lewin",
+      "position": "FWD",
+      "price": 6.1,
+      "baseline": 15.736794406273066,
+      "candidate": 16.18575898813819,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 17.589816704622454
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 379,
+      "name": "Isak",
+      "position": "FWD",
+      "price": 9.0,
+      "baseline": 20.801081922421353,
+      "candidate": 16.97589411379543,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 18.408775747891156
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 411,
+      "name": "Haaland",
+      "position": "FWD",
+      "price": 15.7,
+      "baseline": 30.420254653527277,
+      "candidate": 32.4708734461625,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 27.344431632961655
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 464,
+      "name": "Wissa",
+      "position": "FWD",
+      "price": 6.1,
+      "baseline": 13.741936774105122,
+      "candidate": 12.850739574245376,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 12.247397919144845
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        0
+      ]
+    },
+    {
+      "id": 634,
+      "name": "Fernandez-Pardo",
+      "position": "FWD",
+      "price": 6.0,
+      "baseline": 10.158531290420793,
+      "candidate": 8.705127354083256,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 9.792314791741829
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        0,
+        1,
+        0,
+        1,
+        0.75,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 167,
+      "name": "Delap",
+      "position": "FWD",
+      "price": 5.5,
+      "baseline": 12.23121053059307,
+      "candidate": 15.515477365414512,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 16.28582116861534
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 401,
+      "name": "Marmoush",
+      "position": "FWD",
+      "price": 7.0,
+      "baseline": 15.91456524466767,
+      "candidate": 13.666458150397435,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 14.271570668928213
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        1,
+        1.0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 526,
+      "name": "Solanke",
+      "position": "FWD",
+      "price": 5.8,
+      "baseline": 12.470281585399054,
+      "candidate": 14.074995382149053,
+      "model": "two_stage_more_minutes",
+      "exploratory_challengers": {
+        "components_multi": 14.02993701825205
+      },
+      "availability_context": [
+        1,
+        1.4466543992360432e-09,
+        1,
+        0,
+        0,
+        0,
+        0.0,
+        1,
+        0
+      ]
+    }
+  ]
+}

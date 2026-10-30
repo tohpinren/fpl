@@ -1,0 +1,1233 @@
+{
+  "results": {
+    "development": {
+      "DEF": {
+        "baseline": {
+          "top5_points_per_pick": 14.91111111111111,
+          "top5_regret_per_pick": 15.044444444444444,
+          "mean_within_gw_rank_correlation": 0.3769804348332306,
+          "mae": 6.421223840232943,
+          "rmse": 8.046685911022735,
+          "r2": 0.09038533474865917,
+          "samples": 724,
+          "price_band_top3_points": 15.256756756756756
+        },
+        "defcon": {
+          "top5_points_per_pick": 13.88888888888889,
+          "top5_regret_per_pick": 16.066666666666666,
+          "mean_within_gw_rank_correlation": 0.37914114831794843,
+          "mae": 6.414912781001965,
+          "rmse": 8.032618565550148,
+          "r2": 0.09356296064761827,
+          "samples": 724,
+          "price_band_top3_points": 15.324324324324325
+        },
+        "xg": {
+          "top5_points_per_pick": 16.244444444444447,
+          "top5_regret_per_pick": 13.711111111111112,
+          "mean_within_gw_rank_correlation": 0.3724222515382374,
+          "mae": 6.4746866649980825,
+          "rmse": 8.080001860915045,
+          "r2": 0.08283752869449879,
+          "samples": 724,
+          "price_band_top3_points": 13.905405405405405
+        },
+        "minutes": {
+          "top5_points_per_pick": 15.377777777777778,
+          "top5_regret_per_pick": 14.577777777777776,
+          "mean_within_gw_rank_correlation": 0.3994858842446076,
+          "mae": 6.351057672054433,
+          "rmse": 7.957762219015705,
+          "r2": 0.11037849943386502,
+          "samples": 724,
+          "price_band_top3_points": 14.878378378378379
+        },
+        "all": {
+          "top5_points_per_pick": 17.044444444444444,
+          "top5_regret_per_pick": 12.911111111111111,
+          "mean_within_gw_rank_correlation": 0.3984310665623294,
+          "mae": 6.386969561568054,
+          "rmse": 7.97905393496544,
+          "r2": 0.1056116044916876,
+          "samples": 724,
+          "price_band_top3_points": 14.608108108108109
+        },
+        "eligible": {
+          "top5_points_per_pick": 15.600000000000001,
+          "top5_regret_per_pick": 14.355555555555554,
+          "mean_within_gw_rank_correlation": 0.3670978896340311,
+          "mae": 6.426504877734178,
+          "rmse": 8.129053396109414,
+          "r2": 0.07166803052400073,
+          "samples": 724,
+          "price_band_top3_points": 15.094594594594595
+        },
+        "weighted": {
+          "top5_points_per_pick": 15.333333333333334,
+          "top5_regret_per_pick": 14.622222222222222,
+          "mean_within_gw_rank_correlation": 0.36956318882252315,
+          "mae": 6.432586442879527,
+          "rmse": 8.111562295705452,
+          "r2": 0.0756586744314337,
+          "samples": 724,
+          "price_band_top3_points": 15.891891891891891
+        },
+        "price_balanced": {
+          "top5_points_per_pick": 14.399999999999999,
+          "top5_regret_per_pick": 15.555555555555555,
+          "mean_within_gw_rank_correlation": 0.3168164674668481,
+          "mae": 6.863420957010718,
+          "rmse": 8.635842270686606,
+          "r2": -0.04768990038452614,
+          "samples": 724,
+          "price_band_top3_points": 14.932432432432432
+        },
+        "all_eligible": {
+          "top5_points_per_pick": 17.48888888888889,
+          "top5_regret_per_pick": 12.466666666666667,
+          "mean_within_gw_rank_correlation": 0.39810768715327177,
+          "mae": 6.2965659335897515,
+          "rmse": 7.9910102507396585,
+          "r2": 0.10292918070000256,
+          "samples": 724,
+          "price_band_top3_points": 15.202702702702704
+        },
+        "all_weighted": {
+          "top5_points_per_pick": 17.15555555555555,
+          "top5_regret_per_pick": 12.799999999999999,
+          "mean_within_gw_rank_correlation": 0.4004127800654727,
+          "mae": 6.3434985712245355,
+          "rmse": 8.004754801022763,
+          "r2": 0.0998406003418234,
+          "samples": 724,
+          "price_band_top3_points": 14.756756756756756
+        },
+        "lgb_l2": {
+          "top5_points_per_pick": 15.600000000000001,
+          "top5_regret_per_pick": 14.355555555555558,
+          "mean_within_gw_rank_correlation": 0.2706340094492512,
+          "mae": 7.120476433436651,
+          "rmse": 8.790844003770022,
+          "r2": -0.08563666218595789,
+          "samples": 724,
+          "price_band_top3_points": 16.013513513513512
+        },
+        "lgb_l1": {
+          "top5_points_per_pick": 15.822222222222223,
+          "top5_regret_per_pick": 14.133333333333333,
+          "mean_within_gw_rank_correlation": 0.28018017421556746,
+          "mae": 6.974080513844738,
+          "rmse": 8.665550123754905,
+          "r2": -0.05491054012947183,
+          "samples": 724,
+          "price_band_top3_points": 15.945945945945946
+        },
+        "ranker": {
+          "top5_points_per_pick": 12.733333333333333,
+          "top5_regret_per_pick": 17.22222222222222,
+          "mean_within_gw_rank_correlation": 0.2512298328001854,
+          "price_band_top3_points": 13.743243243243244
+        },
+        "snapshots": {
+          "top5_points_per_pick": 15.844444444444443,
+          "top5_regret_per_pick": 14.111111111111112,
+          "mean_within_gw_rank_correlation": 0.44227612625730733,
+          "mae": 6.148441148984618,
+          "rmse": 7.771686146938321,
+          "r2": 0.15149606335342258,
+          "samples": 724,
+          "price_band_top3_points": 15.364864864864865
+        },
+        "two_stage": {
+          "top5_points_per_pick": 16.488888888888887,
+          "top5_regret_per_pick": 13.466666666666665,
+          "mean_within_gw_rank_correlation": 0.3037592397126248,
+          "mae": 6.824605214949955,
+          "rmse": 8.46568150034858,
+          "r2": -0.006809267967281318,
+          "samples": 724,
+          "price_band_top3_points": 15.594594594594595
+        },
+        "two_stage_more_minutes": {
+          "top5_points_per_pick": 18.11111111111111,
+          "top5_regret_per_pick": 11.844444444444443,
+          "mean_within_gw_rank_correlation": 0.3610759146493064,
+          "mae": 6.512902151928914,
+          "rmse": 8.128180742002176,
+          "r2": 0.07186733275115098,
+          "samples": 724,
+          "price_band_top3_points": 16.41891891891892
+        },
+        "components_single": {
+          "top5_points_per_pick": 18.022222222222226,
+          "top5_regret_per_pick": 11.933333333333332,
+          "mean_within_gw_rank_correlation": 0.2948769798902725,
+          "mae": 6.853958112405741,
+          "rmse": 8.476200326716553,
+          "r2": -0.009312795020360864,
+          "samples": 724,
+          "price_band_top3_points": 16.324324324324323
+        },
+        "components_multi": {
+          "top5_points_per_pick": 17.91111111111111,
+          "top5_regret_per_pick": 12.044444444444444,
+          "mean_within_gw_rank_correlation": 0.38406357883467235,
+          "mae": 6.427252460530492,
+          "rmse": 7.956015776742808,
+          "r2": 0.1107689363595018,
+          "samples": 724,
+          "price_band_top3_points": 16.445945945945947
+        }
+      },
+      "MID": {
+        "baseline": {
+          "top5_points_per_pick": 18.6,
+          "top5_regret_per_pick": 15.044444444444444,
+          "mean_within_gw_rank_correlation": 0.23356944320354922,
+          "mae": 7.722322372619041,
+          "rmse": 9.278936522850433,
+          "r2": 0.0026325030211363787,
+          "samples": 764,
+          "price_band_top3_points": 17.430555555555557
+        },
+        "defcon": {
+          "top5_points_per_pick": 20.755555555555553,
+          "top5_regret_per_pick": 12.888888888888891,
+          "mean_within_gw_rank_correlation": 0.24533042987475698,
+          "mae": 7.685689287626603,
+          "rmse": 9.245473408980036,
+          "r2": 0.009813248572409283,
+          "samples": 764,
+          "price_band_top3_points": 18.430555555555557
+        },
+        "xg": {
+          "top5_points_per_pick": 19.822222222222223,
+          "top5_regret_per_pick": 13.822222222222223,
+          "mean_within_gw_rank_correlation": 0.2491720714022979,
+          "mae": 7.658600364059168,
+          "rmse": 9.222895751322518,
+          "r2": 0.014643461034692717,
+          "samples": 764,
+          "price_band_top3_points": 18.27777777777778
+        },
+        "minutes": {
+          "top5_points_per_pick": 19.977777777777774,
+          "top5_regret_per_pick": 13.666666666666664,
+          "mean_within_gw_rank_correlation": 0.2500196066979452,
+          "mae": 7.722100265280553,
+          "rmse": 9.262710887716775,
+          "r2": 0.006117551530299803,
+          "samples": 764,
+          "price_band_top3_points": 19.166666666666668
+        },
+        "all": {
+          "top5_points_per_pick": 19.355555555555554,
+          "top5_regret_per_pick": 14.288888888888888,
+          "mean_within_gw_rank_correlation": 0.2544190567920388,
+          "mae": 7.7212438659602585,
+          "rmse": 9.2665827149503,
+          "r2": 0.0052864891249228,
+          "samples": 764,
+          "price_band_top3_points": 17.875
+        },
+        "eligible": {
+          "top5_points_per_pick": 19.84444444444445,
+          "top5_regret_per_pick": 13.799999999999999,
+          "mean_within_gw_rank_correlation": 0.24053929022309983,
+          "mae": 7.633204666605137,
+          "rmse": 9.229083852535533,
+          "r2": 0.013320767661077815,
+          "samples": 764,
+          "price_band_top3_points": 17.52777777777778
+        },
+        "weighted": {
+          "top5_points_per_pick": 19.06666666666667,
+          "top5_regret_per_pick": 14.577777777777776,
+          "mean_within_gw_rank_correlation": 0.24782757146770093,
+          "mae": 7.69653373873506,
+          "rmse": 9.256225953572162,
+          "r2": 0.007508722236481913,
+          "samples": 764,
+          "price_band_top3_points": 17.805555555555557
+        },
+        "price_balanced": {
+          "top5_points_per_pick": 17.977777777777778,
+          "top5_regret_per_pick": 15.666666666666666,
+          "mean_within_gw_rank_correlation": 0.23238511046782373,
+          "mae": 7.724858254396327,
+          "rmse": 9.312511454123886,
+          "r2": -0.004598310335482081,
+          "samples": 764,
+          "price_band_top3_points": 17.041666666666668
+        },
+        "all_eligible": {
+          "top5_points_per_pick": 18.8,
+          "top5_regret_per_pick": 14.844444444444443,
+          "mean_within_gw_rank_correlation": 0.27697253634056,
+          "mae": 7.633577469259132,
+          "rmse": 9.202561714848466,
+          "r2": 0.018983570477243306,
+          "samples": 764,
+          "price_band_top3_points": 18.875
+        },
+        "all_weighted": {
+          "top5_points_per_pick": 18.488888888888887,
+          "top5_regret_per_pick": 15.155555555555557,
+          "mean_within_gw_rank_correlation": 0.27228141672701506,
+          "mae": 7.7059802972632525,
+          "rmse": 9.248914005769057,
+          "r2": 0.00907613818038877,
+          "samples": 764,
+          "price_band_top3_points": 18.01388888888889
+        },
+        "lgb_l2": {
+          "top5_points_per_pick": 17.33333333333333,
+          "top5_regret_per_pick": 16.311111111111114,
+          "mean_within_gw_rank_correlation": 0.19225063566935685,
+          "mae": 7.931822858058457,
+          "rmse": 9.658934881599466,
+          "r2": -0.08073018070280136,
+          "samples": 764,
+          "price_band_top3_points": 16.72222222222222
+        },
+        "lgb_l1": {
+          "top5_points_per_pick": 18.244444444444444,
+          "top5_regret_per_pick": 15.399999999999999,
+          "mean_within_gw_rank_correlation": 0.22924253248630796,
+          "mae": 7.632890439820697,
+          "rmse": 9.251468193404417,
+          "r2": 0.008528753924002874,
+          "samples": 764,
+          "price_band_top3_points": 16.97222222222222
+        },
+        "ranker": {
+          "top5_points_per_pick": 18.866666666666664,
+          "top5_regret_per_pick": 14.777777777777779,
+          "mean_within_gw_rank_correlation": 0.2604748854150937,
+          "price_band_top3_points": 18.166666666666668
+        },
+        "snapshots": {
+          "top5_points_per_pick": 19.799999999999997,
+          "top5_regret_per_pick": 13.844444444444443,
+          "mean_within_gw_rank_correlation": 0.26857422721767904,
+          "mae": 7.710710833428909,
+          "rmse": 9.238058971159866,
+          "r2": 0.011400778801036626,
+          "samples": 764,
+          "price_band_top3_points": 19.0
+        },
+        "two_stage": {
+          "top5_points_per_pick": 17.444444444444443,
+          "top5_regret_per_pick": 16.200000000000003,
+          "mean_within_gw_rank_correlation": 0.22075203418999165,
+          "mae": 7.744951459100511,
+          "rmse": 9.330015910450204,
+          "r2": -0.00837848806559216,
+          "samples": 764,
+          "price_band_top3_points": 18.041666666666668
+        },
+        "two_stage_more_minutes": {
+          "top5_points_per_pick": 17.11111111111111,
+          "top5_regret_per_pick": 16.533333333333335,
+          "mean_within_gw_rank_correlation": 0.25492335928354826,
+          "mae": 7.874377762943441,
+          "rmse": 9.527802859870265,
+          "r2": -0.05158486930277206,
+          "samples": 764,
+          "price_band_top3_points": 18.15277777777778
+        },
+        "components_single": {
+          "top5_points_per_pick": 18.333333333333332,
+          "top5_regret_per_pick": 15.31111111111111,
+          "mean_within_gw_rank_correlation": 0.2553554125293131,
+          "mae": 7.71874109629755,
+          "rmse": 9.271777651187133,
+          "r2": 0.004170884399911423,
+          "samples": 764,
+          "price_band_top3_points": 18.59722222222222
+        },
+        "components_multi": {
+          "top5_points_per_pick": 18.88888888888889,
+          "top5_regret_per_pick": 14.755555555555556,
+          "mean_within_gw_rank_correlation": 0.2765479629591598,
+          "mae": 7.7802599265613654,
+          "rmse": 9.396982553907588,
+          "r2": -0.022905808295162977,
+          "samples": 764,
+          "price_band_top3_points": 18.180555555555557
+        }
+      },
+      "FWD": {
+        "baseline": {
+          "top5_points_per_pick": 19.133333333333333,
+          "top5_regret_per_pick": 10.444444444444445,
+          "mean_within_gw_rank_correlation": 0.19696583778069415,
+          "mae": 7.801173321572227,
+          "rmse": 9.741010602772839,
+          "r2": -0.04487551273321477,
+          "samples": 178,
+          "price_band_top3_points": 18.815384615384616
+        },
+        "defcon": {
+          "top5_points_per_pick": 19.133333333333333,
+          "top5_regret_per_pick": 10.444444444444445,
+          "mean_within_gw_rank_correlation": 0.15738956866454717,
+          "mae": 7.840934830954299,
+          "rmse": 9.8012723704644,
+          "r2": -0.057843533095088384,
+          "samples": 178,
+          "price_band_top3_points": 18.353846153846153
+        },
+        "xg": {
+          "top5_points_per_pick": 19.133333333333333,
+          "top5_regret_per_pick": 10.444444444444445,
+          "mean_within_gw_rank_correlation": 0.18955923563758625,
+          "mae": 7.836412741864079,
+          "rmse": 9.776200164651565,
+          "r2": -0.052438408782126356,
+          "samples": 178,
+          "price_band_top3_points": 18.0
+        },
+        "minutes": {
+          "top5_points_per_pick": 18.977777777777774,
+          "top5_regret_per_pick": 10.600000000000001,
+          "mean_within_gw_rank_correlation": 0.20813481814456677,
+          "mae": 7.7709198420030505,
+          "rmse": 9.710303237041202,
+          "r2": -0.03829820711770693,
+          "samples": 178,
+          "price_band_top3_points": 18.93846153846154
+        },
+        "all": {
+          "top5_points_per_pick": 19.133333333333333,
+          "top5_regret_per_pick": 10.444444444444445,
+          "mean_within_gw_rank_correlation": 0.17099189800362322,
+          "mae": 7.824328733051341,
+          "rmse": 9.792685634329922,
+          "r2": -0.05599082580832304,
+          "samples": 178,
+          "price_band_top3_points": 18.323076923076922
+        },
+        "eligible": {
+          "top5_points_per_pick": 17.933333333333334,
+          "top5_regret_per_pick": 11.644444444444446,
+          "mean_within_gw_rank_correlation": 0.09529975360672485,
+          "mae": 8.059037729754529,
+          "rmse": 10.427721481109618,
+          "r2": -0.1973892781059392,
+          "samples": 178,
+          "price_band_top3_points": 17.369230769230768
+        },
+        "weighted": {
+          "top5_points_per_pick": 17.955555555555556,
+          "top5_regret_per_pick": 11.622222222222222,
+          "mean_within_gw_rank_correlation": 0.09866432966804327,
+          "mae": 8.186324262547533,
+          "rmse": 10.430203006960125,
+          "r2": -0.1979592407779056,
+          "samples": 178,
+          "price_band_top3_points": 16.953846153846154
+        },
+        "price_balanced": {
+          "top5_points_per_pick": 19.577777777777776,
+          "top5_regret_per_pick": 10.0,
+          "mean_within_gw_rank_correlation": 0.026915113229260903,
+          "mae": 9.030767379178444,
+          "rmse": 11.868825822178879,
+          "r2": -0.5512151307600741,
+          "samples": 178,
+          "price_band_top3_points": 17.015384615384615
+        },
+        "all_eligible": {
+          "top5_points_per_pick": 20.53333333333333,
+          "top5_regret_per_pick": 9.044444444444444,
+          "mean_within_gw_rank_correlation": 0.1277627909124742,
+          "mae": 8.004620897193014,
+          "rmse": 10.392839203168505,
+          "r2": -0.18939178677400714,
+          "samples": 178,
+          "price_band_top3_points": 18.661538461538463
+        },
+        "all_weighted": {
+          "top5_points_per_pick": 19.355555555555554,
+          "top5_regret_per_pick": 10.222222222222221,
+          "mean_within_gw_rank_correlation": 0.08341320426713317,
+          "mae": 8.229182995793778,
+          "rmse": 10.481837211409058,
+          "r2": -0.20984947513724928,
+          "samples": 178,
+          "price_band_top3_points": 17.723076923076924
+        },
+        "lgb_l2": {
+          "top5_points_per_pick": 15.177777777777777,
+          "top5_regret_per_pick": 14.399999999999999,
+          "mean_within_gw_rank_correlation": 0.024338109669479805,
+          "mae": 8.564909330549883,
+          "rmse": 10.796773551393123,
+          "r2": -0.2836437323466803,
+          "samples": 178,
+          "price_band_top3_points": 16.26153846153846
+        },
+        "lgb_l1": {
+          "top5_points_per_pick": 16.4,
+          "top5_regret_per_pick": 13.177777777777779,
+          "mean_within_gw_rank_correlation": 0.03008030139930343,
+          "mae": 8.41785768251878,
+          "rmse": 10.609013740445405,
+          "r2": -0.2393858770928099,
+          "samples": 178,
+          "price_band_top3_points": 18.107692307692307
+        },
+        "ranker": {
+          "top5_points_per_pick": 18.6,
+          "top5_regret_per_pick": 10.97777777777778,
+          "mean_within_gw_rank_correlation": 0.06069702915142367,
+          "price_band_top3_points": 17.876923076923077
+        },
+        "snapshots": {
+          "top5_points_per_pick": 19.0,
+          "top5_regret_per_pick": 10.577777777777778,
+          "mean_within_gw_rank_correlation": 0.22130107065440455,
+          "mae": 7.708445768739972,
+          "rmse": 9.692825601954167,
+          "r2": -0.034563892073883995,
+          "samples": 178,
+          "price_band_top3_points": 18.43076923076923
+        },
+        "two_stage": {
+          "top5_points_per_pick": 19.444444444444446,
+          "top5_regret_per_pick": 10.133333333333333,
+          "mean_within_gw_rank_correlation": 0.11872500307185772,
+          "mae": 7.795906334407563,
+          "rmse": 9.984675247011523,
+          "r2": -0.09780298449408797,
+          "samples": 178,
+          "price_band_top3_points": 17.861538461538462
+        },
+        "two_stage_more_minutes": {
+          "top5_points_per_pick": 19.26666666666667,
+          "top5_regret_per_pick": 10.31111111111111,
+          "mean_within_gw_rank_correlation": 0.187059728407184,
+          "mae": 7.666800989060673,
+          "rmse": 9.93860422224899,
+          "r2": -0.08769545031452819,
+          "samples": 178,
+          "price_band_top3_points": 18.892307692307693
+        },
+        "components_single": {
+          "top5_points_per_pick": 18.066666666666666,
+          "top5_regret_per_pick": 11.511111111111111,
+          "mean_within_gw_rank_correlation": 0.05691146406701465,
+          "mae": 8.077562916777726,
+          "rmse": 10.028390869369645,
+          "r2": -0.10743698833168591,
+          "samples": 178,
+          "price_band_top3_points": 18.0
+        },
+        "components_multi": {
+          "top5_points_per_pick": 20.177777777777777,
+          "top5_regret_per_pick": 9.4,
+          "mean_within_gw_rank_correlation": 0.23923787776255578,
+          "mae": 7.484941699251279,
+          "rmse": 9.608265213137502,
+          "r2": -0.01659152233346428,
+          "samples": 178,
+          "price_band_top3_points": 18.630769230769232
+        }
+      }
+    },
+    "audit": {
+      "DEF": {
+        "baseline": {
+          "top5_points_per_pick": 21.939999999999998,
+          "top5_regret_per_pick": 11.16,
+          "mean_within_gw_rank_correlation": 0.2900222985524366,
+          "mae": 6.8202465386181235,
+          "rmse": 8.719319309487078,
+          "r2": 0.0824448122874385,
+          "samples": 788,
+          "price_band_top3_points": 19.431818181818183
+        },
+        "defcon": {
+          "top5_points_per_pick": 21.839999999999996,
+          "top5_regret_per_pick": 11.26,
+          "mean_within_gw_rank_correlation": 0.29123813860403047,
+          "mae": 6.804188940525459,
+          "rmse": 8.70624721626061,
+          "r2": 0.08519396631876064,
+          "samples": 788,
+          "price_band_top3_points": 19.170454545454547
+        },
+        "xg": {
+          "top5_points_per_pick": 20.32,
+          "top5_regret_per_pick": 12.78,
+          "mean_within_gw_rank_correlation": 0.30308177154690774,
+          "mae": 6.818773238202843,
+          "rmse": 8.721620609071254,
+          "r2": 0.08196040566086549,
+          "samples": 788,
+          "price_band_top3_points": 17.84090909090909
+        },
+        "minutes": {
+          "top5_points_per_pick": 21.9,
+          "top5_regret_per_pick": 11.2,
+          "mean_within_gw_rank_correlation": 0.3174769726785386,
+          "mae": 6.843450344939137,
+          "rmse": 8.803258529366989,
+          "r2": 0.06469352073400758,
+          "samples": 788,
+          "price_band_top3_points": 19.579545454545453
+        },
+        "all": {
+          "top5_points_per_pick": 20.939999999999998,
+          "top5_regret_per_pick": 12.16,
+          "mean_within_gw_rank_correlation": 0.330364312708846,
+          "mae": 6.812436560504566,
+          "rmse": 8.780645852241351,
+          "r2": 0.06949233924838694,
+          "samples": 788,
+          "price_band_top3_points": 18.954545454545453
+        },
+        "eligible": {
+          "top5_points_per_pick": 21.28,
+          "top5_regret_per_pick": 11.819999999999999,
+          "mean_within_gw_rank_correlation": 0.2467647009219852,
+          "mae": 7.210104984042806,
+          "rmse": 9.259770544196538,
+          "r2": -0.03482635466953665,
+          "samples": 788,
+          "price_band_top3_points": 20.318181818181817
+        },
+        "weighted": {
+          "top5_points_per_pick": 19.86,
+          "top5_regret_per_pick": 13.24,
+          "mean_within_gw_rank_correlation": 0.24293764570844054,
+          "mae": 7.0450012469649,
+          "rmse": 9.048063894555876,
+          "r2": 0.011951306761921354,
+          "samples": 788,
+          "price_band_top3_points": 19.295454545454547
+        },
+        "price_balanced": {
+          "top5_points_per_pick": 17.919999999999998,
+          "top5_regret_per_pick": 15.180000000000001,
+          "mean_within_gw_rank_correlation": 0.09680736452376128,
+          "mae": 8.169586969536004,
+          "rmse": 10.484847868686447,
+          "r2": -0.3267567240990883,
+          "samples": 788,
+          "price_band_top3_points": 18.636363636363637
+        },
+        "all_eligible": {
+          "top5_points_per_pick": 19.84,
+          "top5_regret_per_pick": 13.260000000000002,
+          "mean_within_gw_rank_correlation": 0.28396745055839856,
+          "mae": 7.281292134910889,
+          "rmse": 9.389622986075322,
+          "r2": -0.06405319485605854,
+          "samples": 788,
+          "price_band_top3_points": 19.704545454545453
+        },
+        "all_weighted": {
+          "top5_points_per_pick": 20.099999999999998,
+          "top5_regret_per_pick": 13.0,
+          "mean_within_gw_rank_correlation": 0.296317075327214,
+          "mae": 7.057208821952146,
+          "rmse": 9.121344365370936,
+          "r2": -0.004117960167778323,
+          "samples": 788,
+          "price_band_top3_points": 19.829545454545453
+        },
+        "lgb_l2": {
+          "top5_points_per_pick": 16.080000000000002,
+          "top5_regret_per_pick": 17.020000000000003,
+          "mean_within_gw_rank_correlation": 0.19943972369441496,
+          "mae": 7.311018949778631,
+          "rmse": 9.183469055935612,
+          "r2": -0.017842461562257883,
+          "samples": 788,
+          "price_band_top3_points": 18.136363636363637
+        },
+        "lgb_l1": {
+          "top5_points_per_pick": 17.56,
+          "top5_regret_per_pick": 15.540000000000001,
+          "mean_within_gw_rank_correlation": 0.2338401835033518,
+          "mae": 7.253477568845657,
+          "rmse": 9.144591536624706,
+          "r2": -0.009242785579350876,
+          "samples": 788,
+          "price_band_top3_points": 18.329545454545453
+        },
+        "ranker": {
+          "top5_points_per_pick": 14.079999999999998,
+          "top5_regret_per_pick": 19.020000000000003,
+          "mean_within_gw_rank_correlation": 0.24684048497553665,
+          "price_band_top3_points": 16.78409090909091
+        },
+        "snapshots": {
+          "top5_points_per_pick": 23.18,
+          "top5_regret_per_pick": 9.92,
+          "mean_within_gw_rank_correlation": 0.3738957307469128,
+          "mae": 6.607170565072975,
+          "rmse": 8.388494940560019,
+          "r2": 0.15075084306697017,
+          "samples": 788,
+          "price_band_top3_points": 20.897727272727273
+        },
+        "two_stage": {
+          "top5_points_per_pick": 20.14,
+          "top5_regret_per_pick": 12.959999999999999,
+          "mean_within_gw_rank_correlation": 0.299424778927468,
+          "mae": 6.946324078736475,
+          "rmse": 8.653957504078653,
+          "r2": 0.09614961568295921,
+          "samples": 788,
+          "price_band_top3_points": 18.170454545454547
+        },
+        "two_stage_more_minutes": {
+          "top5_points_per_pick": 21.1,
+          "top5_regret_per_pick": 11.999999999999998,
+          "mean_within_gw_rank_correlation": 0.36211674383223297,
+          "mae": 6.704017819351984,
+          "rmse": 8.500387443530624,
+          "r2": 0.12794380272984618,
+          "samples": 788,
+          "price_band_top3_points": 18.28409090909091
+        },
+        "components_single": {
+          "top5_points_per_pick": 20.58,
+          "top5_regret_per_pick": 12.52,
+          "mean_within_gw_rank_correlation": 0.3132432983854446,
+          "mae": 6.9054301958974325,
+          "rmse": 8.64136812434984,
+          "r2": 0.09877746287055778,
+          "samples": 788,
+          "price_band_top3_points": 18.727272727272727
+        },
+        "components_multi": {
+          "top5_points_per_pick": 20.179999999999996,
+          "top5_regret_per_pick": 12.919999999999998,
+          "mean_within_gw_rank_correlation": 0.3848629968683389,
+          "mae": 6.62301162331365,
+          "rmse": 8.410038116675114,
+          "r2": 0.14638319013399215,
+          "samples": 788,
+          "price_band_top3_points": 18.261363636363637
+        }
+      },
+      "MID": {
+        "baseline": {
+          "top5_points_per_pick": 19.46,
+          "top5_regret_per_pick": 14.419999999999998,
+          "mean_within_gw_rank_correlation": 0.38610176776494776,
+          "mae": 6.576360982558745,
+          "rmse": 8.116019563694394,
+          "r2": 0.14069307550304755,
+          "samples": 847,
+          "price_band_top3_points": 20.640449438202246
+        },
+        "defcon": {
+          "top5_points_per_pick": 20.060000000000002,
+          "top5_regret_per_pick": 13.819999999999999,
+          "mean_within_gw_rank_correlation": 0.39501293592408465,
+          "mae": 6.568782443643442,
+          "rmse": 8.11250978240908,
+          "r2": 0.14143613118607912,
+          "samples": 847,
+          "price_band_top3_points": 20.662921348314608
+        },
+        "xg": {
+          "top5_points_per_pick": 19.54,
+          "top5_regret_per_pick": 14.34,
+          "mean_within_gw_rank_correlation": 0.3995844021075013,
+          "mae": 6.578285988133495,
+          "rmse": 8.130726850665285,
+          "r2": 0.13757590104211115,
+          "samples": 847,
+          "price_band_top3_points": 20.202247191011235
+        },
+        "minutes": {
+          "top5_points_per_pick": 19.7,
+          "top5_regret_per_pick": 14.179999999999998,
+          "mean_within_gw_rank_correlation": 0.4070112691670261,
+          "mae": 6.534356305707786,
+          "rmse": 8.079316065308241,
+          "r2": 0.14844767824838934,
+          "samples": 847,
+          "price_band_top3_points": 20.95505617977528
+        },
+        "all": {
+          "top5_points_per_pick": 19.0,
+          "top5_regret_per_pick": 14.88,
+          "mean_within_gw_rank_correlation": 0.41957523802742863,
+          "mae": 6.542982020137319,
+          "rmse": 8.078084586832398,
+          "r2": 0.14870725181276234,
+          "samples": 847,
+          "price_band_top3_points": 20.426966292134832
+        },
+        "eligible": {
+          "top5_points_per_pick": 17.440000000000005,
+          "top5_regret_per_pick": 16.439999999999998,
+          "mean_within_gw_rank_correlation": 0.37646199340140796,
+          "mae": 6.629442724303816,
+          "rmse": 8.203756513322467,
+          "r2": 0.12201384989193553,
+          "samples": 847,
+          "price_band_top3_points": 19.359550561797754
+        },
+        "weighted": {
+          "top5_points_per_pick": 20.1,
+          "top5_regret_per_pick": 13.780000000000001,
+          "mean_within_gw_rank_correlation": 0.3902780374279375,
+          "mae": 6.593096817316051,
+          "rmse": 8.165556301350597,
+          "r2": 0.13017137392352318,
+          "samples": 847,
+          "price_band_top3_points": 19.865168539325843
+        },
+        "price_balanced": {
+          "top5_points_per_pick": 18.16,
+          "top5_regret_per_pick": 15.720000000000002,
+          "mean_within_gw_rank_correlation": 0.37975804133007607,
+          "mae": 6.692097161432544,
+          "rmse": 8.2089508568889,
+          "r2": 0.12090167512170547,
+          "samples": 847,
+          "price_band_top3_points": 21.49438202247191
+        },
+        "all_eligible": {
+          "top5_points_per_pick": 18.740000000000002,
+          "top5_regret_per_pick": 15.14,
+          "mean_within_gw_rank_correlation": 0.3799193327047768,
+          "mae": 6.608126512335741,
+          "rmse": 8.211301874117076,
+          "r2": 0.12039806112717666,
+          "samples": 847,
+          "price_band_top3_points": 19.97752808988764
+        },
+        "all_weighted": {
+          "top5_points_per_pick": 18.880000000000003,
+          "top5_regret_per_pick": 15.0,
+          "mean_within_gw_rank_correlation": 0.41182152368309266,
+          "mae": 6.557957332674408,
+          "rmse": 8.112044731473524,
+          "r2": 0.141534562990011,
+          "samples": 847,
+          "price_band_top3_points": 21.02247191011236
+        },
+        "lgb_l2": {
+          "top5_points_per_pick": 17.44,
+          "top5_regret_per_pick": 16.44,
+          "mean_within_gw_rank_correlation": 0.3732936261310722,
+          "mae": 6.797874165757699,
+          "rmse": 8.36338127051438,
+          "r2": 0.0875145823347202,
+          "samples": 847,
+          "price_band_top3_points": 18.775280898876403
+        },
+        "lgb_l1": {
+          "top5_points_per_pick": 20.3,
+          "top5_regret_per_pick": 13.580000000000002,
+          "mean_within_gw_rank_correlation": 0.3990631284715984,
+          "mae": 6.505393216794524,
+          "rmse": 8.136880358638738,
+          "r2": 0.13627000505830678,
+          "samples": 847,
+          "price_band_top3_points": 21.921348314606742
+        },
+        "ranker": {
+          "top5_points_per_pick": 19.139999999999997,
+          "top5_regret_per_pick": 14.740000000000004,
+          "mean_within_gw_rank_correlation": 0.4014287720567129,
+          "price_band_top3_points": 20.168539325842698
+        },
+        "snapshots": {
+          "top5_points_per_pick": 19.060000000000002,
+          "top5_regret_per_pick": 14.819999999999999,
+          "mean_within_gw_rank_correlation": 0.44521478119111446,
+          "mae": 6.479729289514578,
+          "rmse": 7.979330479165786,
+          "r2": 0.16939403408970088,
+          "samples": 847,
+          "price_band_top3_points": 19.89887640449438
+        },
+        "two_stage": {
+          "top5_points_per_pick": 23.9,
+          "top5_regret_per_pick": 9.979999999999999,
+          "mean_within_gw_rank_correlation": 0.4320645295965613,
+          "mae": 6.363684752465187,
+          "rmse": 7.836230707790542,
+          "r2": 0.19891874728780146,
+          "samples": 847,
+          "price_band_top3_points": 23.258426966292134
+        },
+        "two_stage_more_minutes": {
+          "top5_points_per_pick": 20.9,
+          "top5_regret_per_pick": 12.98,
+          "mean_within_gw_rank_correlation": 0.4470123892690131,
+          "mae": 6.4553595218293545,
+          "rmse": 7.911255995283643,
+          "r2": 0.18350596444137002,
+          "samples": 847,
+          "price_band_top3_points": 20.662921348314608
+        },
+        "components_single": {
+          "top5_points_per_pick": 25.220000000000002,
+          "top5_regret_per_pick": 8.66,
+          "mean_within_gw_rank_correlation": 0.45840652331769005,
+          "mae": 6.297122107027604,
+          "rmse": 7.741628734984765,
+          "r2": 0.21814391402599975,
+          "samples": 847,
+          "price_band_top3_points": 23.078651685393258
+        },
+        "components_multi": {
+          "top5_points_per_pick": 21.619999999999997,
+          "top5_regret_per_pick": 12.260000000000002,
+          "mean_within_gw_rank_correlation": 0.47016845916753186,
+          "mae": 6.385821893712702,
+          "rmse": 7.79169604735482,
+          "r2": 0.20799824144288614,
+          "samples": 847,
+          "price_band_top3_points": 21.40449438202247
+        }
+      },
+      "FWD": {
+        "baseline": {
+          "top5_points_per_pick": 20.12,
+          "top5_regret_per_pick": 8.760000000000002,
+          "mean_within_gw_rank_correlation": 0.24391459913202357,
+          "mae": 6.883055233129045,
+          "rmse": 8.882559973330025,
+          "r2": 0.04273655464398529,
+          "samples": 211,
+          "price_band_top3_points": 17.863013698630137
+        },
+        "defcon": {
+          "top5_points_per_pick": 20.12,
+          "top5_regret_per_pick": 8.760000000000002,
+          "mean_within_gw_rank_correlation": 0.2516227720994463,
+          "mae": 6.804942022544177,
+          "rmse": 8.837382601697339,
+          "r2": 0.052449220518230755,
+          "samples": 211,
+          "price_band_top3_points": 17.424657534246574
+        },
+        "xg": {
+          "top5_points_per_pick": 19.820000000000004,
+          "top5_regret_per_pick": 9.06,
+          "mean_within_gw_rank_correlation": 0.23571210632030598,
+          "mae": 6.89162780481811,
+          "rmse": 8.891586973119429,
+          "r2": 0.040789906873136994,
+          "samples": 211,
+          "price_band_top3_points": 17.863013698630137
+        },
+        "minutes": {
+          "top5_points_per_pick": 19.940000000000005,
+          "top5_regret_per_pick": 8.940000000000001,
+          "mean_within_gw_rank_correlation": 0.24918014644363956,
+          "mae": 6.949727750853813,
+          "rmse": 8.954085687134068,
+          "r2": 0.027257994339773606,
+          "samples": 211,
+          "price_band_top3_points": 17.904109589041095
+        },
+        "all": {
+          "top5_points_per_pick": 20.140000000000004,
+          "top5_regret_per_pick": 8.74,
+          "mean_within_gw_rank_correlation": 0.2520388642135258,
+          "mae": 6.862578977862829,
+          "rmse": 8.894646707409368,
+          "r2": 0.040129634865584296,
+          "samples": 211,
+          "price_band_top3_points": 17.753424657534246
+        },
+        "eligible": {
+          "top5_points_per_pick": 18.84,
+          "top5_regret_per_pick": 10.040000000000001,
+          "mean_within_gw_rank_correlation": 0.2315699700407993,
+          "mae": 7.085715855350211,
+          "rmse": 9.037221961123326,
+          "r2": 0.009110842859618828,
+          "samples": 211,
+          "price_band_top3_points": 17.397260273972602
+        },
+        "weighted": {
+          "top5_points_per_pick": 20.020000000000003,
+          "top5_regret_per_pick": 8.860000000000001,
+          "mean_within_gw_rank_correlation": 0.19187650129913972,
+          "mae": 7.133602718334825,
+          "rmse": 9.246533338078473,
+          "r2": -0.03732073187611418,
+          "samples": 211,
+          "price_band_top3_points": 17.616438356164384
+        },
+        "price_balanced": {
+          "top5_points_per_pick": 16.64,
+          "top5_regret_per_pick": 12.24,
+          "mean_within_gw_rank_correlation": -0.04172473749228335,
+          "mae": 8.508821579650984,
+          "rmse": 11.23591630209966,
+          "r2": -0.5316945566222513,
+          "samples": 211,
+          "price_band_top3_points": 16.205479452054796
+        },
+        "all_eligible": {
+          "top5_points_per_pick": 19.44,
+          "top5_regret_per_pick": 9.440000000000001,
+          "mean_within_gw_rank_correlation": 0.23851893283532588,
+          "mae": 7.10120361006705,
+          "rmse": 9.089308517147055,
+          "r2": -0.002344168031184868,
+          "samples": 211,
+          "price_band_top3_points": 17.506849315068493
+        },
+        "all_weighted": {
+          "top5_points_per_pick": 20.200000000000003,
+          "top5_regret_per_pick": 8.680000000000001,
+          "mean_within_gw_rank_correlation": 0.21529352215861972,
+          "mae": 7.139450762987402,
+          "rmse": 9.261351278509185,
+          "r2": -0.040648091987701473,
+          "samples": 211,
+          "price_band_top3_points": 17.602739726027398
+        },
+        "lgb_l2": {
+          "top5_points_per_pick": 20.0,
+          "top5_regret_per_pick": 8.879999999999999,
+          "mean_within_gw_rank_correlation": 0.28506342563483916,
+          "mae": 7.13666638341441,
+          "rmse": 8.929538670364867,
+          "r2": 0.03258409581330557,
+          "samples": 211,
+          "price_band_top3_points": 17.356164383561644
+        },
+        "lgb_l1": {
+          "top5_points_per_pick": 20.92,
+          "top5_regret_per_pick": 7.959999999999999,
+          "mean_within_gw_rank_correlation": 0.3031545591688377,
+          "mae": 6.972623119153542,
+          "rmse": 8.767886243729102,
+          "r2": 0.06729352606627292,
+          "samples": 211,
+          "price_band_top3_points": 17.643835616438356
+        },
+        "ranker": {
+          "top5_points_per_pick": 19.860000000000003,
+          "top5_regret_per_pick": 9.02,
+          "mean_within_gw_rank_correlation": 0.2587017237108025,
+          "price_band_top3_points": 18.232876712328768
+        },
+        "snapshots": {
+          "top5_points_per_pick": 19.940000000000005,
+          "top5_regret_per_pick": 8.940000000000001,
+          "mean_within_gw_rank_correlation": 0.24974145265080958,
+          "mae": 6.926941706678256,
+          "rmse": 8.937482939640205,
+          "r2": 0.030861984193254588,
+          "samples": 211,
+          "price_band_top3_points": 17.534246575342465
+        },
+        "two_stage": {
+          "top5_points_per_pick": 19.38,
+          "top5_regret_per_pick": 9.5,
+          "mean_within_gw_rank_correlation": 0.32877630566337057,
+          "mae": 6.876338389069588,
+          "rmse": 8.770299275379696,
+          "r2": 0.06678007051193446,
+          "samples": 211,
+          "price_band_top3_points": 18.82191780821918
+        },
+        "two_stage_more_minutes": {
+          "top5_points_per_pick": 19.380000000000003,
+          "top5_regret_per_pick": 9.499999999999998,
+          "mean_within_gw_rank_correlation": 0.3785347918630234,
+          "mae": 6.739291536401143,
+          "rmse": 8.885866761430165,
+          "r2": 0.042023684345921075,
+          "samples": 211,
+          "price_band_top3_points": 19.52054794520548
+        },
+        "components_single": {
+          "top5_points_per_pick": 19.6,
+          "top5_regret_per_pick": 9.28,
+          "mean_within_gw_rank_correlation": 0.3629814979513729,
+          "mae": 6.84079402081514,
+          "rmse": 8.81475304619695,
+          "r2": 0.05729572320317733,
+          "samples": 211,
+          "price_band_top3_points": 18.643835616438356
+        },
+        "components_multi": {
+          "top5_points_per_pick": 20.78,
+          "top5_regret_per_pick": 8.100000000000001,
+          "mean_within_gw_rank_correlation": 0.3456889302831176,
+          "mae": 6.772289450169055,
+          "rmse": 8.886995238481697,
+          "r2": 0.04178034895447402,
+          "samples": 211,
+          "price_band_top3_points": 19.315068493150687
+        }
+      }
+    }
+  },
+  "selected": {
+    "DEF": "snapshots",
+    "MID": "defcon",
+    "FWD": "two_stage_more_minutes"
+  },
+  "code_sha256": "8f63358e74e3742274974c064328386bdd721dc01248f573083a770cd2627a4e",
+  "paired_audit": {
+    "DEF": {
+      "per_origin_top5_change": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -3.0,
+        1.4000000000000004,
+        8.4,
+        3.799999999999997,
+        1.8000000000000007,
+        0.0
+      ],
+      "per_origin_mae_improvement": [
+        0.29288081545277844,
+        0.157452044986103,
+        0.3263711021656306,
+        0.19889482087192167,
+        -0.101363796109883,
+        0.43256154210487185,
+        0.500210106766696,
+        0.42121267374213467,
+        -0.053072858195118755,
+        -0.03494289118483884
+      ],
+      "top5_change_block95": [
+        -0.45999999999999996,
+        2.9399999999999995
+      ],
+      "mae_improvement_block95": [
+        0.14722179980256128,
+        0.28081891231749784
+      ]
+    },
+    "MID": {
+      "per_origin_top5_change": [
+        3.3999999999999986,
+        2.0,
+        0.0,
+        5.600000000000001,
+        -5.600000000000001,
+        -2.0,
+        0.8000000000000007,
+        0.0,
+        0.0,
+        1.8000000000000007
+      ],
+      "per_origin_mae_improvement": [
+        0.00369308339976282,
+        0.02122455834546777,
+        -0.08047634186512997,
+        0.021982691128503262,
+        -0.08409279778855172,
+        -0.02847749320002002,
+        0.21179984868812607,
+        0.043498882566514574,
+        -0.026455376855381907,
+        -0.011302501843426072
+      ],
+      "top5_change_block95": [
+        -0.8,
+        2.0
+      ],
+      "mae_improvement_block95": [
+        -0.026750819015967854,
+        0.04102972953114081
+      ]
+    },
+    "FWD": {
+      "per_origin_top5_change": [
+        1.6000000000000014,
+        2.200000000000003,
+        2.1999999999999993,
+        3.6000000000000014,
+        1.0,
+        0.0,
+        1.6000000000000014,
+        -8.0,
+        -6.199999999999999,
+        -5.400000000000002
+      ],
+      "per_origin_mae_improvement": [
+        -0.2625382400039715,
+        0.5292665410146622,
+        0.7278971624799722,
+        1.661575189993851,
+        0.70460265367982,
+        -0.33656992273353836,
+        -0.3201690679519249,
+        -0.43433512080861014,
+        -0.2688503176275203,
+        -0.7252470346219333
+      ],
+      "top5_change_block95": [
+        -3.44,
+        1.9600000000000009
+      ],
+      "mae_improvement_block95": [
+        -0.40963112447574873,
+        0.6647574931599101
+      ]
+    }
+  },
+  "software": {
+    "python": "3.13.3",
+    "numpy": "2.3.4",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.16.3",
+    "lightgbm": "4.6.0"
+  },
+  "protocol": {
+    "blocks": {
+      "development": [
+        [
+          16,
+          20
+        ],
+        [
+          21,
+          24
+        ]
+      ],
+      "audit": [
+        [
+          25,
+          29
+        ],
+        [
+          30,
+          34
+        ]
+      ]
+    },
+    "horizon": 5,
+    "selection": "Max development top5 with no worse MAE and price-band top3 than baseline, per position.",
+    "primary_metric": "Actual five-GW points per pick among the forecast top five at each origin.",
+    "warning": "GW25-34 was inspected in a prior review; this is a reused out-of-time audit, not a fresh test."
+  },
+  "aggregate_audit": {
+    "baseline": {
+      "mae": 6.715523661348086,
+      "samples": 1846,
+      "equal_position_top5": 20.506666666666664
+    },
+    "selected": {
+      "mae": 6.604658531540705,
+      "samples": 1846,
+      "equal_position_top5": 20.873333333333335
+    }
+  }
+}

@@ -88,6 +88,10 @@ publish a new snapshot. **Refresh view** reloads the latest published results. S
 filters, player details, the fixture planner and watchlists run in the browser.
 Watchlists are stored on the visitor's browser, separately for each season.
 
+If publishing fails, use **Run workflow** to build and publish a fresh snapshot.
+To retry publishing the same snapshot, use **Re-run failed jobs** while the Pages
+artifact is available. The workflow retains it for 30 days.
+
 Build and preview the static version locally:
 
 ```bash

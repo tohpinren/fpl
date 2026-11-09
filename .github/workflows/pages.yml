@@ -41,7 +41,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
-          retention-days: 1
+          # Keep the artifact for GitHub's 30-day workflow rerun window.
+          retention-days: 30
 
   deploy:
     needs: build
